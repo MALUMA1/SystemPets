@@ -1,63 +1,49 @@
 ﻿using Dapper;
 using SysPet.Models;
-using System.Data.SqlClient;
 
 namespace SysPet.Data
 {
-    public class ProductsData
+    public class ProductsData : DataAccessBase<ProductosViewModel>
     {
-        private readonly SqlConnection connection;
-        private readonly string connectionString;
 
         public ProductsData()
         {
-            
-            connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Pets;Integrated Security=True;Connect Timeout=30;Encrypt=False;";
-            connection = new SqlConnection(connectionString);
         }
 
-        public async Task<IEnumerable<ProductosViewModel>> GetProducts()
+        public override async Task<IEnumerable<ProductosViewModel>> GetAll()
         {
             try
             {
                 var sql = @$"SELECT [IdProducto],[Nombre],[FechaIngreso],[Proveedor],[Cantidad],[Stock],[PrecioUnitario],[PrecioSugerido],[Descripcion],[FechaVencimiento],[Estado]
                         FROM [dbo].[Productos]";
 
-                connection.Open();
-                var productos = await connection.QueryAsync<ProductosViewModel>(sql);
-                connection.Close();
-                return productos;
+                return await GetItems(sql);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<ProductosViewModel>();
             }
             
         }
 
-        public async Task<ProductosViewModel> GetProduct(int idProducto)
+        public override async Task<ProductosViewModel> GetItem(int idProducto)
         {
             var sql = @$"SELECT [IdProducto],[Nombre],[FechaIngreso],[Proveedor],[Cantidad],[Stock],[PrecioUnitario],[PrecioSugerido],[Descripcion],[FechaVencimiento],
                                 [Estado]  FROM [Pets].[dbo].[Productos] WHERE idProducto = @idProducto";
-            connection.Open();
-            var producto = await connection.QuerySingleAsync<ProductosViewModel>(sql, new { idProducto });
-            connection.Close();
-            return producto;
+
+            return await Get(sql, new { idProducto });
         }
 
-        public int CreateProduct(ProductosViewModel producto)
+        public override int Create(ProductosViewModel producto)
         {
             var sql = @$"INSERT INTO Productos (Nombre, FechaIngreso, Proveedor, Cantidad, Stock, PrecioUnitario, PrecioSugerido, Descripcion, FechaVencimiento, Estado)
             VALUES ('${producto.Nombre}', '${FormatDate(producto.FechaIngreso)}', '${producto.Proveedor}', ${producto.Cantidad}, ${producto.Stock}, 
                     ${producto.PrecioUnitario}, ${producto.PrecioSugerido}, '${producto.Descripcion}', '${FormatDate(producto.FechaVencimiento)}', 1);";
-            connection.Open();
-            var result = connection.Execute(sql);
-            connection.Close();
 
-            return result;
+            return Execute(sql);
         }
 
-        public int UpdateProduct(ProductosViewModel producto, int idProducto)
+        public override int Update(ProductosViewModel producto, int idProducto)
         {
             var estado = producto.Estado ? 1 : 0;
             var sql = @$"UPDATE Productos SET Nombre='{producto.Nombre}',
@@ -69,26 +55,16 @@ namespace SysPet.Data
                                 FechaVencimiento='{FormatDate(producto.FechaVencimiento)}',
                                 Estado={estado }
                         WHERE idProducto = @idProducto";
-            connection.Open();
-            var result = connection.Execute(sql, new { idProducto });
-            connection.Close();
 
-            return result;
+            return Execute(sql, new { idProducto });
         }
 
-        public int DeleteProduct(int idProducto)
+        public override int Delete(int idProducto)
         {
             var sql = $"DELETE FROM Productos WHERE IdProducto = @idProducto;";
-            connection.Open();
-            var result = connection.Execute(sql, new { idProducto});
-            connection.Close();
 
-            return result;
+            return Execute(sql, new { idProducto});
         }
 
-        private string FormatDate(DateTime date)
-        {
-            return $"{date.Year}-{date.Month}-{date.Day}";
-        }
     }
 }
