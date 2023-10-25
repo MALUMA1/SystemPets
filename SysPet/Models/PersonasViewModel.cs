@@ -13,6 +13,7 @@ namespace SysPet.Models
         [DisplayName("Teléfono")]
         public string Telefono { get; set; }
         public bool Estado { get; set; }
+        public int IdTipoPersona { get; set; }
         public List<MascotasViewModel> Mascotas { get; set; }
     }
 }

@@ -25,6 +25,11 @@
             return await data.GetAll(sql);
         }
 
+        public async Task<IEnumerable<T>> GetItems(string sql, object param)
+        {
+            return await data.GetAll(sql, param);
+        }
+
         public async Task<T> Get(string sql, object param)
         {
             return await data.Get(sql, param);

@@ -14,6 +14,12 @@
             return items;
         }
 
+        public async Task<IEnumerable<T>> GetAll(string sql, object param)
+        {
+            var items = await repository.QueryAsync<T>(sql, param);
+            return items;
+        }
+
         public async Task<T> Get(string sql, object param)
         {
             var result = await repository.QuerySingleAsync<T>(sql,param);

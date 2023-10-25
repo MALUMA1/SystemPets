@@ -6,7 +6,7 @@ namespace SysPet.Data
     {
         public override int Create(PersonasViewModel item)
         {
-            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1)";
+            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1,{item.IdTipoPersona})";
 
             return Execute(sql);
         }
@@ -29,9 +29,32 @@ namespace SysPet.Data
                               ,[CodigoPostal]
                               ,[Telefono]
                               ,[Estado]
-                          FROM [dbo].[Personas]";
+                          FROM [dbo].[Personas]
+                          WHERE IdTipoPersona=2";
 
                 return await GetItems(sql);
+            }
+            catch (Exception)
+            {
+                return new List<PersonasViewModel>();
+            }
+        }
+
+        public async Task<IEnumerable<PersonasViewModel>> GetAll(int idTipoPersona)
+        {
+            try
+            {
+                var sql = @$"SELECT [IdPersona]
+                              ,[Nombre]
+                              ,[Apellidos]
+                              ,[Cuidad] Ciudad
+                              ,[CodigoPostal]
+                              ,[Telefono]
+                              ,[Estado]
+                          FROM [dbo].[Personas]
+                          WHERE IdTipoPersona=@idTipoPersona";
+
+                return await GetItems(sql, new { idTipoPersona });
             }
             catch (Exception)
             {

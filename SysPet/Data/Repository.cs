@@ -36,6 +36,19 @@ namespace SysPet.Data
             }
         }
 
+        public async Task<IEnumerable<T>> QueryAsync<T>(string query, object param)
+        {
+            try
+            {
+                var resut = await connection.QueryAsync<T>(query, param);
+                return resut;
+            }
+            catch (Exception)
+            {
+                return new List<T>();
+            }
+        }
+
         public async Task<T> QuerySingleAsync<T>(string sql, object param)
         {
             var result = await connection.QuerySingleAsync<T>(sql, param);
