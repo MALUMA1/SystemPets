@@ -1,6 +1,8 @@
-﻿namespace SysPet.Models
+﻿using System.ComponentModel;
+
+namespace SysPet.Models
 {
-    public class PacientesViewModel
+    public class MascotasViewModel
     {
         public int IdPaciente { get; set; }
         public string Nombre { get; set; }
@@ -11,6 +13,9 @@
         public string Color { get; set; }
         public string Peso { get; set; }
         public bool Estado { get; set; }
+
+        [DisplayName("Fecha de Registro")]
         public DateTime Fecha { get; set; }
+        public int IdPersona { get; set; }
     }
 }

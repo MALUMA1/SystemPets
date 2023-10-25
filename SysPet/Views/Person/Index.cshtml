@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SysPet.Models.PersonasViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Clientes</h1>
+
+<p>
+    @Html.ActionLink("Agregar Cliente", "Create", new{}, new { @class = "btn btn-primary" })
+</p>
+
+@if(Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellidos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ciudad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodigoPostal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ciudad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoPostal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new {  id=item.IdPersona }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Detalle", "Details", new { id=item.IdPersona }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
+}

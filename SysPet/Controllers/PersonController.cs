@@ -2,39 +2,41 @@
 using Microsoft.AspNetCore.Mvc;
 using SysPet.Data;
 using SysPet.Models;
+using System.Reflection;
 
 namespace SysPet.Controllers
 {
-    public class AppointmentController : Controller
+    public class PersonController : Controller
     {
-        private readonly DatingData data;
-        public AppointmentController()
+        private readonly PersonsData data;
+        public PersonController()
         {
-            data = new DatingData();
+            data = new PersonsData();
         }
-        // GET: AppointmentController
+
+        // GET: PersonController
         public async Task<ActionResult> Index()
         {
             ViewBag.Url = "Shared/EmptyData";
-            return View( await data.GetAll());
+            return View(await data.GetAll());
         }
 
-        // GET: AppointmentController/Details/5
+        // GET: PersonController/Details/5
         public async Task<ActionResult> Details(int id)
         {
             return View(await data.GetItem(id));
         }
 
-        // GET: AppointmentController/Create
+        // GET: PersonController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AppointmentController/Create
+        // POST: PersonController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CitasViewModel model)
+        public ActionResult Create(PersonasViewModel model)
         {
             try
             {
@@ -47,16 +49,16 @@ namespace SysPet.Controllers
             }
         }
 
-        // GET: AppointmentController/Edit/5
+        // GET: PersonController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
             return View(await data.GetItem(id));
         }
 
-        // POST: AppointmentController/Edit/5
+        // POST: PersonController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, CitasViewModel model)
+        public ActionResult Edit(int id, PersonasViewModel model)
         {
             try
             {
@@ -77,16 +79,16 @@ namespace SysPet.Controllers
             }
         }
 
-        // GET: AppointmentController/Delete/5
+        // GET: PersonController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
             return View(await data.GetItem(id));
         }
 
-        // POST: AppointmentController/Delete/5
+        // POST: PersonController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, CitasViewModel model)
+        public ActionResult Delete(int id, PersonasViewModel model)
         {
             try
             {

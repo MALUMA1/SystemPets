@@ -4,12 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Internamientos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Agregar Internamiento", "Create", new{}, new { @class = "btn btn-primary" })
 </p>
-@if (Model != null)
+
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
@@ -36,7 +37,7 @@
                     @Html.DisplayNameFor(model => model.IdPaciente)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdUsuario)
+                    @Html.DisplayNameFor(model => model.IdPersona)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IdPersonaDepartamento)
@@ -70,15 +71,14 @@
                         @Html.DisplayFor(modelItem => item.IdPaciente)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdUsuario)
+                        @Html.DisplayFor(modelItem => item.IdPersona)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IdPersonaDepartamento)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }
@@ -88,5 +88,5 @@
 }
 else
 {
-    @Html.PartialAsync("EmptyData", new { Url = ViewBag.Url})
+    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
 }

@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SysPet.Data;
+using SysPet.Models;
 
 namespace SysPet.Controllers
 {
     public class InternmentController : Controller
     {
+        private readonly InternmentsData data;
+        public InternmentController()
+        {
+            data = new InternmentsData();
+        }
+
         // GET: InternmentController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             ViewBag.Url = "Shared/EmptyData";
             return View();
@@ -27,7 +35,7 @@ namespace SysPet.Controllers
         // POST: InternmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(InternamientosViewModel model)
         {
             try
             {
@@ -48,7 +56,7 @@ namespace SysPet.Controllers
         // POST: InternmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, InternamientosViewModel model)
         {
             try
             {
@@ -69,7 +77,7 @@ namespace SysPet.Controllers
         // POST: InternmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, InternamientosViewModel model)
         {
             try
             {

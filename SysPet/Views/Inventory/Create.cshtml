@@ -4,19 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Agregar Inventario</h1>
 
-<h4>InventariosViewModel</h4>
+<div>
+    @Html.ActionLink("Ir a Inventarios", "Index", new {}, new { @class = "btn btn-primary" })
+</div>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="FechaIngreso" class="control-label"></label>
                 <input asp-for="FechaIngreso" class="form-control" />
@@ -32,25 +30,17 @@
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
-            </div>
             <div class="form-group">
                 <label asp-for="IdProducto" class="control-label"></label>
                 <input asp-for="IdProducto" class="form-control" />
                 <span asp-validation-for="IdProducto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

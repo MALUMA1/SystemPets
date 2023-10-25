@@ -1,22 +1,20 @@
 ﻿@model SysPet.Models.PersonasViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Actualizar Cliente</h1>
 
-<h4>PersonasViewModel</h4>
+<div>
+    @Html.ActionLink("Ir a Clientes", "Index", new {}, new { @class = "btn btn-primary" })
+</div>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdPersona" class="control-label"></label>
-                <input asp-for="IdPersona" class="form-control" />
-                <span asp-validation-for="IdPersona" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -48,16 +46,16 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+

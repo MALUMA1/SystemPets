@@ -54,7 +54,6 @@ namespace SysPet.Data
 
         public override int Update(ProductosViewModel producto, int idProducto)
         {
-            var estado = producto.Estado ? 1 : 0;
             var sql = @$"UPDATE Productos SET Nombre='{producto.Nombre}',
                                 Cantidad={producto.Cantidad}, 
                                 Stock={producto.Stock},
@@ -62,7 +61,7 @@ namespace SysPet.Data
                                 PrecioSugerido={producto.PrecioSugerido},
                                 Descripcion='{producto.Descripcion}',
                                 FechaVencimiento='{FormatDate(producto.FechaVencimiento)}',
-                                Estado={estado }
+                                Estado={GetEstado(producto.Estado)}
                         WHERE idProducto = @idProducto";
 
             return Execute(sql, new { idProducto });

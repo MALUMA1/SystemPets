@@ -39,5 +39,15 @@
         {
             return $"{date.Year}-{date.Month}-{date.Day}";
         }
+
+        public string FormatDateTime(DateTime date)
+        {
+            return $"{date.Year}-{date.Month}-{date.Day} {date.Hour}:{date.Minute}";
+        }
+
+        public static int GetEstado(bool estado)
+        {
+            return estado ? 1 : 0;
+        }
     }
 }

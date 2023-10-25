@@ -4,19 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Inventarios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Agregar Inventario", "Create", new{}, new { @class = "btn btn-primary" })
 </p>
-@if (Model != null)
+
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FechaIngreso)
                 </th>
@@ -27,11 +25,12 @@
                     @Html.DisplayNameFor(model => model.Stock)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Estado)
+                    @Html.DisplayNameFor(model => model.Producto)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdProducto)
+                    @Html.DisplayNameFor(model => model.Estado)
                 </th>
+                
                 <th></th>
             </tr>
         </thead>
@@ -39,9 +38,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FechaIngreso)
                     </td>
@@ -52,15 +48,15 @@
                         @Html.DisplayFor(modelItem => item.Stock)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Producto)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
+                    
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdProducto)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }
@@ -70,5 +66,5 @@
 }
 else
 {
-    @Html.PartialAsync("EmptyData", new { Url = ViewBag.Url})
+    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
 }

@@ -4,19 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Historiales</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Agregar Historial", "Create", new{}, new { @class = "btn btn-primary" })
 </p>
-@if (Model != null)
+
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FechaVisita)
                 </th>
@@ -37,9 +35,6 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.FechaVisita)
                     </td>
                     <td>
@@ -52,9 +47,8 @@
                         @Html.DisplayFor(modelItem => item.IdPaciente)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }
@@ -64,5 +58,5 @@
 }
 else
 {
-    @Html.PartialAsync("EmptyData", new { Url = ViewBag.Url})
+    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
 }
