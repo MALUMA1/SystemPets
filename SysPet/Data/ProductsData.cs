@@ -36,9 +36,18 @@ namespace SysPet.Data
 
         public override int Create(ProductosViewModel producto)
         {
-            var sql = @$"INSERT INTO Productos (Nombre, FechaIngreso, Proveedor, Cantidad, Stock, PrecioUnitario, PrecioSugerido, Descripcion, FechaVencimiento, Estado)
-            VALUES ('${producto.Nombre}', '${FormatDate(producto.FechaIngreso)}', '${producto.Proveedor}', ${producto.Cantidad}, ${producto.Stock}, 
-                    ${producto.PrecioUnitario}, ${producto.PrecioSugerido}, '${producto.Descripcion}', '${FormatDate(producto.FechaVencimiento)}', 1);";
+            var sql = @$"INSERT INTO Productos 
+                        (Nombre, FechaIngreso, Proveedor, Cantidad, Stock, PrecioUnitario, PrecioSugerido, Descripcion, FechaVencimiento, Estado)
+            VALUES ('{producto.Nombre}', 
+                    '{FormatDate(producto.FechaIngreso)}', 
+                    '{producto.Proveedor}', 
+                    {producto.Cantidad}, 
+                    {producto.Stock}, 
+                    {producto.PrecioUnitario}, 
+                    {producto.PrecioSugerido}, 
+                   '{producto.Descripcion}', 
+                   '{FormatDate(producto.FechaVencimiento)}', 
+                    1);";
 
             return Execute(sql);
         }
