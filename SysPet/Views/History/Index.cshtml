@@ -25,7 +25,10 @@
                     @Html.DisplayNameFor(model => model.Diagnostico)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdPaciente)
+                    @Html.DisplayNameFor(model => model.Paciente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
                 </th>
                 <th></th>
             </tr>
@@ -44,11 +47,15 @@
                         @Html.DisplayFor(modelItem => item.Diagnostico)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdPaciente)
+                        @Html.DisplayFor(modelItem => item.Paciente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

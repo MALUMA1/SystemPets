@@ -40,7 +40,7 @@ namespace SysPet.Data
                               ,p.[Peso]
                               ,p.[Estado]
                               ,p.[Fecha]
-                              ,a.Nombre
+                              ,a.Nombre Propietario
 	                          ,a.Apellidos
                           FROM [dbo].[Pacientes] p
                           INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona";
@@ -65,7 +65,7 @@ namespace SysPet.Data
                               ,p.[Peso]
                               ,p.[Estado]
                               ,p.[Fecha]
-                              ,a.Nombre
+                              ,a.Nombre Propietario
 	                          ,a.Apellidos
                           FROM [dbo].[Pacientes] p
                           INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona

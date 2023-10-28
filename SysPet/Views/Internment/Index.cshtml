@@ -12,12 +12,9 @@
 
 @if (Model != null && Model.Any())
 {
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FechaIngreso)
                 </th>
@@ -25,22 +22,16 @@
                     @Html.DisplayNameFor(model => model.Medicamento)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Antecedentes)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Tratamiento)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Estado)
+                    @Html.DisplayNameFor(model => model.Paciente)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdPaciente)
+                    @Html.DisplayNameFor(model => model.Propietario)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdPersona)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdPersonaDepartamento)
+                    @Html.DisplayNameFor(model => model.Atendio)
                 </th>
                 <th></th>
             </tr>
@@ -50,35 +41,27 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.FechaIngreso)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Medicamento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Antecedentes)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Tratamiento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
+                        @Html.DisplayFor(modelItem => item.Paciente)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdPaciente)
+                        @Html.DisplayFor(modelItem => item.Propietario)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdPersona)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdPersonaDepartamento)
+                        @Html.DisplayFor(modelItem => item.Atendio)
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

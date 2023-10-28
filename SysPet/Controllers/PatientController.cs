@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Models;
 using System.Reflection;
@@ -9,9 +10,11 @@ namespace SysPet.Controllers
     public class PatientController : Controller
     {
         private readonly PetsData data;
+        private readonly PersonsData personData;
         public PatientController()
         {
             data = new PetsData();
+            personData = new PersonsData();
         }
 
         // GET: PatientController
@@ -28,9 +31,20 @@ namespace SysPet.Controllers
         }
 
         // GET: PatientController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new MascotasViewModel();
+            var persons = await personData.GetAll();
+            
+            var lista = persons.Select(x => new SelectListItem
+            {
+                Value = x.IdPersona.ToString(),
+                Text = $"{x.Nombre} {x.Apellidos}"
+            });
+
+            model.Personas = persons.ToList();
+            model.ListaPersonas = lista.ToList();
+            return View(model);
         }
 
         // POST: PatientController/Create

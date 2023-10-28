@@ -4,15 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Agregar Inventario</h1>
+<h1 class="col-md-6 offset-3">Agregar Inventario</h1>
 
-<div>
-    @Html.ActionLink("Ir a Inventarios", "Index", new {}, new { @class = "btn btn-primary" })
-</div>
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 offset-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -31,11 +26,11 @@
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <input asp-for="IdProducto" class="form-control" />
-                <span asp-validation-for="IdProducto" class="text-danger"></span>
+                @Html.LabelFor(model => model.IdProducto, "Producto")
+                @Html.DropDownListFor(model => model.IdProducto, Model.Productos,"Seleccionar un producto", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdProducto)
             </div>
-            <div class="form-group">
+            <div class="form-group" style="padding-top: 16px;">
                 <input type="submit" value="Guardar" class="btn btn-success" />
                 @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
             </div>

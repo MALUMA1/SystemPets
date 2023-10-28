@@ -12,7 +12,7 @@
 
 @if (Model != null && Model.Any())
 {
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>
@@ -32,6 +32,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Peso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Estado)
@@ -62,11 +65,15 @@
                         @Html.DisplayFor(modelItem => item.Peso)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Propietario)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id=item.IdPaciente }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Detalle", "Details", new { id=item.IdPaciente }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.IdPaciente }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

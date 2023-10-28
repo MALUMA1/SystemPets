@@ -26,12 +26,15 @@ namespace SysPet.Data
         {
             try
             {
-                var sql = @$"SELECT [Id]
-                              ,[FechaVisita]
-                              ,[Motivo]
-                              ,[Diagnostico]
-                              ,[IdPaciente]
-                          FROM [dbo].[Historiales]";
+                var sql = @$"SELECT h.[Id]
+                              ,h.[FechaVisita]
+                              ,h.[Motivo]
+                              ,h.[Diagnostico]
+                              ,p.[Nombre] Paciente
+	                          ,ps.Nombre + ' ' + ps.Apellidos AS FullName
+                          FROM [dbo].[Historiales] h
+                          INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
+                          INNER JOIN Personas ps on ps.IdPersona = p.IdPersona";
 
                 return await GetItems(sql);
             }
@@ -43,13 +46,16 @@ namespace SysPet.Data
 
         public async override Task<HistorialesViewModel> GetItem(int id)
         {
-            var sql = @$"SELECT [Id]
-                              ,[FechaVisita]
-                              ,[Motivo]
-                              ,[Diagnostico]
-                              ,[IdPaciente]
-                          FROM [dbo].[Historiales]
-                          WHERE [Id] = @id";
+            var sql = @$"SELECT h.[Id]
+                              ,h.[FechaVisita]
+                              ,h.[Motivo]
+                              ,h.[Diagnostico]
+                              ,p.[Nombre] Paciente
+	                          ,ps.Nombre + ' ' + ps.Apellidos AS FullName
+                          FROM [dbo].[Historiales] h
+                          INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
+                          INNER JOIN Personas ps on ps.IdPersona = p.IdPersona
+                          WHERE h.[Id] = @id";
 
             return await Get(sql, new { id });
         }

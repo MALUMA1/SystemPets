@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Models;
 using System.Reflection;
@@ -9,9 +10,11 @@ namespace SysPet.Controllers
     public class HistoryController : Controller
     {
         private readonly HistoriesData data;
+        private readonly PetsData petsData;
         public HistoryController() 
         {
             data = new HistoriesData();
+            petsData = new PetsData();
         }
 
         // GET: HistoryController
@@ -28,9 +31,18 @@ namespace SysPet.Controllers
         }
 
         // GET: HistoryController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new HistorialesViewModel();
+            var pacientes = await petsData.GetAll();
+            var list = pacientes.Select(x => new SelectListItem
+            {
+                Value = x.IdPaciente.ToString(),
+                Text = x.Nombre
+            }).ToList();
+
+            model.Pacientes = list;
+            return View(model);
         }
 
         // POST: HistoryController/Create

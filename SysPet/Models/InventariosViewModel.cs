@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 
 namespace SysPet.Models
 {
@@ -6,15 +7,16 @@ namespace SysPet.Models
     {
         public int Id { get; set; }
         [DisplayName("Fecha de Ingreso")]
-        public DateTime FechaIngreso { get; set; }
+        public DateTime FechaIngreso { get; set; } = DateTime.Now.Date;
         [DisplayName("Fecha de Vencimiento")]
-        public DateTime FechaVencimiento { get; set; }
+        public DateTime FechaVencimiento { get; set; } = DateTime.Now.Date;
         public int Stock { get; set; }
         public bool Estado { get; set; }
         public int IdProducto { get; set; }
         public string Producto { get; set; }
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }
+        public List<SelectListItem> Productos { get; set; }
 
     }
 }

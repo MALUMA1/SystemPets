@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Models;
 
@@ -7,9 +8,11 @@ namespace SysPet.Controllers
     public class InventoryController : Controller
     {
         private readonly InventoriesData data;
+        private readonly ProductsData productData;
         public InventoryController()
         {
             data = new InventoriesData();
+            productData = new ProductsData();
         }
 
         // GET: InventoryController
@@ -26,9 +29,20 @@ namespace SysPet.Controllers
         }
 
         // GET: InventoryController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new InventariosViewModel();
+
+            var products = await productData.GetAll();
+            var productList = products.Select(x => new SelectListItem
+            {
+                Value = x.IdProducto.ToString(),
+                Text = x.Nombre
+            }).ToList();
+
+            model.Productos = productList;
+
+            return View(model);
         }
 
         // POST: InventoryController/Create

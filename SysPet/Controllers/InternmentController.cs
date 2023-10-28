@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SysPet.Data;
 using SysPet.Models;
 
@@ -8,28 +10,59 @@ namespace SysPet.Controllers
     public class InternmentController : Controller
     {
         private readonly InternmentsData data;
+        private readonly PersonsData personsData;
+        private readonly PetsData petsData;
         public InternmentController()
         {
             data = new InternmentsData();
+            personsData = new PersonsData();
+            petsData = new PetsData();
         }
 
         // GET: InternmentController
         public async Task<ActionResult> Index()
         {
             ViewBag.Url = "Shared/EmptyData";
-            return View();
+            return View(await data.GetAll());
         }
 
         // GET: InternmentController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            return View(await data.GetItem(id));
         }
 
         // GET: InternmentController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new InternamientosViewModel();
+            var persons = await personsData.GetAll(2);
+            var doctors = await personsData.GetAll(3);
+            var patients = await petsData.GetAll();
+
+            var personList = persons.Select(x => new SelectListItem
+            {
+                Value = x.IdPersona.ToString(),
+                Text = $"{x.Nombre} {x.Apellidos}"
+            }).ToList();
+
+            var doctorList = doctors.Select(x => new SelectListItem
+            {
+                Value = x.IdPersona.ToString(),
+                Text = $"{x.Nombre} {x.Apellidos}"
+            }).ToList();
+
+            var patientList = patients.Select(x => new SelectListItem
+            {
+                Value = x.IdPaciente.ToString(),
+                Text = $"{x.Nombre}"
+            }).ToList();
+
+            model.Personas = personList;
+            model.Pacientes = patientList;
+            model.Doctores = doctorList;
+
+            return View(model);
         }
 
         // POST: InternmentController/Create
@@ -39,6 +72,7 @@ namespace SysPet.Controllers
         {
             try
             {
+                var resut = data.Create(model);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -48,9 +82,9 @@ namespace SysPet.Controllers
         }
 
         // GET: InternmentController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            return View(await data.GetItem(id));
         }
 
         // POST: InternmentController/Edit/5
@@ -60,6 +94,15 @@ namespace SysPet.Controllers
         {
             try
             {
+                var item = data.GetItem(id);
+                if (item == null) { RedirectToAction(nameof(Index)); }
+
+                if (model == null) { RedirectToAction(nameof(Index)); }
+
+                if (!ModelState.IsValid) { RedirectToAction(nameof(Index)); }
+
+                var result = data.Update(model, id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -69,9 +112,9 @@ namespace SysPet.Controllers
         }
 
         // GET: InternmentController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            return View(await data.GetItem(id));
         }
 
         // POST: InternmentController/Delete/5
@@ -81,6 +124,9 @@ namespace SysPet.Controllers
         {
             try
             {
+                if (model == null) { RedirectToAction(nameof(Index)); }
+                var result = data.Delete(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -4,66 +4,69 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalle del internamiento</h1>
+<div class="col-md-6 offset-3">
+    <h1>Detalle del internamiento</h1>
 
-<div>
-    @Html.ActionLink("Ir a Internamientos", "Index", new {}, new { @class = "btn btn-primary" })
+    <div>
+        @Html.ActionLink("Ir a Internamientos", "Index", new {}, new { @class = "btn btn-primary" })
+    </div>
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FechaIngreso)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Medicamento)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Medicamento)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Antecedentes)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Antecedentes)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tratamiento)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Tratamiento)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Paciente)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Paciente)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Propietario)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Propietario)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Atendio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Atendio)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    </div>
 </div>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaIngreso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaIngreso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medicamento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medicamento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Antecedentes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Antecedentes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tratamiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tratamiento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPaciente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPaciente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPersona)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPersona)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPersonaDepartamento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPersonaDepartamento)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
-</div>
+

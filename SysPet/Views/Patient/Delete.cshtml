@@ -4,75 +4,79 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Eliminar Mascota</h1>
+<div class="col-md-6 offset-3">
+    <h1>Eliminar Mascota</h1>
 
-<h3>¿Estas seguro de eliminar mascota?</h3>
+    <h3>¿Estas seguro de eliminar mascota?</h3>
 
-<div>
-    @Html.ActionLink("Ir a Mascotas", "Index", new {}, new { @class = "btn btn-primary" })
+    <div>
+        @Html.ActionLink("Ir a Mascotas", "Index", new {}, new { @class = "btn btn-primary" })
+    </div>
+
+    <div>
+        <h4>PacientesViewModel</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Raza)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Raza)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Especie)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Especie)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Sexo)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Sexo)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Edad)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Edad)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Color)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Peso)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Peso)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+        </form>
+    </div>
+
 </div>
 
-<div>
-    <h4>PacientesViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Raza)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Raza)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Especie)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Especie)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sexo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Edad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Edad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Peso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Peso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-    </form>
-</div>

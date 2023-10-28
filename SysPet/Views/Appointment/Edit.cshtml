@@ -4,39 +4,43 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Editar Cita</h1>
+<div class="col-md-6 offset-3">
+    <h1>Editar Cita</h1>
 
-<div>
-    @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
-</div>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FechaCita" class="control-label"></label>
-                <input asp-for="FechaCita" class="form-control" />
-                <span asp-validation-for="FechaCita" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Motivo" class="control-label"></label>
-                <input asp-for="Motivo" class="form-control" />
-                <span asp-validation-for="Motivo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdEstado" class="control-label"></label>
-                <input asp-for="IdEstado" class="form-control" />
-                <span asp-validation-for="IdEstado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Guadar" class="btn btn-success" />
-                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
-            </div>
-        </form>
+    <div>
+        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
     </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FechaCita" class="control-label"></label>
+                    <input asp-for="FechaCita" class="form-control" />
+                    <span asp-validation-for="FechaCita" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Motivo" class="control-label"></label>
+                    <input asp-for="Motivo" class="form-control" />
+                    <span asp-validation-for="Motivo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdEstado, "Estado")
+                    @Html.DropDownListFor(model => model.IdEstado, Model.EstadoCitas,"Seleccionar un estado", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdEstado)
+                </div>
+
+                <div class="form-group" style="padding-top: 16px;">
+                    <input type="submit" value="Guadar" class="btn btn-success" />
+                    @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

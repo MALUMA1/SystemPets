@@ -39,6 +39,20 @@ namespace SysPet.Data
             }
         }
 
+        public async Task<IEnumerable<CitasViewModel>> GetStates()
+        {
+            try
+            {
+                var sql = @$"SELECT [Id],[Nombre] FROM [dbo].[EstadoCitas]";
+
+                return await GetItems(sql);
+            }
+            catch (Exception)
+            {
+                return new List<CitasViewModel>();
+            }
+        }
+
         public async override Task<CitasViewModel> GetItem(int id)
         {
             var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[Apellidos], e.[Nombre] Estado

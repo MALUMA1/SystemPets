@@ -4,48 +4,52 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalle de la cita</h1>
+<div class="col-md-6 offset-3">
+    <h1>Detalle de la cita</h1>
 
-<div>
-    @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
+    <div>
+        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
+    </div>
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FechaCita)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FechaCita)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Motivo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Motivo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Apellidos)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Elimiar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    </div>
+
 </div>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCita)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCita)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Motivo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Motivo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellidos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellidos)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Elimiar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
-</div>
+
