@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SysPet.Data;
 using SysPet.Models;
+
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 namespace SysPet.Controllers
 {
@@ -12,12 +15,69 @@ namespace SysPet.Controllers
         private readonly InternmentsData data;
         private readonly PersonsData personsData;
         private readonly PetsData petsData;
-        public InternmentController()
+        private readonly IConverter converter;
+        public InternmentController(IConverter converter)
         {
             data = new InternmentsData();
             personsData = new PersonsData();
             petsData = new PetsData();
+            this.converter = converter;
+
         }
+
+        public IActionResult ShowPdf()
+        {
+            string currentPage = HttpContext.Request.Path;
+            string pageUrl = HttpContext.Request.GetEncodedUrl();
+
+            pageUrl = pageUrl.Replace(currentPage, "");
+            pageUrl = $"{pageUrl}/Internment/Details";
+
+            var pdfSettings = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings
+                {
+                    PaperSize = PaperKind.A4,
+                    Orientation = Orientation.Portrait
+                },
+                Objects = { new ObjectSettings
+                {
+                    Page = pageUrl
+                } }
+            };
+
+            var pdf = converter.Convert(pdfSettings);
+
+            return File(pdf,"application/pdf");
+        }
+
+        public IActionResult DownloadPdf()
+        {
+            string currentPage = HttpContext.Request.Path;
+            string pageUrl = HttpContext.Request.GetEncodedUrl();
+
+            pageUrl = pageUrl.Replace(currentPage, "");
+            pageUrl = $"{pageUrl}/Internment/Details";
+
+            var pdfSettings = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings
+                {
+                    PaperSize = PaperKind.A4Plus,
+                    Orientation = Orientation.Portrait
+                },
+                Objects = { new ObjectSettings
+                {
+                    Page = pageUrl
+                } }
+            };
+
+            var pdf = converter.Convert(pdfSettings);
+            string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+
+            return File(pdf, "application/pdf", pdfName);
+        }
+
 
         // GET: InternmentController
         public async Task<ActionResult> Index()

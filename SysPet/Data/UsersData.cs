@@ -2,16 +2,15 @@
 
 namespace SysPet.Data
 {
-    public class UsersData : DataAccessBase<PersonasViewModel>
+    public class UsersData : DataAccessBase<UsuariosViewModel>
     {
-        public override int Create(PersonasViewModel item)
+        public override int Create(UsuariosViewModel item)
         {
-            var sql = $@"INSERT INTO Personas VALUES (
+            var sql = $@"INSERT INTO Usuarios VALUES (
                         '{item.Nombre}', 
-                        '{item.Apellidos}', 
-                        '{item.Ciudad}', 
-                        '{item.CodigoPostal}', 
-                        '{item.Telefono}', 
+                        '{item.Email}', 
+                        '{item.Contrasenia}', 
+                        '{item.IdRol}',  
                         1)";
 
             return Execute(sql);
@@ -19,43 +18,66 @@ namespace SysPet.Data
 
         public override int Delete(int id)
         {
-            var sql = $"DELETE FROM Personas WHERE IdPersona = @id;";
+            var sql = $"DELETE FROM Usuarios WHERE Id = @id;";
 
             return Execute(sql, new { id });
         }
 
-        public async override Task<IEnumerable<PersonasViewModel>> GetAll()
+        public async override Task<IEnumerable<UsuariosViewModel>> GetAll()
         {
             try
             {
-                var sql = @$"SELECT [IdPersona],[Nombre],[Apellidos],[Ciudad],[CodigoPostal],[Telefono],[Estado]
-                        FROM [dbo].[Personas]";
+                var sql = @$"SELECT u.Id,u.Nombre, u.Email,u.Contrasenia,u.Estado, r.Nombre AS Rol
+                            FROM Usuarios u
+                            INNER JOIN Roles r on r.IdRol = u.IdRol";
 
                 return await GetItems(sql);
             }
             catch (Exception)
             {
-                return new List<PersonasViewModel>();
+                return new List<UsuariosViewModel>();
             }
         }
 
-        public async override Task<PersonasViewModel> GetItem(int id)
+        public async Task<IEnumerable<UsuariosViewModel>> GetRoles()
         {
-            var sql = @$"SELECT [IdPersona],[Nombre],[Apellidos],[Ciudad],[CodigoPostal],[Telefono],[Estado]
-                        FROM [dbo].[Personas] WHERE IdPersona = @id";
+            try
+            {
+                var sql = @$"SELECT IdRol,Nombre
+                        FROM [dbo].[Roles]";
+
+                return await GetItems(sql);
+            }
+            catch (Exception)
+            {
+                return new List<UsuariosViewModel>();
+            }
+        }
+
+        public async override Task<UsuariosViewModel> GetItem(int id)
+        {
+            var sql = @$"SELECT u.Id,u.Nombre, u.Email,u.Contrasenia,u.Estado, r.Nombre AS Rol
+                         FROM Usuarios u
+                         INNER JOIN Roles r on r.IdRol = u.IdRol 
+                         WHERE u.Id = @id";
             return await Get(sql, new { id });
         }
 
-        public override int Update(PersonasViewModel item, int id)
+        public async Task<UsuariosViewModel> GetUserManager(string email, string password)
         {
-            var sql = $@"UPDATE Personas SET 
+            var sql = @$"SELECT Email,Contrasenia
+                        FROM Usuarios
+                        WHERE Email = @email AND Contrasenia = @password";
+            return await Get(sql, new { email, password });
+        }
+
+        public override int Update(UsuariosViewModel item, int id)
+        {
+            var sql = $@"UPDATE Usuarios SET 
                         Nombre='{item.Nombre}', 
-                        Apellidos='{item.Apellidos}', 
-                        Ciudad='{item.Ciudad}', 
-                        CodigoPostal='{item.CodigoPostal}', 
-                        Telefono='{item.Telefono}', 
+                        Apellidos='{item.Contrasenia}', 
                         Estado={GetEstado(item.Estado)}
-                        WHERE IdPersona = @id";
+                        WHERE Id = @id";
 
             return Execute(sql, new { id });
         }

@@ -5,35 +5,35 @@
 }
 
 <div class="col-md-6 offset-3">
-    <h1>Editar Cita</h1>
+    <h1 class="fw-normal mb-3 pb-3">Editar Cita</h1>
 
     <div>
-        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary btn-lg btn-block" })
     </div>
 
     <div class="row">
         <div class="col-md-8">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="FechaCita" class="control-label"></label>
-                    <input asp-for="FechaCita" class="form-control" />
+                <div class="form-outline mb-4">
+                    <label asp-for="FechaCita" class="control-label col-md-4"></label>
+                    <input asp-for="FechaCita" class="form-control form-control-lg" />
                     <span asp-validation-for="FechaCita" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Motivo" class="control-label"></label>
-                    <input asp-for="Motivo" class="form-control" />
+                <div class="form-outline mb-4">
+                    <label asp-for="Motivo" class="control-label col-md-4"></label>
+                    <input asp-for="Motivo" class="form-control form-control-lg" />
                     <span asp-validation-for="Motivo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IdEstado, "Estado")
-                    @Html.DropDownListFor(model => model.IdEstado, Model.EstadoCitas,"Seleccionar un estado", new { @class = "form-control" })
+                <div class="form-outline mb-4">
+                    @Html.LabelFor(model => model.IdEstado, "Estado", new { @class = "control-label col-md-4" })
+                    @Html.DropDownListFor(model => model.IdEstado, Model.EstadoCitas,"Seleccionar un estado", new { @class = "form-control form-control-lg" })
                     @Html.ValidationMessageFor(model => model.IdEstado)
                 </div>
 
-                <div class="form-group" style="padding-top: 16px;">
-                    <input type="submit" value="Guadar" class="btn btn-success" />
-                    @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
+                <div class="form-outline mb-4" style="padding-top: 16px;">
+                    <input type="submit" value="Guadar" class="btn btn-success btn-lg btn-block" />
+                    @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger btn-lg btn-block" })
                 </div>
             </form>
         </div>

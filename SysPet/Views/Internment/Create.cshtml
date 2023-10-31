@@ -4,50 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="col-md-6 offset-3">Agregar Internamiento</h1>
+<h1 class="col-md-6 offset-3 fw-normal mb-3 pb-3">Agregar Internamiento</h1>
 
 <div class="row">
     <div class="col-md-6 offset-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FechaIngreso" class="control-label"></label>
-                <input asp-for="FechaIngreso" class="form-control" />
+            <div class="form-outline mb-4">
+                <label asp-for="FechaIngreso" class="control-label col-md-4"></label>
+                <input asp-for="FechaIngreso" class="form-control form-control-lg" />
                 <span asp-validation-for="FechaIngreso" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Medicamento" class="control-label"></label>
-                <input asp-for="Medicamento" class="form-control" />
+            <div class="form-outline mb-4">
+                <label asp-for="Medicamento" class="control-label col-md-4"></label>
+                <input asp-for="Medicamento" class="form-control form-control-lg" />
                 <span asp-validation-for="Medicamento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Antecedentes" class="control-label"></label>
-                <input asp-for="Antecedentes" class="form-control" />
+            <div class="form-outline mb-4">
+                <label asp-for="Antecedentes" class="control-label col-md-4"></label>
+                <input asp-for="Antecedentes" class="form-control form-control-lg" />
                 <span asp-validation-for="Antecedentes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tratamiento" class="control-label"></label>
-                <input asp-for="Tratamiento" class="form-control" />
+            <div class="form-outline mb-4">
+                <label asp-for="Tratamiento" class="control-label col-md-4"></label>
+                <input asp-for="Tratamiento" class="form-control form-control-lg" />
                 <span asp-validation-for="Tratamiento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdPaciente, "Paciente")
-                @Html.DropDownListFor(model => model.IdPaciente, Model.Pacientes,"Seleccionar un paciente", new { @class = "form-control" })
+            <div class="form-outline mb-4">
+                @Html.LabelFor(model => model.IdPaciente, "Paciente", new { @class = "control-label col-md-4" })
+                @Html.DropDownListFor(model => model.IdPaciente, Model.Pacientes,"Seleccionar un paciente", new { @class = "form-control form-control-lg" })
                 @Html.ValidationMessageFor(model => model.IdPaciente)
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdPersona, "Propietario")
-                @Html.DropDownListFor(model => model.IdPersona, Model.Personas,"Seleccionar un propietario", new { @class = "form-control" })
+            <div class="form-outline mb-4">
+                @Html.LabelFor(model => model.IdPersona, "Propietario", new { @class = "control-label col-md-4" })
+                @Html.DropDownListFor(model => model.IdPersona, Model.Personas,"Seleccionar un propietario", new { @class = "form-control form-control-lg" })
                 @Html.ValidationMessageFor(model => model.IdPersona)
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdDoctor, "Doctor")
-                @Html.DropDownListFor(model => model.IdDoctor, Model.Doctores,"Seleccionar un doctor", new { @class = "form-control" })
+            <div class="form-outline mb-4">
+                @Html.LabelFor(model => model.IdDoctor, "Doctor", new { @class = "control-label col-md-4" })
+                @Html.DropDownListFor(model => model.IdDoctor, Model.Doctores,"Seleccionar un doctor", new { @class = "form-control form-control-lg" })
                 @Html.ValidationMessageFor(model => model.IdDoctor)
             </div>
-            <div class="form-group" style="padding-top: 16px;">
-                <input type="submit" value="Guardar" class="btn btn-success" />
-                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger" })
+            <div class="form-outline mb-4" style="padding-top: 16px;">
+                <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block" />
+                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger btn-lg btn-block" })
             </div>
         </form>
     </div>

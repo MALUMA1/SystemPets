@@ -1,7 +1,17 @@
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using SysPet.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Sincronizacion de la libreria de PDF
+var context = new CustomAsemblyLoadContext();
+context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Agents/libwkhtmltox.dll"));
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
 var app = builder.Build();
 
@@ -22,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Singin}");
 
 app.Run();

@@ -1,61 +1,41 @@
-﻿@model SysPet.Models.PersonasViewModel
+﻿@model SysPet.Models.UsuariosViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="col-md-6 offset-3 fw-normal mb-3 pb-3">Nuevo Usuario</h1>
 
-<h4>PersonasViewModel</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 offset-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdPersona" class="control-label"></label>
-                <input asp-for="IdPersona" class="form-control" />
-                <span asp-validation-for="IdPersona" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+            <div class="form-outline mb-4">
+                <label asp-for="Nombre" class="control-label col-md-4 col-md-4"></label>
+                <input asp-for="Nombre" class="form-control form-control-lg form-control form-control-lg-lg" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
-                <input asp-for="Apellidos" class="form-control" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            <div class="form-outline mb-4">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-4 col-md-4" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg form-control form-control-lg-lg", type = "email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input asp-for="Ciudad" class="form-control" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
+            <div class="form-outline mb-4">
+                @Html.LabelFor(m => m.Contrasenia, new { @class = "control-label col-md-4 col-md-4" })
+                @Html.PasswordFor(m => m.Contrasenia, new { @class = "form-control form-control-lg form-control form-control-lg-lg" })
+                @Html.ValidationMessageFor(m => m.Contrasenia, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="CodigoPostal" class="control-label"></label>
-                <input asp-for="CodigoPostal" class="form-control" />
-                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+            <div class="form-outline mb-4">
+                @Html.LabelFor(model => model.IdRol, "Rol", new { @class = "control-label col-md-4 col-md-4" })
+                @Html.DropDownListFor(model => model.IdRol, Model.Roles,"Seleccionar un rol", new { @class = "form-control form-control-lg form-control form-control-lg-lg" })
+                @Html.ValidationMessageFor(model => model.IdRol)
             </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="pt-1 mb-4">
+                <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block btn-lg btn-block" />
+                @Html.ActionLink("Cancelar", "Singin", new {}, new { @class = "btn btn-danger btn-lg btn-block btn-lg btn-block" })
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -53,7 +53,9 @@
                         @Html.DisplayFor(modelItem => item.Telefono)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new {  id=item.IdPersona }, new { @class = "btn btn-primary" })
+                        
+                        @Html.ActionLink("Editar","Edit", new {  id=item.IdPersona }, new { @class = "btn btn-primary"})
+
                         @Html.ActionLink("Detalle", "Details", new { id=item.IdPersona }, new { @class = "btn btn-info" })
                         @Html.ActionLink("Eliminar", "Delete", new { id=item.IdPersona }, new { @class = "btn btn-danger" })
                     </td>

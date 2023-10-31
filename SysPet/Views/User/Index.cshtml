@@ -4,19 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @Html.ActionLink("Nuevo Usuario", "Create", new{}, new { @class = "btn btn-primary" })
 </p>
-@if (Model != null)
+
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
@@ -27,10 +25,7 @@
                     @Html.DisplayNameFor(model => model.Contrasenia)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdPersona)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdRol)
+                    @Html.DisplayNameFor(model => model.Rol)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Estado)
@@ -43,9 +38,6 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
                     <td>
@@ -55,18 +47,14 @@
                         @Html.DisplayFor(modelItem => item.Contrasenia)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdPersona)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdRol)
+                        @Html.DisplayFor(modelItem => item.Rol)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }
@@ -76,5 +64,5 @@
 }
 else
 {
-    
+    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
 }

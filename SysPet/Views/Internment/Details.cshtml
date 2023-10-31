@@ -66,6 +66,7 @@
     <div>
         @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
         @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Descargar PDF", "DownloadPdf", new { id = Model.Id }, new { @class = "btn btn-info" })
     </div>
 </div>
 
