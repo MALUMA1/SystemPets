@@ -40,9 +40,15 @@
                         <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
                     </label>
                 </div>
-                <div class="form-outline mb-4">
-                    <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block" />
-                    @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger btn-lg btn-block" })
+                <div class="form-outline mb-4 btn-groups">
+                    <button type="submit" class="btn btn-outline-success btn-lg btn-block custom-tooltip">
+                        <img src="../icons/floppy.svg" alt="Guardar">
+                        <span class="custom-tooltip-text">Guardar</span>
+                    </button>
+                    <a class="btn btn-outline-danger btn-lg btn-block custom-tooltip" href="@Url.Action("Index", "Internment", new {})">
+                        <img src="../icons/x-square.svg" alt="Cancelar">
+                        <span class="custom-tooltip-text">Cancelar</span>
+                    </a>
                 </div>
             </form>
         </div>

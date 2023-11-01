@@ -4,11 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Mascotas</h1>
+<h1 class="fw-normal mb-3 pb-3">Mascotas</h1>
 
-<p>
-    @Html.ActionLink("Agregar Mascota", "Create", new{}, new { @class = "btn btn-primary" })
-</p>
+<div class="btn-head custom-tooltip">
+    <a class="btn btn-outline-primary btn-image" href="@Url.Action("Create", "Patient", new {})">
+        <img src="../icons/plus-square.svg" alt="Nueva Mascota">
+        <span class="custom-tooltip-text-head">Nueva Mascota</span>
+    </a>
+</div>
 
 @if (Model != null && Model.Any())
 {
@@ -71,9 +74,20 @@
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id=item.IdPaciente }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Detalle", "Details", new { id=item.IdPaciente }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Eliminar", "Delete", new { id=item.IdPaciente }, new { @class = "btn btn-danger" })
+                        <a class="btn btn-outline-primary custom-tooltip" href="@Url.Action("Edit", "Patient", new { id = item.IdPaciente })">
+                            <img src="../icons/pencil-square.svg" alt="Editar">
+                            <span class="custom-tooltip-text">Editar</span>
+                        </a>
+
+                        <a class="btn btn btn-outline-info custom-tooltip" href="@Url.Action("Details", "Patient", new { id = item.IdPaciente })">
+                            <img src="../icons/view-list.svg" alt="Detalle">
+                            <span class="custom-tooltip-text-detail">Detalle</span>
+                        </a>
+
+                        <a class="btn btn-outline-danger custom-tooltip" href="@Url.Action("Delete", "Patient", new { id = item.IdPaciente })">
+                            <img src="../icons/x-square.svg" alt="Eliminar">
+                            <span class="custom-tooltip-text-delete">Eliminar</span>
+                        </a>
                     </td>
                 </tr>
             }

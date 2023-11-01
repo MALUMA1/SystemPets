@@ -4,11 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Inventarios</h1>
+<h1 class="fw-normal mb-3 pb-3">Inventarios</h1>
 
-<p>
-    @Html.ActionLink("Agregar Inventario", "Create", new{}, new { @class = "btn btn-primary" })
-</p>
+<div class="btn-head custom-tooltip">
+    <a class="btn btn-outline-primary btn-image" href="@Url.Action("Create", "Inventory", new {})">
+        <img src="../icons/plus-square.svg" alt="Nuevo Inventario">
+        <span class="custom-tooltip-text-head">Nuevo Inventario</span>
+    </a>
+</div>
 
 @if (Model != null && Model.Any())
 {
@@ -55,9 +58,20 @@
                     </td>
                     
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Detalle", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Eliminar", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
+                        <a class="btn btn-outline-primary custom-tooltip" href="@Url.Action("Edit", "Inventory", new { id = item.Id })">
+                            <img src="../icons/pencil-square.svg" alt="Editar">
+                            <span class="custom-tooltip-text">Editar</span>
+                        </a>
+
+                        <a class="btn btn btn-outline-info custom-tooltip" href="@Url.Action("Details", "Inventory", new { id = item.Id })">
+                            <img src="../icons/view-list.svg" alt="Detalle">
+                            <span class="custom-tooltip-text-detail">Detalle</span>
+                        </a>
+
+                        <a class="btn btn-outline-danger custom-tooltip" href="@Url.Action("Delete", "Inventory", new { id = item.Id })">
+                            <img src="../icons/x-square.svg" alt="Eliminar">
+                            <span class="custom-tooltip-text-delete">Eliminar</span>
+                        </a>
                     </td>
                 </tr>
             }

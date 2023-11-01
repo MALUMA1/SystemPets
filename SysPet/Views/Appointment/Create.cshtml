@@ -25,9 +25,16 @@
                 @Html.DropDownListFor(model => model.IdPersona, Model.Personas,"Seleccionar un propietario", new { @class = "form-control form-control-lg" })
                 @Html.ValidationMessageFor(model => model.IdPersona)
             </div>
-            <div class="form-outline mb-4" style="padding-top: 16px;">
-                <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block" />
-                @Html.ActionLink("Cancelar", "Index", new {}, new { @class = "btn btn-danger btn-lg btn-block" })
+            <div class="form-outline mb-4 btn-groups">
+                @* <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block" /> *@
+                <button type="submit" class="btn btn-outline-success btn-lg btn-block custom-tooltip">
+                    <img src="../icons/floppy.svg" alt="Guardar">
+                    <span class="custom-tooltip-text">Guardar</span>
+                </button>
+                <a class="btn btn-outline-danger btn-lg btn-block custom-tooltip" href="@Url.Action("Index", "Appointment", new {})">
+                    <img src="../icons/x-square.svg" alt="Cancelar">
+                    <span class="custom-tooltip-text">Cancelar</span>
+                </a>
             </div>
         </form>
     </div>

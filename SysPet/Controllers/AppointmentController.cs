@@ -25,7 +25,14 @@ namespace SysPet.Controllers
         // GET: AppointmentController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View(await data.GetItem(id));
+            var model = await data.GetItem(id);
+            return View(model);
+        }
+        
+        public async Task<IActionResult> ShowDetails(int id)
+        {
+            var model = await data.GetItem(id);
+            return PartialView("_ModalDetail",model);
         }
 
         // GET: AppointmentController/Create

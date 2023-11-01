@@ -20,3 +20,122 @@ body {
 .container {
     padding: 60px 0 0 0;
 }
+
+.btn-head {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-image {
+    display: flex;
+    padding: 12px;
+}
+
+.custom-tooltip {
+    position: relative;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.custom-tooltip-text {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -70px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip-text-detail {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -80px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip-text-delete {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -85px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip-text-cancel {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -85px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip-text-head {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 98%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip:hover .custom-tooltip-text,
+.custom-tooltip:hover .custom-tooltip-text-head,
+.custom-tooltip:hover .custom-tooltip-text-detail,
+.custom-tooltip:hover .custom-tooltip-text-delete
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+.btn-groups {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn-groups-detail {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+}

@@ -5,51 +5,59 @@
 }
 
 <div class="col-md-6 offset-3">
-    <h1>Detalle de la cita</h1>
+    <h1 class="fw-normal mb-3 pb-3">Detalle de la cita</h1>
 
     <div>
-        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
+        <a class="btn btn-outline-info btn-lg btn-block custom-tooltip" href="@Url.Action("Index", "Appointment", new { id=Model.Id })">
+            <img src="../icons/arrow-left-square-fill.svg" alt="Ir a Citas">
+            <span class="custom-tooltip-text">Ir a Citas</span>
+        </a>
     </div>
 
     <div>
         <dl class="row">
-            <dt class="col-sm-2">
+            <dt class="col-sm-4 mb-4">
                 @Html.DisplayNameFor(model => model.FechaCita)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.FechaCita)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Motivo)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Motivo)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Nombre)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Nombre)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Apellidos)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Apellidos)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Estado)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Estado)
             </dd>
         </dl>
     </div>
-    <div>
-        @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Elimiar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    <div class="btn-groups-detail">
+        <a class="btn btn-outline-primary btn-lg btn-block custom-tooltip" href="@Url.Action("Edit", "Appointment", new { id=Model.Id })">
+            <img src="../icons/pencil-square.svg" alt="Editar">
+            <span class="custom-tooltip-text">Editar</span>
+        </a>
+        <a class="btn btn-outline-danger btn-lg btn-block custom-tooltip" href="@Url.Action("Delete", "Appointment", new { id=Model.Id })">
+            <img src="../icons/x-square.svg" alt="Eliminar">
+            <span class="custom-tooltip-text">Eliminar</span>
+        </a>
     </div>
 
 </div>
-
 
