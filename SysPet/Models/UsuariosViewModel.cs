@@ -18,7 +18,7 @@ namespace SysPet.Models
         [Required(ErrorMessage = "El campo es requerido.")]
         [DataType(DataType.Password)]
         [DisplayName("Confirmar contraseña")]
-        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public int IdPersona { get; set; }
         public int IdRol { get; set; }
         public string Rol { get; set; }

@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Models;
+using System.Net.Http;
 using System.Reflection;
 
 namespace SysPet.Controllers
 {
     public class UserController : Controller
     {
+        
+
         private readonly UsersData _usersData;
         public UserController()
         {
@@ -53,10 +56,6 @@ namespace SysPet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> LogIn(UsuariosViewModel model)
         {
-            if (model.Contrasenia != model.Password)
-            {
-                ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden");
-            }
             if (model == null || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Contrasenia))
             {
                 ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos.");
@@ -64,10 +63,15 @@ namespace SysPet.Controllers
             else
             {
                 var user = await _usersData.GetUserManager(model.Email, model.Contrasenia);
-                if (user != null && model.Email == user.Email && model.Contrasenia == user.Contrasenia)
+                if (user == null || model.Email != user.Email || model.Contrasenia != user.Contrasenia)
                 {
-                    return RedirectToAction("Index", "Home"); // Redirige al usuario a la página de inicio después de iniciar sesión.
+                    ModelState.AddModelError("", "Nombre de usuario o contraseña incorrectos.");
                 }
+
+                HttpContext.Session.SetString("User", user.Nombre);
+                HttpContext.Session.SetInt32("UserId", user.Id);
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
@@ -130,9 +134,14 @@ namespace SysPet.Controllers
         {
             try
             {
+                if (model.Contrasenia != model.ConfirmPassword)
+                {
+                    ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden");
+                }
+
                 model.IdRol = 2;
                 var result = _usersData.Create(model);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(LogIn));
             }
             catch
             {

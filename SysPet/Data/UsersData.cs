@@ -65,7 +65,7 @@ namespace SysPet.Data
 
         public async Task<UsuariosViewModel> GetUserManager(string email, string password)
         {
-            var sql = @$"SELECT Email,Contrasenia
+            var sql = @$"SELECT Email,Contrasenia,Nombre,Id
                         FROM Usuarios
                         WHERE Email = @email AND Contrasenia = @password";
             return await Get(sql, new { email, password });

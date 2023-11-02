@@ -24,7 +24,7 @@
         <div class="row custom-container">
             <div class="col-md-6 myform">
                 <h2 class="fw-normal mb-3 pb-3">Iniciar Sesión</h2>
-                @using (Html.BeginForm("Singin", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("LogIn", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", onsubmit = "return valitePassword();" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -51,12 +51,14 @@
                         @Html.ActionLink("Registrarse", "Register", "User", new{}, new { @class = "link-info" })
                     </p>
                 }
+
             </div>
         </div>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
 </body>
 
 </html>
