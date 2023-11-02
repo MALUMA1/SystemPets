@@ -4,51 +4,50 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="col-md-6 offset-3">
-    <h1>Detalle del historial</h1>
-
-    <div>
-        @Html.ActionLink("Ir a Historiales", "Index", new {}, new { @class = "btn btn-primary" })
-    </div>
-
-    <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaVisita)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaVisita)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Motivo)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Motivo)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Diagnostico)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Diagnostico)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Paciente)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Paciente)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FullName)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FullName)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        @Html.ActionLink("Editar", "Edit", new { id=Model.Id }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+<div class="modal fade" id="detailModal-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle del historial</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FechaVisita)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FechaVisita)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Motivo)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Motivo)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Diagnostico)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Diagnostico)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Paciente)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Paciente)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FullName)
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>
-
-

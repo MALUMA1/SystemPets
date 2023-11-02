@@ -82,22 +82,12 @@ namespace SysPet.Controllers
             }
         }
 
-        // GET: ProductController/Delete/5
-        [HttpGet]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var product = await productsData.GetItem(id);
-            return View(product);
-        }
-
-        // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, ProductosViewModel model)
+        
+        public ActionResult Delete(int id)
         {
             try
             {
-                if (model == null) { RedirectToAction(nameof(Index)); }
+                if (id <= 0) { RedirectToAction(nameof(Index)); }
                 var result = productsData.Delete(id);
                 return RedirectToAction(nameof(Index));
             }

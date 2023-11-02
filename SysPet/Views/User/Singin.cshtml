@@ -15,13 +15,13 @@
                 <div class="form-outline mb-4">
 
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Email, "Campo Requerido", new { @class = "text-danger" })
                     @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-4" })
                 </div>
 
                 <div class="form-outline mb-4">
                     @Html.PasswordFor(m => m.Contrasenia, new { @class = "form-control form-control-lg" })
-                    @Html.ValidationMessageFor(m => m.Contrasenia, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Contrasenia, "Campo Requerido", new { @class = "text-danger" })
 
                     @Html.LabelFor(m => m.Contrasenia, new { @class = "control-label col-md-4" })
                 </div>

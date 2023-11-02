@@ -4,48 +4,56 @@
     ViewData["Title"] = "Delete";
 }
 
-<div class="col-md-6 offset-3">
-    <h1>Eliminar Cita</h1>
+<div class="modal fade" id="deleteModal-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estas seguro de eliminar cita?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
 
-    <h3>¿Estas seguro de eliminar cita?</h3>
-
-    <div>
-        @Html.ActionLink("Ir a Citas", "Index", new {}, new { @class = "btn btn-primary" })
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FechaCita)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FechaCita)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Motivo)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Motivo)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Apellidos)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Apellidos)
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                
+                    <a class="btn btn-outline-danger custom-tooltip btn-custom-color-delete" href="@Url.Action("Delete", "Appointment", new { id = Model.Id })">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                        Eliminar
+                    </a>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.FechaCita)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.FechaCita)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.Motivo)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Motivo)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.Nombre)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Nombre)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.Apellidos)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Apellidos)
-            </dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-        </form>
-    </div>
-
 </div>
 

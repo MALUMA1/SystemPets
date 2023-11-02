@@ -1,26 +1,15 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    var customTooltipElements = document.querySelectorAll(".custom-tooltip");
+    var elementos = document.querySelectorAll(".open-modal");
 
-    customTooltipElements.forEach(function (element) {
-        element.addEventListener("click", function (e) {
-            e.preventDefault();
-            var target = element.getAttribute("data-target");
-            var href = element.getAttribute("href");
-
+    elementos.forEach(function (elemento) {
+        elemento.addEventListener("click", function () {
+            var elementoId = this.getAttribute("data-id");
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", href, true);
+            xhr.open("GET", "/Appointment/ShowDetails?id=" + elementoId, true);
 
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    var modalContent = xhr.responseText;
-                    var targetModal = document.querySelector(target);
-
-                    if (targetModal) {
-                        targetModal.innerHTML = modalContent;
-
-                        var modal = new bootstrap.Modal(targetModal);
-                        modal.show();
-                    }
+                    document.getElementById("exampleModal").innerHTML = xhr.responseText;
                 }
             };
 
@@ -28,3 +17,5 @@
         });
     });
 });
+
+

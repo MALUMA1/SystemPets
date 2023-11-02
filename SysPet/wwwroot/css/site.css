@@ -29,6 +29,8 @@ body {
 .btn-image {
     display: flex;
     padding: 12px;
+    gap: 12px ;
+    align-items: center;
 }
 
 .custom-tooltip {
@@ -133,9 +135,92 @@ body {
     gap: 24px;
 }
 
+.btn-groups-delete {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+}
+
 .btn-groups-detail {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 24px;
+}
+
+.btn-custom-color-delete{
+    color:red;
+}
+
+.btn-custom-color-info {
+    color: #0dcaf0;
+}
+
+.btn-custom-color-primary {
+    color: #007bff;
+}
+
+.btn-custom-color-success {
+    color: #198754;
+}
+
+.btn-custom-color-delete:hover,
+.btn-custom-color-info:hover,
+.btn-custom-color-primary:hover,
+btn-custom-color-success:hover{
+    color: white;
+}
+
+.btn-custom-f {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.custom-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-body 
+{
+    padding-top: 4.2rem;
+    padding-bottom: 4.2rem;
+    background: rgba(0, 0, 0, 0.76);
+}
+
+.myform {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1rem;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 1.1rem;
+    outline: 0;
+    max-width: 500px;
+}
+
+.btn-login {
+    color: #0dcaf0;
+}
+
+.btn-login:hover{
+    color:white;
+}
+
+.custom-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
 }

@@ -43,6 +43,36 @@ namespace SysPet.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LogIn(UsuariosViewModel model)
+        {
+            if (model.Contrasenia != model.Password)
+            {
+                ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden");
+            }
+            if (model == null || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Contrasenia))
+            {
+                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos.");
+            }
+            else
+            {
+                var user = await _usersData.GetUserManager(model.Email, model.Contrasenia);
+                if (user != null && model.Email == user.Email && model.Contrasenia == user.Contrasenia)
+                {
+                    return RedirectToAction("Index", "Home"); // Redirige al usuario a la página de inicio después de iniciar sesión.
+                }
+            }
+
+            return View(model);
+        }
+
         // GET: UserController
         public async Task<ActionResult> Index()
         {
@@ -79,6 +109,28 @@ namespace SysPet.Controllers
         {
             try
             {
+                var result = _usersData.Create(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: UserController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(UsuariosViewModel model)
+        {
+            try
+            {
+                model.IdRol = 2;
                 var result = _usersData.Create(model);
                 return RedirectToAction(nameof(Index));
             }

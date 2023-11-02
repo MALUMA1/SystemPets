@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Models;
+using System.Reflection;
 
 namespace SysPet.Controllers
 {
@@ -32,7 +33,7 @@ namespace SysPet.Controllers
         public async Task<IActionResult> ShowDetails(int id)
         {
             var model = await data.GetItem(id);
-            return PartialView("_ModalDetail",model);
+            return PartialView("_ModalDetail", model);
         }
 
         // GET: AppointmentController/Create
@@ -105,20 +106,12 @@ namespace SysPet.Controllers
             }
         }
 
-        // GET: AppointmentController/Delete/5
-        public async Task<ActionResult> Delete(int id)
-        {
-            return View(await data.GetItem(id));
-        }
 
-        // POST: AppointmentController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, CitasViewModel model)
+        public ActionResult Delete(int id)
         {
             try
             {
-                if (model == null) { RedirectToAction(nameof(Index)); }
+                if (id <= 0) { RedirectToAction(nameof(Index)); }
                 var result = data.Delete(id);
 
                 return RedirectToAction(nameof(Index));

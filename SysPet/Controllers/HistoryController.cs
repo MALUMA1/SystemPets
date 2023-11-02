@@ -91,20 +91,11 @@ namespace SysPet.Controllers
             }
         }
 
-        // GET: HistoryController/Delete/5
-        public async Task<ActionResult> Delete(int id)
-        {
-            return View( await data.GetItem(id));
-        }
-
-        // POST: HistoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, HistorialesViewModel model)
+        public ActionResult Delete(int id)
         {
             try
             {
-                if (model == null) { RedirectToAction(nameof(Index)); }
+                if (id <= 0) { RedirectToAction(nameof(Index)); }
                 var result = data.Delete(id);
 
                 return RedirectToAction(nameof(Index));

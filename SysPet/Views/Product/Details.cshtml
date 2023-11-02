@@ -4,80 +4,80 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="col-md-6 offset-3">
-
-    <h1>Detalle del producto</h1>
-
-    <div>
-        @Html.ActionLink("Ir a Productos", "Index", new {}, new { @class = "btn btn-primary" })
-    </div>
-
-    <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Nombre)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaIngreso)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaIngreso)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Proveedor)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Proveedor)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cantidad)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cantidad)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Stock)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Stock)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.PrecioUnitario)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.PrecioUnitario)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.PrecioSugerido)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.PrecioSugerido)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaVencimiento)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaVencimiento)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Estado)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Estado)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        @Html.ActionLink("Editar", "Update", new { id=Model.IdProducto }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.IdProducto }, new { @class = "btn btn-danger" })
+<div class="modal fade" id="detailModal-@Model.IdProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle del producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FechaIngreso)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FechaIngreso)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Proveedor)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Proveedor)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Cantidad)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Stock)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.PrecioUnitario)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.PrecioUnitario)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.PrecioSugerido)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.PrecioSugerido)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Descripcion)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FechaVencimiento)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FechaVencimiento)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Estado)
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>
