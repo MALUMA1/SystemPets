@@ -57,7 +57,34 @@ namespace SysPet.Controllers
             string pageUrl = HttpContext.Request.GetEncodedUrl();
 
             pageUrl = pageUrl.Replace(currentPage, "");
-            pageUrl = $"{pageUrl}/Internment/Details";
+            pageUrl = $"{pageUrl}/Internment/PDF";
+
+            var pdfSettings = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings
+                {
+                    PaperSize = PaperKind.A4Plus,
+                    Orientation = Orientation.Portrait
+                },
+                Objects = { new ObjectSettings
+                {
+                    Page = pageUrl
+                } }
+            };
+
+            var pdf = converter.Convert(pdfSettings);
+            string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+
+            return File(pdf, "application/pdf", pdfName);
+        }
+
+        public IActionResult DownloadIndexPdf()
+        {
+            string currentPage = HttpContext.Request.Path;
+            string pageUrl = HttpContext.Request.GetEncodedUrl();
+
+            pageUrl = pageUrl.Replace(currentPage, "");
+            pageUrl = $"{pageUrl}/Internment/Index";
 
             var pdfSettings = new HtmlToPdfDocument()
             {
@@ -84,6 +111,11 @@ namespace SysPet.Controllers
         {
             ViewBag.Url = "Shared/EmptyData";
             return View(await data.GetAll());
+        }
+
+        public async Task<ActionResult> PDF(int id)
+        {
+            return View(await data.GetItem(id));
         }
 
         // GET: InternmentController/Details/5

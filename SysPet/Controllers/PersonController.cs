@@ -41,6 +41,7 @@ namespace SysPet.Controllers
             try
             {
                 model.IdTipoPersona = 2;
+                model.Telefono = model.PhoneNumber.ToString();
                 var result = data.Create(model);
                 return RedirectToAction(nameof(Index));
             }

@@ -4,26 +4,6 @@
     ViewData["Title"] = "Delete";
 }
 
-<div class="col-md-6 offset-3">
-    <h1>Eliminar Internamiento</h1>
-
-    <h3>¿Estas seguro de eliminar Internamiento?</h3>
-
-    <div>
-        @Html.ActionLink("Ir a Internamientos", "Index", new {}, new { @class = "btn btn-primary" })
-    </div>
-
-    <div>
-        <hr />
-        
-
-        <form asp-action="Delete">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-        </form>
-    </div>
-
-</div>
-
 <div class="modal fade" id="deleteModal-@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

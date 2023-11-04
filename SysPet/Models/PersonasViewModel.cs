@@ -1,17 +1,36 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SysPet.Models
 {
     public class PersonasViewModel
     {
         public int IdPersona { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(100, MinimumLength =3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
         public string Apellidos { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(25, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
         public string Ciudad { get; set; }
+
         [DisplayName("Código Postal")]
+        [Range(6,10, ErrorMessage ="El campo debe tener un minimo de 6 digitos y un maximo de 10 digitos")]
         public int CodigoPostal { get; set; }
         [DisplayName("Teléfono")]
+        [StringLength(10)]
         public string Telefono { get; set; }
+
+        [DisplayName("Teléfono")]
+        [Required(ErrorMessage = "El número de teléfono es obligatorio.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "El número de teléfono debe tener 10 dígitos numéricos.")]
+        public int PhoneNumber { get; set; }
         public bool Estado { get; set; }
         public int IdTipoPersona { get; set; }
         public List<MascotasViewModel> Mascotas { get; set; }
