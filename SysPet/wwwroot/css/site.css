@@ -242,3 +242,8 @@ btn-custom-color-success:hover{
     align-items: center;
     gap: 12px;
 }
+
+.log {
+    background-image: url('../images/bg-2.jpg');
+    background-size:cover;
+}
