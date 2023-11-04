@@ -7,7 +7,7 @@ namespace SysPet.Models
     {
         public int IdDepartamento { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 20 caracteres.")]
         public string Nombre { get; set; }
         [DisplayName("Descripción")]

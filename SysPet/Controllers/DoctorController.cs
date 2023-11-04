@@ -63,6 +63,7 @@ namespace SysPet.Controllers
         {
             try
             {
+                id = id > 0 ? id : model.IdPersona;
                 var item = data.GetItem(id);
                 if (item == null) { RedirectToAction(nameof(Index)); }
 

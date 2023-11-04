@@ -7,7 +7,7 @@ namespace SysPet.Models
     {
         public int Id { get; set; }
         [DisplayName("Fecha de Visita")]
-        public DateTime FechaVisita { get; set; }
+        public DateTime FechaVisita { get; set; } = DateTime.Now.Date;
         public string Motivo { get; set; }
         [DisplayName("Diagnóstico")]
         public string Diagnostico { get; set; }

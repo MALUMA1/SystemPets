@@ -60,6 +60,7 @@ namespace SysPet.Controllers
         {
             try
             {
+                id = id > 0 ? id : model.IdDepartamento;
                 var item = await data.GetItem(id);
                 if (item == null) { RedirectToAction(nameof(Index)); }
 

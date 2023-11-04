@@ -64,10 +64,11 @@ namespace SysPet.Data
         public override int Update(InventariosViewModel item, int id)
         {
             var sql = @$"UPDATE Inventarios SET
-                        '{FormatDate(item.FechaIngreso)}',
-                        '{FormatDate(item.FechaVencimiento)}',
-                        {item.Stock},
-                        {GetEstado(item.Estado)}";
+                        FechaIngreso='{FormatDate(item.FechaIngreso)}',
+                        FechaVencimiento='{FormatDate(item.FechaVencimiento)}',
+                        Stock={item.Stock},
+                        Estado={GetEstado(item.Estado)}
+                        Where Id=@id";
 
             return Execute(sql, new { id });
         }

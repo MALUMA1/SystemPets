@@ -42,12 +42,16 @@
 
         public string FormatDate(DateTime date)
         {
-            return $"{date.Year}-{date.Month}-{date.Day}";
+            var day = date.Date.Day > 9 ? date.Date.Day.ToString() : $"0{date.Date.Day}";
+            var month = date.Date.Month > 9 ? date.Date.Month.ToString() : $"0{date.Date.Month}";
+            return $"{date.Year}-{month}-{day}";
         }
 
         public string FormatDateTime(DateTime date)
         {
-            return $"{date.Year}-{date.Month}-{date.Day} {date.Hour}:{date.Minute}";
+            var day = date.Date.Day > 9 ? date.Date.Day.ToString() : $"0{date.Date.Day}";
+            var month = date.Date.Month > 9 ? date.Date.Month.ToString() : $"0{date.Date.Month}";
+            return $"{date.Year}-{month}-{day} {date.Hour}:{date.Minute}";
         }
 
         public static int GetEstado(bool estado)

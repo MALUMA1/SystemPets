@@ -120,7 +120,7 @@ namespace SysPet.Data
                         FechaIngreso='{FormatDate(item.FechaIngreso)}', 
                         Antecedentes='{item.Antecedentes}',
                         Medicamento='{item.Medicamento}', 
-                        Antecedentes='{item.Antecedentes}',
+                        Tratamiento='{item.Tratamiento}',
                         Estado={GetEstado(item.Estado)}
                         WHERE [Id] = @id";
 

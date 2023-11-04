@@ -10,7 +10,7 @@ namespace SysPet.Models
         [DisplayName("Fecha de Ingreso")]
         public DateTime FechaIngreso { get; set; } = DateTime.Now.Date;
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
         public string Medicamento { get; set; }
         [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
@@ -26,7 +26,7 @@ namespace SysPet.Models
         public string Propietario { get; set; }
         [DisplayName("Atendió")]
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
         public string Atendio { get; set; }
         public string FullName { get; set;}
 

@@ -62,10 +62,11 @@ namespace SysPet.Data
 
         public override int Update(HistorialesViewModel item, int id)
         {
+            var date = item.FechaVisita.Date.Year < DateTime.Now.Year ? DateTime.Now.Date : item.FechaVisita.Date;
             var sql = $@"UPDATE Historiales SET
-                        '{FormatDate(item.FechaVisita)}', 
-                        '{item.Motivo}', 
-                        '{item.Diagnostico}'
+                        FechaVisita='{FormatDate(date)}', 
+                        Motivo='{item.Motivo}', 
+                        Diagnostico='{item.Diagnostico}'
                         WHERE [Id] = @id";
 
             return Execute(sql, new { id });

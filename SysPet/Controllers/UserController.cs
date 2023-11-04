@@ -163,6 +163,7 @@ namespace SysPet.Controllers
         {
             try
             {
+                id = id > 0 ? id : model.Id;
                 var product = await _usersData.GetItem(id);
                 if (product == null) { RedirectToAction(nameof(Index)); }
 

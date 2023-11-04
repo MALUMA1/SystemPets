@@ -11,6 +11,11 @@
         <div class="col-md-8">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-outline mb-4" style="display: none;">
+
+                    <label asp-for="IdDepartamento" class="control-label col-md-4"></label>
+                    <input asp-for="IdDepartamento" class="form-control" />
+                </div>
                 <div class="form-group">
                     <label asp-for="Nombre" class="control-label col-md-4"></label>
                     <input asp-for="Nombre" class="form-control form-control-lg" />
