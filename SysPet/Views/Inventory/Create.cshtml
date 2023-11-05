@@ -11,26 +11,36 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-outline mb-4">
-                <label asp-for="FechaIngreso" class="control-label col-md-4"></label>
+                <label asp-for="FechaIngreso" class="control-label col-md-6"></label>
                 <input asp-for="FechaIngreso" class="form-control form-control-lg" />
                 <span asp-validation-for="FechaIngreso" class="text-danger"></span>
             </div>
             <div class="form-outline mb-4">
-                <label asp-for="FechaVencimiento" class="control-label col-md-4"></label>
+                <label asp-for="FechaVencimiento" class="control-label col-md-6"></label>
                 <input asp-for="FechaVencimiento" class="form-control form-control-lg" />
                 <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
             </div>
             <div class="form-outline mb-4">
-                <label asp-for="Stock" class="control-label col-md-4"></label>
+                <label asp-for="Stock" class="control-label col-md-6"></label>
                 <input asp-for="Stock" class="form-control form-control-lg" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-outline mb-4">
-                @Html.LabelFor(model => model.IdProducto, "Producto")
-                @Html.DropDownListFor(model => model.IdProducto, Model.Productos,"Seleccionar un producto", new { @class = "form-control form-control-lg" })
+                @Html.LabelFor(model => model.IdProducto, "Artículo")
+                @Html.DropDownListFor(model => model.IdProducto, Model.Productos,"Seleccionar un artículo", new { @class = "form-control form-control-lg" })
                 @Html.ValidationMessageFor(model => model.IdProducto)
             </div>
-            <div class="form-outline mb-4 btn-groups">
+            <div class="form-outline mb-4 btn-groups" style="justify-content:space-between;">
+                <div>
+                    <a class="btn btn-outline-info btn-lg btn-block btn-custom-color-info btn-custom-f" href="@Url.Action("Create", "Product", new {})">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                        </svg>
+                        Nuevo Artículo
+                    </a>
+                </div>
                 <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-custom-color-success btn-custom-f">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
                         <path d="M11 2H9v3h2V2Z" />

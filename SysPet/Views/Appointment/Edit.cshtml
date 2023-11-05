@@ -13,21 +13,21 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-outline mb-4" style="display: none;">
 
-                    <label asp-for="Id" class="control-label col-md-4"></label>
+                    <label asp-for="Id" class="control-label col-md-6"></label>
                     <input asp-for="Id" class="form-control" />
                 </div>
                 <div class="form-outline mb-4">
-                    <label asp-for="FechaCita" class="control-label col-md-4"></label>
+                    <label asp-for="FechaCita" class="control-label col-md-6"></label>
                     <input asp-for="FechaCita" class="form-control form-control-lg" />
                     <span asp-validation-for="FechaCita" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
-                    <label asp-for="Motivo" class="control-label col-md-4"></label>
+                    <label asp-for="Motivo" class="control-label col-md-6"></label>
                     <input asp-for="Motivo" class="form-control form-control-lg" />
                     <span asp-validation-for="Motivo" class="text-danger"></span>
                 </div>
                 <div class="form-outline mb-4">
-                    @Html.LabelFor(model => model.IdEstado, "Estado", new { @class = "control-label col-md-4" })
+                    @Html.LabelFor(model => model.IdEstado, "Estado", new { @class = "control-label col-md-6" })
                     @Html.DropDownListFor(model => model.IdEstado, Model.EstadoCitas,"Seleccionar un estado", new { @class = "form-control form-control-lg" })
                     @Html.ValidationMessageFor(model => model.IdEstado)
                 </div>

@@ -67,6 +67,16 @@
                     <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.Fecha)
                     </dd>
+                    @if (Model.Imagen != null)
+                    {
+                        <dt class="col-sm-4" style="display: flex;align-items: center;">
+                            @Html.DisplayNameFor(model => model.Imagen)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <img src="data:@Model.TipoContenido;base64,@(Convert.ToBase64String(Model.Imagen))" class="rounded-3" style="width: 200px;" 
+                            alt="Imagen del Paciente" />
+                        </dd>
+                    }
                 </dl>
             </div>
             <div class="modal-footer">

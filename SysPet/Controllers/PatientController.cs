@@ -34,6 +34,7 @@ namespace SysPet.Controllers
         public async Task<ActionResult> Create()
         {
             var model = new MascotasViewModel();
+            
             var persons = await personData.GetAll();
             
             var lista = persons.Select(x => new SelectListItem
@@ -50,12 +51,21 @@ namespace SysPet.Controllers
         // POST: PatientController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MascotasViewModel model)
+        public ActionResult Create(MascotasViewModel model, IFormFile file)
         {
             try
             {
-                var result = data.Create(model);
-                return RedirectToAction(nameof(Index));
+                using (var ms = new MemoryStream())
+                {
+                    model.Image.CopyTo(ms);
+                    model.NombreArchivo = model.Image.FileName;
+                    model.TipoContenido = model.Image.ContentType;
+                    model.Imagen = ms.ToArray();
+
+                    var result = data.Create(model);
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             catch
             {
@@ -82,11 +92,23 @@ namespace SysPet.Controllers
 
                 if (model == null) { RedirectToAction(nameof(Index)); }
 
-                if (!ModelState.IsValid) { RedirectToAction(nameof(Index)); }
+                if (model?.Imagen != null)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        model.Image.CopyTo(ms);
+                        model.NombreArchivo = model.Image.FileName;
+                        model.TipoContenido = model.Image.ContentType;
+                        model.Imagen = ms.ToArray();
+
+                        var res = data.Update(model, id);
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
 
                 var result = data.Update(model, id);
-
                 return RedirectToAction(nameof(Index));
+
             }
             catch
             {

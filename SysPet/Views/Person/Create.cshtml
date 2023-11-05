@@ -10,31 +10,44 @@
     <div class="col-md-6 offset-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-outline mb-4">
-                <label asp-for="Nombre" class="control-label col-md-4"></label>
-                <input asp-for="Nombre" class="form-control form-control-lg" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+            <div class="d-g">
+                <div class="form-outline mb-4">
+                    <label asp-for="Nombre" class="control-label col-md-6"></label>
+                    <input asp-for="Nombre" class="form-control form-control-lg" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <label asp-for="Apellidos" class="control-label col-md-6"></label>
+                    <input asp-for="Apellidos" class="form-control form-control-lg" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-outline mb-4">
-                <label asp-for="Apellidos" class="control-label col-md-4"></label>
-                <input asp-for="Apellidos" class="form-control form-control-lg" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            <div class="d-g">
+                <div class="form-outline mb-4">
+                    <label asp-for="PhoneNumber" class="control-label col-md-6"></label>
+                    <input asp-for="PhoneNumber" class="form-control form-control-lg" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <label asp-for="Direccion" class="control-label col-md-6"></label>
+                    <input asp-for="Direccion" class="form-control form-control-lg" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-outline mb-4">
-                <label asp-for="Ciudad" class="control-label col-md-4"></label>
-                <input asp-for="Ciudad" class="form-control form-control-lg" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
+            <div class="d-g">
+                <div class="form-outline mb-4">
+                    <label asp-for="Ciudad" class="control-label col-md-6"></label>
+                    <input asp-for="Ciudad" class="form-control form-control-lg" />
+                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <label asp-for="CodigoPostal" class="control-label col-md-6"></label>
+                    <input asp-for="CodigoPostal" class="form-control form-control-lg" />
+                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-outline mb-4">
-                <label asp-for="CodigoPostal" class="control-label col-md-4"></label>
-                <input asp-for="CodigoPostal" class="form-control form-control-lg" />
-                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
-            </div>
-            <div class="form-outline mb-4">
-                <label asp-for="PhoneNumber" class="control-label col-md-4"></label>
-                <input asp-for="PhoneNumber" class="form-control form-control-lg" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
+
+            
             <div class="form-outline mb-4 btn-groups">
                 <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-custom-color-success btn-custom-f">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">

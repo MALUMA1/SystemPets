@@ -14,6 +14,12 @@
             <div class="modal-body">
                 <dl class="row">
                     <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Producto)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Producto)
+                    </dd>
+                    <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.FechaIngreso)
                     </dt>
                     <dd class="col-sm-8">
@@ -30,12 +36,6 @@
                     </dt>
                     <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.Stock)
-                    </dd>
-                    <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.Producto)
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.Producto)
                     </dd>
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.Descripcion)

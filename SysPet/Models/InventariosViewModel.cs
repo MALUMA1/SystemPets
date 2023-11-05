@@ -13,6 +13,7 @@ namespace SysPet.Models
         public int Stock { get; set; }
         public bool Estado { get; set; }
         public int IdProducto { get; set; }
+        [DisplayName("Nombre del artículo")]
         public string Producto { get; set; }
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }

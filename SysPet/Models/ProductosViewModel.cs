@@ -9,6 +9,7 @@ namespace SysPet.Models
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 50 caracteres.")]
+        [DisplayName("Nombre del artículo")]
         public string Nombre { get; set; }
         [DisplayName("Fecha de Ingreso")]
         public DateTime FechaIngreso { get; set; }

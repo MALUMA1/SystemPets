@@ -6,17 +6,16 @@ namespace SysPet.Data
     {
         public override int Create(MascotasViewModel item)
         {
-            var sql = $@"INSERT INTO Pacientes VALUES(
-                        '{item.Nombre}',
-                        '{item.Raza}',
-                        '{item.Especie}',
-                        '{item.Sexo}',
-                        {item.Edad},
-                        '{item.Color}',
-                        '{item.Peso}', 
-                        1, GETDATE(),{item.IdPersona})";
+            var query = $@"INSERT INTO Pacientes (Nombre,Raza,Especie,Sexo,Edad,Color,Peso,Estado,Fecha,IdPersona,Imagen,NombreArchivo,TipoContenido)
+                        VALUES(@Nombre,@Raza,@Especie,@Sexo,@Edad,@Color,@Peso,@Estado,@Fecha,@IdPersona,@Imagen,@NombreArchivo,@TipoContenido)";
+            var estado = 1;
+            var fecha = FormatDate(DateTime.Now.Date);
+            var parameters = new
+            {
+                item.Nombre, item.Raza, item.Especie, item.Sexo,item.Edad,item.Color,item.Peso,Estado = estado,Fecha = fecha, item.IdPersona,item.Imagen,item.NombreArchivo,item.TipoContenido
+            };
 
-            return Execute(sql);
+            return Execute(query, parameters);
         }
 
         public override int Delete(int id)
@@ -42,6 +41,7 @@ namespace SysPet.Data
                               ,p.[Fecha]
                               ,a.Nombre Propietario
 	                          ,a.Apellidos
+                              ,p.Imagen
                           FROM [dbo].[Pacientes] p
                           INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona";
 
@@ -67,6 +67,8 @@ namespace SysPet.Data
                               ,p.[Fecha]
                               ,a.Nombre Propietario
 	                          ,a.Apellidos
+                              ,p.Imagen
+                              ,p.NombreArchivo,p.TipoContenido
                           FROM [dbo].[Pacientes] p
                           INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona
                           WHERE p.IdPaciente = @id";
@@ -76,18 +78,37 @@ namespace SysPet.Data
 
         public override int Update(MascotasViewModel item, int id)
         {
+            var estado = GetEstado(item.Estado);
             var sql = $@"UPDATE Pacientes SET
-                        Nombre='{item.Nombre}',
-                        Raza='{item.Raza}',
-                        Especie='{item.Especie}',
-                        Sexo='{item.Sexo}',
-                        Edad={item.Edad},
-                        Color='{item.Color}',
-                        Peso='{item.Peso}', 
-                        Estado={GetEstado(item.Estado)}
+                        Nombre=@Nombre,
+                        Raza=@Raza,
+                        Especie=@Especie,
+                        Sexo=@Sexo,
+                        Edad=@Edad,
+                        Color=@Color,
+                        Peso=@Peso, 
+                        Estado=@Estado,
+                        Imagen=@Imagen,
+                        NombreArchivo=@NombreArchivo,
+                        TipoContenido=@TipoContenido
                         WHERE IdPaciente = @id";
+            var parameters = new
+            {
+                item.Nombre,
+                item.Raza,
+                item.Especie,
+                item.Sexo,
+                item.Edad,
+                item.Color,
+                item.Peso,
+                Estado = estado,
+                item.Imagen,
+                item.TipoContenido,
+                item.NombreArchivo,
+                id
+            };
 
-            return Execute(sql, new { id });
+            return Execute(sql, parameters);
         }
     }
 }

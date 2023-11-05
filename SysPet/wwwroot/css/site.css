@@ -192,7 +192,6 @@ btn-custom-color-success:hover{
 {
     padding-top: 4.2rem;
     padding-bottom: 4.2rem;
-    background: rgba(0, 0, 0, 0.76);
 }
 
 .myform {
@@ -246,4 +245,20 @@ btn-custom-color-success:hover{
 .log {
     background-image: url('../images/bg-2.jpg');
     background-size:cover;
+}
+
+.d-g{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap:12px;
+}
+
+.d-f-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-form-container{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
 }

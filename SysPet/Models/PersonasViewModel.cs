@@ -20,6 +20,12 @@ namespace SysPet.Models
         [StringLength(25, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
         public string Ciudad { get; set; }
 
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(25, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
+        [DisplayName("Dirección")]
+        public string Direccion { get; set; }
+
         [DisplayName("Código Postal")]
         [RegularExpression(@"^\d{5}$", ErrorMessage = "El número de teléfono debe tener 10 dígitos numéricos.")]
         public int CodigoPostal { get; set; }

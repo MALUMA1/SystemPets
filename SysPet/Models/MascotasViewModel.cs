@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace SysPet.Models
 {
@@ -39,11 +40,21 @@ namespace SysPet.Models
         public string Peso { get; set; }
         public bool Estado { get; set; }
         public string Propietario { get; set; }
+        [DisplayName("Foto")]
+        public byte[] Imagen { get; set; }
 
         [DisplayName("Fecha de Registro")]
         public DateTime Fecha { get; set; }
         public int IdPersona { get; set; }
         public List<PersonasViewModel> Personas { get; set; }
         public List<SelectListItem> ListaPersonas { get; set; }
+        public string NombreArchivo { get; set; }
+        public string FileName { get; set; } 
+        public string TipoContenido { get; set; }
+        public IFormFile Image { get; set; }
+        public MascotasViewModel()
+        {
+            FileName = Image!= null ? Image.FileName : "";
+        }
     }
 }
