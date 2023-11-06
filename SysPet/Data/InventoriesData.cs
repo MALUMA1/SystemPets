@@ -39,7 +39,7 @@ namespace SysPet.Data
 
                 return await GetItems(sql);
             }
-            catch (Exception)
+            catch
             {
                 return new List<InventariosViewModel>();
             }

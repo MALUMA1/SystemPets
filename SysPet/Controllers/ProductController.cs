@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SysPet.Data;
+using SysPet.Exception;
 using SysPet.Models;
 
 namespace SysPet.Controllers
 {
+    [ServiceFilter(typeof(ManageExceptionFilter))]
     public class ProductController : Controller
     {
         private readonly ProductsData productsData;
@@ -17,16 +19,32 @@ namespace SysPet.Controllers
         // GET: ProductController
         public async Task<ActionResult> Index()
         {
-            ViewBag.Url = "Shared/EmptyData";
-            var products = await productsData.GetAll();
-            return View(products);
+            try
+            {
+                ViewBag.Url = "Shared/EmptyData";
+                var products = await productsData.GetAll();
+                return View(products);
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: ProductController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var product = await productsData.GetItem(id);
-            return View(product);
+            try
+            {
+                var product = await productsData.GetItem(id);
+                return View(product);
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: ProductController/Create
@@ -47,7 +65,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -69,17 +87,13 @@ namespace SysPet.Controllers
                 var product = await productsData.GetItem(id);
                 if (product == null) { RedirectToAction(nameof(Index)); }
 
-                if (model == null) { RedirectToAction(nameof(Index)); }
-
-                if(!ModelState.IsValid) { RedirectToAction(nameof(Index));  }
-
                 var result = productsData.Update(model, id);
                 
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -92,9 +106,9 @@ namespace SysPet.Controllers
                 var result = productsData.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
     }

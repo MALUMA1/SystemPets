@@ -66,7 +66,7 @@ namespace SysPet.Data
                 return internments;
 
             }
-            catch (Exception)
+            catch
             {
                 return new List<InternamientosViewModel>();
             }

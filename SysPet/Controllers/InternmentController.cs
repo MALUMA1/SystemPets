@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SysPet.Data;
 using SysPet.Models;
 
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using SysPet.Exception;
 
 namespace SysPet.Controllers
 {
+    [ServiceFilter(typeof(ManageExceptionFilter))]
     public class InternmentController : Controller
     {
         private readonly InternmentsData data;
@@ -53,108 +54,155 @@ namespace SysPet.Controllers
 
         public IActionResult DownloadPdf()
         {
-            string currentPage = HttpContext.Request.Path;
-            string pageUrl = HttpContext.Request.GetEncodedUrl();
-
-            pageUrl = pageUrl.Replace(currentPage, "");
-            pageUrl = $"{pageUrl}/Internment/PDF";
-
-            var pdfSettings = new HtmlToPdfDocument()
+            try
             {
-                GlobalSettings = new GlobalSettings
-                {
-                    PaperSize = PaperKind.A4Plus,
-                    Orientation = Orientation.Portrait
-                },
-                Objects = { new ObjectSettings
-                {
-                    Page = pageUrl
-                } }
-            };
+                string currentPage = HttpContext.Request.Path;
+                string pageUrl = HttpContext.Request.GetEncodedUrl();
 
-            var pdf = converter.Convert(pdfSettings);
-            string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+                pageUrl = pageUrl.Replace(currentPage, "");
+                pageUrl = $"{pageUrl}/Internment/PDF";
 
-            return File(pdf, "application/pdf", pdfName);
+                var pdfSettings = new HtmlToPdfDocument()
+                {
+                    GlobalSettings = new GlobalSettings
+                    {
+                        PaperSize = PaperKind.A4Plus,
+                        Orientation = Orientation.Portrait
+                    },
+                    Objects = { new ObjectSettings
+                    {
+                        Page = pageUrl
+                    } }
+                };
+
+                var pdf = converter.Convert(pdfSettings);
+                string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+
+                return File(pdf, "application/pdf", pdfName);
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         public IActionResult DownloadIndexPdf()
         {
-            string currentPage = HttpContext.Request.Path;
-            string pageUrl = HttpContext.Request.GetEncodedUrl();
-
-            pageUrl = pageUrl.Replace(currentPage, "");
-            pageUrl = $"{pageUrl}/Internment/Index";
-
-            var pdfSettings = new HtmlToPdfDocument()
+            try
             {
-                GlobalSettings = new GlobalSettings
-                {
-                    PaperSize = PaperKind.A4Plus,
-                    Orientation = Orientation.Portrait
-                },
-                Objects = { new ObjectSettings
-                {
-                    Page = pageUrl
-                } }
-            };
+                string currentPage = HttpContext.Request.Path;
+                string pageUrl = HttpContext.Request.GetEncodedUrl();
 
-            var pdf = converter.Convert(pdfSettings);
-            string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+                pageUrl = pageUrl.Replace(currentPage, "");
+                pageUrl = $"{pageUrl}/Internment/Index";
 
-            return File(pdf, "application/pdf", pdfName);
+                var pdfSettings = new HtmlToPdfDocument()
+                {
+                    GlobalSettings = new GlobalSettings
+                    {
+                        PaperSize = PaperKind.A4Plus,
+                        Orientation = Orientation.Portrait
+                    },
+                    Objects = { new ObjectSettings
+                    {
+                        Page = pageUrl
+                    } }
+                };
+
+                var pdf = converter.Convert(pdfSettings);
+                string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+
+                return File(pdf, "application/pdf", pdfName);
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
 
         // GET: InternmentController
         public async Task<ActionResult> Index()
         {
-            ViewBag.Url = "Shared/EmptyData";
-            return View(await data.GetAll());
+            try
+            {
+                ViewBag.Url = "Shared/EmptyData";
+                return View(await data.GetAll());
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         public async Task<ActionResult> PDF(int id)
         {
-            return View(await data.GetItem(id));
+            try
+            {
+                return View(await data.GetItem(id));
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: InternmentController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View(await data.GetItem(id));
+            try
+            {
+                return View(await data.GetItem(id));
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: InternmentController/Create
         public async Task<ActionResult> Create()
         {
-            var model = new InternamientosViewModel();
-            var persons = await personsData.GetAll(2);
-            var doctors = await personsData.GetAll(3);
-            var patients = await petsData.GetAll();
+            try
 
-            var personList = persons.Select(x => new SelectListItem
             {
-                Value = x.IdPersona.ToString(),
-                Text = $"{x.Nombre} {x.Apellidos}"
-            }).ToList();
 
-            var doctorList = doctors.Select(x => new SelectListItem
+                var model = new InternamientosViewModel();
+                var persons = await personsData.GetAll(2);
+                var doctors = await personsData.GetAll(3);
+                var patients = await petsData.GetAll();
+
+                var personList = persons.Select(x => new SelectListItem
+                {
+                    Value = x.IdPersona.ToString(),
+                    Text = $"{x.Nombre} {x.Apellidos}"
+                }).ToList();
+
+                var doctorList = doctors.Select(x => new SelectListItem
+                {
+                    Value = x.IdPersona.ToString(),
+                    Text = $"{x.Nombre} {x.Apellidos}"
+                }).ToList();
+
+                var patientList = patients.Select(x => new SelectListItem
+                {
+                    Value = x.IdPaciente.ToString(),
+                    Text = $"{x.Nombre}"
+                }).ToList();
+
+                model.Personas = personList;
+                model.Pacientes = patientList;
+                model.Doctores = doctorList;
+                return View(model);
+            }
+            catch (System.Exception)
             {
-                Value = x.IdPersona.ToString(),
-                Text = $"{x.Nombre} {x.Apellidos}"
-            }).ToList();
-
-            var patientList = patients.Select(x => new SelectListItem
-            {
-                Value = x.IdPaciente.ToString(),
-                Text = $"{x.Nombre}"
-            }).ToList();
-
-            model.Personas = personList;
-            model.Pacientes = patientList;
-            model.Doctores = doctorList;
-
-            return View(model);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // POST: InternmentController/Create
@@ -169,7 +217,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -190,17 +238,13 @@ namespace SysPet.Controllers
                 var item = data.GetItem(id);
                 if (item == null) { RedirectToAction(nameof(Index)); }
 
-                if (model == null) { RedirectToAction(nameof(Index)); }
-
-                if (!ModelState.IsValid) { RedirectToAction(nameof(Index)); }
-
                 var result = data.Update(model, id);
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -216,7 +260,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
     }

@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
+using SysPet.Exception;
 using SysPet.Models;
-using System.Net.Http;
-using System.Reflection;
 
 namespace SysPet.Controllers
 {
+    [ServiceFilter(typeof(ManageExceptionFilter))]
     public class UserController : Controller
     {
         
@@ -80,14 +78,30 @@ namespace SysPet.Controllers
         // GET: UserController
         public async Task<ActionResult> Index()
         {
-            ViewBag.Url = "Shared/EmptyData";
-            return View(await _usersData.GetAll());
+            try
+            {
+                ViewBag.Url = "Shared/EmptyData";
+                return View(await _usersData.GetAll());
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View(await _usersData.GetItem(id));
+            try
+            {
+                return View(await _usersData.GetItem(id));
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: UserController/Create
@@ -118,7 +132,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -145,7 +159,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -167,17 +181,13 @@ namespace SysPet.Controllers
                 var product = await _usersData.GetItem(id);
                 if (product == null) { RedirectToAction(nameof(Index)); }
 
-                if (model == null) { RedirectToAction(nameof(Index)); }
-
-                if (!ModelState.IsValid) { RedirectToAction(nameof(Index)); }
-
                 var result = _usersData.Update(model, id);
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -201,7 +211,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
     }

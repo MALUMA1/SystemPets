@@ -20,41 +20,48 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="custom-body log">
-    <div class="container">
-        <div class="row custom-container">
-            <div class="col-md-6 myform">
-                <h2 class="fw-normal mb-3 pb-3">Iniciar Sesión</h2>
-                @using (Html.BeginForm("LogIn", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", onsubmit = "return valitePassword();" }))
-                {
-                    @Html.AntiForgeryToken()
+    @try
+    {
+        <div class="container">
+            <div class="row custom-container">
+                <div class="col-md-6 myform">
+                    <h2 class="fw-normal mb-3 pb-3">Iniciar Sesión</h2>
+                    @using (Html.BeginForm("LogIn", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", onsubmit = "return valitePassword();" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-                    <div class="form-outline mb-4">
+                        <div class="form-outline mb-4">
 
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-6" })
-                    </div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-6" })
+                        </div>
 
-                    <div class="form-outline mb-4">
-                        @Html.PasswordFor(m => m.Contrasenia, new { @class = "form-control form-control-lg" })
-                        @Html.ValidationMessageFor(m => m.Contrasenia, "", new { @class = "text-danger" })
+                        <div class="form-outline mb-4">
+                            @Html.PasswordFor(m => m.Contrasenia, new { @class = "form-control form-control-lg" })
+                            @Html.ValidationMessageFor(m => m.Contrasenia, "", new { @class = "text-danger" })
 
-                        @Html.LabelFor(m => m.Contrasenia, new { @class = "control-label col-md-6" })
-                    </div>
+                            @Html.LabelFor(m => m.Contrasenia, new { @class = "control-label col-md-6" })
+                        </div>
 
-                    <div class="pt-1 mb-4">
-                        <button type="submit" class="btn btn-outline-info btn-lg btn-block btn-login">Iniciar Sesión</button>
-                    </div>
+                        <div class="pt-1 mb-4">
+                            <button type="submit" class="btn btn-outline-info btn-lg btn-block btn-login">Iniciar Sesión</button>
+                        </div>
 
-                    <p>
-                        ¿No tienes una cuenta?
-                        @Html.ActionLink("Registrarse", "Register", "User", new{}, new { @class = "link-info" })
-                    </p>
-                }
+                        <p>
+                            ¿No tienes una cuenta?
+                            @Html.ActionLink("Registrarse", "Register", "User", new{}, new { @class = "link-info" })
+                        </p>
+                    }
 
+                </div>
             </div>
         </div>
-    </div>
+    }
+    catch (Exception ex)
+    {
+        <p>Error: @ex.Message</p>
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

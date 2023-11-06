@@ -1,0 +1,12 @@
+﻿@model Microsoft.AspNetCore.Diagnostics.ExceptionHandlerFeature
+
+@{
+    Layout = "_Layout"; // Puedes elegir el layout que desees
+}
+
+<div class="container">
+    <h1>Error</h1>
+    <p>Se ha producido un error inesperado en la aplicación.</p>
+    <p>Detalles del error:</p>
+    <pre>@Model.Error.ToString()</pre>
+</div>

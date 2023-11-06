@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
+using SysPet.Exception;
 using SysPet.Models;
 using System.Reflection;
 
 namespace SysPet.Controllers
 {
+    [ServiceFilter(typeof(ManageExceptionFilter))]
     public class PatientController : Controller
     {
         private readonly PetsData data;
@@ -20,14 +22,30 @@ namespace SysPet.Controllers
         // GET: PatientController
         public async Task<ActionResult> Index()
         {
-            ViewBag.Url = "Shared/EmptyData";
-            return View(await data.GetAll());
+            try
+            {
+                ViewBag.Url = "Shared/EmptyData";
+                return View(await data.GetAll());
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: PatientController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View(await data.GetItem(id));
+            try
+            {
+                return View(await data.GetItem(id));
+
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: PatientController/Create
@@ -69,7 +87,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -89,8 +107,6 @@ namespace SysPet.Controllers
                 id = id > 0 ? id : model.IdPaciente;
                 var item = data.GetItem(id);
                 if (item == null) { RedirectToAction(nameof(Index)); }
-
-                if (model == null) { RedirectToAction(nameof(Index)); }
 
                 if (model?.Imagen != null)
                 {
@@ -112,7 +128,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -128,7 +144,7 @@ namespace SysPet.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
             }
         }
     }

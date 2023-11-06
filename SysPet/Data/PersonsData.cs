@@ -34,7 +34,7 @@ namespace SysPet.Data
 
                 return await GetItems(sql);
             }
-            catch (Exception)
+            catch
             {
                 return new List<PersonasViewModel>();
             }
@@ -56,7 +56,7 @@ namespace SysPet.Data
 
                 return await GetItems(sql, new { idTipoPersona });
             }
-            catch (Exception)
+            catch
             {
                 return new List<PersonasViewModel>();
             }

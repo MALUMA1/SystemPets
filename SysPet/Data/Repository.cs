@@ -30,7 +30,7 @@ namespace SysPet.Data
                 var resut = await connection.QueryAsync<T>(query);
                 return resut;
             }
-            catch (Exception)
+            catch
             {
                 return new List<T>();
             }
@@ -43,7 +43,7 @@ namespace SysPet.Data
                 var resut = await connection.QueryAsync<T>(query, param);
                 return resut;
             }
-            catch (Exception)
+            catch
             {
                 return new List<T>();
             }
