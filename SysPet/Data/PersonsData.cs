@@ -6,7 +6,7 @@ namespace SysPet.Data
     {
         public override int Create(PersonasViewModel item)
         {
-            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1,{item.IdTipoPersona})";
+            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Direccion}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1,{item.IdTipoPersona})";
 
             return Execute(sql);
         }
@@ -25,6 +25,7 @@ namespace SysPet.Data
                 var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
                               ,[Telefono]
@@ -47,6 +48,7 @@ namespace SysPet.Data
                 var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
                               ,[Telefono]
@@ -67,6 +69,7 @@ namespace SysPet.Data
             var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
                               ,[Telefono]
@@ -81,6 +84,7 @@ namespace SysPet.Data
         {
             var sql = $@"UPDATE Personas SET Nombre='{item.Nombre}',
                                 Apellidos='{item.Apellidos}',
+                                Direccion='{item.Direccion}',
                                 Cuidad='{item.Ciudad}',
                                 CodigoPostal='{item.CodigoPostal}',
                                 Telefono='{item.Telefono}',

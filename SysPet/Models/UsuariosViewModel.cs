@@ -17,11 +17,13 @@ namespace SysPet.Models
         [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
         [Required(ErrorMessage = "El campo de contraseña es requerido.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "El campo debe tener entre 8 y 20 caracteres.")]
         [DataType(DataType.Password)]
         [DisplayName("Contraseña")]
         [Compare("ConfirmPassword")]
         public string Contrasenia { get; set; }
         [Required(ErrorMessage = "El campo es requerido.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "El campo debe tener entre 8 y 20 caracteres.")]
         [DataType(DataType.Password)]
         [DisplayName("Confirmar contraseña")]
         public string ConfirmPassword { get; set; }
