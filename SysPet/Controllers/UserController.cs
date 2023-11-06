@@ -57,6 +57,7 @@ namespace SysPet.Controllers
             if (model == null || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Contrasenia))
             {
                 ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos.");
+                return View(model);
             }
             else
             {
@@ -71,8 +72,6 @@ namespace SysPet.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-
-            return View(model);
         }
 
         // GET: UserController
@@ -151,6 +150,7 @@ namespace SysPet.Controllers
                 if (model.Contrasenia != model.ConfirmPassword)
                 {
                     ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden");
+                    return View(model);
                 }
 
                 model.IdRol = 2;
