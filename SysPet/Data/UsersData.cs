@@ -65,10 +65,19 @@ namespace SysPet.Data
 
         public async Task<UsuariosViewModel> GetUserManager(string email, string password)
         {
-            var sql = @$"SELECT Email,Contrasenia,Nombre,Id
+            try
+            {
+                var sql = @$"SELECT Email,Contrasenia,Nombre,Id
                         FROM Usuarios
                         WHERE Email = @email AND Contrasenia = @password";
-            return await Get(sql, new { email, password });
+                var user = await Get(sql, new { email, password });
+                return user;
+            }
+            catch
+            {
+
+                throw;
+            }
         }
 
         public override int Update(UsuariosViewModel item, int id)

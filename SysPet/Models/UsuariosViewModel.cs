@@ -20,7 +20,7 @@ namespace SysPet.Models
         [StringLength(20, MinimumLength = 8, ErrorMessage = "El campo debe tener entre 8 y 20 caracteres.")]
         [DataType(DataType.Password)]
         [DisplayName("Contraseña")]
-        [Compare("ConfirmPassword")]
+        [Compare("ConfirmPassword", ErrorMessage = "Las contraseñas no coinciden")]
         public string Contrasenia { get; set; }
         [Required(ErrorMessage = "El campo es requerido.")]
         [StringLength(20, MinimumLength = 8, ErrorMessage = "El campo debe tener entre 8 y 20 caracteres.")]

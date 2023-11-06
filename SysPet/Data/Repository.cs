@@ -51,7 +51,7 @@ namespace SysPet.Data
 
         public async Task<T> QuerySingleAsync<T>(string sql, object param)
         {
-            var result = await connection.QuerySingleAsync<T>(sql, param);
+            var result = await connection.QuerySingleOrDefaultAsync<T>(sql, param);
             return result;
         }
 

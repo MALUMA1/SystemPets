@@ -31,13 +31,14 @@ namespace SysPet.Controllers
             if (model == null || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Contrasenia))
             {
                 ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos.");
+                return View(model);
             }
             else
             {
                 var user = await _usersData.GetUserManager(model.Email, model.Contrasenia);
                 if (user != null && model.Email == user.Email && model.Contrasenia == user.Contrasenia)
                 {
-                    return RedirectToAction("Index", "Home"); // Redirige al usuario a la página de inicio después de iniciar sesión.
+                    return RedirectToAction("Index", "Home");
                 }
             }
             
@@ -65,6 +66,7 @@ namespace SysPet.Controllers
                 if (user == null || model.Email != user.Email || model.Contrasenia != user.Contrasenia)
                 {
                     ModelState.AddModelError("", "Nombre de usuario o contraseña incorrectos.");
+                    return View(model);
                 }
 
                 HttpContext.Session.SetString("User", user.Nombre);
