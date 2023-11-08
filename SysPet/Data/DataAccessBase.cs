@@ -20,6 +20,11 @@
             return data.Execute(sql);
         }
 
+        public int ExecuteWithId(string sql)
+        {
+            return data.ExecuteWithId(sql);
+        }
+
         public async Task<IEnumerable<T>> GetItems(string sql)
         {
             return await data.GetAll(sql);

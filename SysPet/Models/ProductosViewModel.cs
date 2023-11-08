@@ -29,5 +29,6 @@ namespace SysPet.Models
         [DisplayName("Fecha de Vencimiento")]
         public DateTime FechaVencimiento { get; set; }
         public bool Estado { get; set; }
+        public decimal Total { get; set; }
     }
 }

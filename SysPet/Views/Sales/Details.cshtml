@@ -1,0 +1,68 @@
+﻿
+
+@model SysPet.Models.SalesViewModel
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+	<div class="modal fade" id="detailModal-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Detalle del artículo</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+                    @foreach (var item in Model.DetalleVenta)
+				{
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => item.IdVenta)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => item.IdVenta)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => item.Articulo)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => item.Articulo)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => item.Precio)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => item.Precio)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => item.Cantidad)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => item.Cantidad)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => item.TotalItem)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => item.TotalItem)
+                        </dd>
+                    </dl>
+                    <hr />
+                }
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+    $('#detailModal-@Model.Id').on('shown.bs.modal', function () {
+        $('#detailModal-@Model.Id table').css('display', 'table');
+    });
+</script>
+
+
+

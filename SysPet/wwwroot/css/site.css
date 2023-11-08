@@ -167,10 +167,15 @@ body {
     color: #198754;
 }
 
+.btn-custom-color-warning {
+    color: #ffc107;
+}
+
 .btn-custom-color-delete:hover,
 .btn-custom-color-info:hover,
 .btn-custom-color-primary:hover,
-btn-custom-color-success:hover{
+.btn-custom-color-success:hover,
+.btn-custom-color-warning:hover {
     color: white;
 }
 
@@ -261,4 +266,10 @@ btn-custom-color-success:hover{
 .custom-form-container{
     display:grid;
     grid-template-columns: repeat(2,1fr);
+}
+
+.table-head-sales {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 24px;
 }

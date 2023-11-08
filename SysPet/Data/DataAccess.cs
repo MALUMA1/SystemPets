@@ -34,6 +34,13 @@
             return result;
         }
 
+        public int ExecuteWithId(string sql)
+        {
+            var result = repository.ExecuteWithId<T>(sql);
+
+            return result;
+        }
+
         public int Execute(string sql, object param)
         {
             var result = repository.Execute<T>(sql, param);

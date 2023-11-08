@@ -61,6 +61,12 @@ namespace SysPet.Data
             return result;
         }
 
+        public int ExecuteWithId<T>(string sql)
+        {
+            var result = connection.Query<int>(sql).Single();
+            return result;
+        }
+
         public int Execute<T>(string sql, object param)
         {
             var result = connection.Execute(sql, param);
