@@ -48,7 +48,7 @@ namespace SysPet.Controllers
                             Descripcion = item.Descripcion,
                             Precio = item.Precio,
                             Cantidad = item.Cantidad,
-                            TotalItem = item.Total
+                            TotalItem = item.TotalItem
                         });
                     }
 

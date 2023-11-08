@@ -92,5 +92,5 @@
 }
 else
 {
-    @section Scripts { @{ await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url }); } }
+    await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url });
 }

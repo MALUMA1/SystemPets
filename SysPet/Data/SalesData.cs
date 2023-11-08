@@ -40,7 +40,7 @@ namespace SysPet.Data
 	                          ,d.[Descripcion]
                               ,d.[Precio]
                               ,d.[Cantidad]
-                              ,d.[Total]
+                              ,d.[Total] TotalItem
 	                          ,p.Nombre Articulo
                           FROM [dbo].[Ventas] v
                           INNER JOIN [dbo].[DetalleVenta] d on d.IdVenta = v.Id

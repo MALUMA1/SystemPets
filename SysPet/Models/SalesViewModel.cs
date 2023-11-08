@@ -25,7 +25,10 @@ namespace SysPet.Models
         public decimal Cantidad { get; set; }
         [DisplayName("Precio Unitario")]
         public decimal Precio { get; set; }
+        [DisplayName("Total de la Venta")]
         public decimal TotalSale { get; set; }
+        public decimal TotalItem { get; set; }
+
         [DisplayName("Artículo")]
         public string Articulo { get; set; }
         public SalesViewModel()
