@@ -3,13 +3,14 @@
 @{
     ViewData["Title"] = "Update";
 }
+
+
 @try
 {
-    <div class="col-md-6 offset-4">
-        <h1 class="fw-normal mb-3 pb-3">Editar Producto</h1>
-
-        <div class="row">
-            <div class="col-md-8">
+    <div class="col-md-8 offset-2 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Editar </h4>
                 <form asp-action="Update">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-outline mb-4" style="display: none;">
@@ -17,55 +18,66 @@
                         <label asp-for="IdProducto" class="control-label col-md-6"></label>
                         <input asp-for="IdProducto" class="form-control" />
                     </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="Nombre" class="control-label col-md-6"></label>
-                        <input asp-for="Nombre" class="form-control form-control-lg" />
-                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <div class="d-g">
+                        <div class="form-outline mb-4">
+                            <label asp-for="Nombre" class="control-label col-md-6"></label>
+                            <input asp-for="Nombre" class="form-control form-control-lg" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label asp-for="FechaIngreso" class="control-label col-md-6"></label>
+                            <input asp-for="FechaIngreso" class="form-control form-control-lg" />
+                            <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="FechaIngreso" class="control-label col-md-6"></label>
-                        <input asp-for="FechaIngreso" class="form-control form-control-lg" />
-                        <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+                    <div class="d-g">
+                        <div class="form-outline mb-4">
+                            <label asp-for="Proveedor" class="control-label col-md-6"></label>
+                            <input asp-for="Proveedor" class="form-control form-control-lg" />
+                            <span asp-validation-for="Proveedor" class="text-danger"></span>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label asp-for="Cantidad" class="control-label col-md-6"></label>
+                            <input asp-for="Cantidad" class="form-control form-control-lg" />
+                            <span asp-validation-for="Cantidad" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="Proveedor" class="control-label col-md-6"></label>
-                        <input asp-for="Proveedor" class="form-control form-control-lg" />
-                        <span asp-validation-for="Proveedor" class="text-danger"></span>
+                    <div class="d-g">
+                        <div class="form-outline mb-4">
+                            <label asp-for="Stock" class="control-label col-md-6"></label>
+                            <input asp-for="Stock" class="form-control form-control-lg" />
+                            <span asp-validation-for="Stock" class="text-danger"></span>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label asp-for="PrecioUnitario" class="control-label col-md-6"></label>
+                            <input asp-for="PrecioUnitario" class="form-control form-control-lg" />
+                            <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="Cantidad" class="control-label col-md-6"></label>
-                        <input asp-for="Cantidad" class="form-control form-control-lg" />
-                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    <div class="d-g">
+                        <div class="form-outline mb-4">
+                            <label asp-for="PrecioSugerido" class="control-label col-md-6"></label>
+                            <input asp-for="PrecioSugerido" class="form-control form-control-lg" />
+                            <span asp-validation-for="PrecioSugerido" class="text-danger"></span>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label asp-for="Descripcion" class="control-label col-md-6"></label>
+                            <input asp-for="Descripcion" class="form-control form-control-lg" />
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="Stock" class="control-label col-md-6"></label>
-                        <input asp-for="Stock" class="form-control form-control-lg" />
-                        <span asp-validation-for="Stock" class="text-danger"></span>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="PrecioUnitario" class="control-label col-md-6"></label>
-                        <input asp-for="PrecioUnitario" class="form-control form-control-lg" />
-                        <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="PrecioSugerido" class="control-label col-md-6"></label>
-                        <input asp-for="PrecioSugerido" class="form-control form-control-lg" />
-                        <span asp-validation-for="PrecioSugerido" class="text-danger"></span>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="Descripcion" class="control-label col-md-6"></label>
-                        <input asp-for="Descripcion" class="form-control form-control-lg" />
-                        <span asp-validation-for="Descripcion" class="text-danger"></span>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label asp-for="FechaVencimiento" class="control-label col-md-6"></label>
-                        <input asp-for="FechaVencimiento" class="form-control form-control-lg" />
-                        <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
-                    </div>
-                    <div class="form-check form-switch">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                        </label>
+                    <div class="d-g" style="align-items: end;">
+                        <div class="form-outline mb-4">
+                            <label asp-for="FechaVencimiento" class="control-label col-md-6"></label>
+                            <input asp-for="FechaVencimiento" class="form-control form-control-lg" />
+                            <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
+                        </div>
+                        <div class="form-outline mb-4 form-check form-switch">
+                            <label class="toggle-switch toggle-switch-success">
+                                <input asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
                     </div>
                     <div class="form-outline mb-4 btn-groups">
                         <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-custom-color-success btn-custom-f">
@@ -86,8 +98,8 @@
                 </form>
             </div>
         </div>
-
     </div>
+
 }
 catch (Exception ex)
 {

@@ -4,13 +4,14 @@
     ViewData["Title"] = "Edit";
 }
 
+
+
 @try
 {
-    <div class="col-md-6 offset-4">
-        <h1 class="fw-normal mb-3 pb-3">Editar Inventario</h1>
-
-        <div class="row">
-            <div class="col-md-8">
+    <div class="col-md-8 offset-2 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Editar </h4>
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-outline mb-4" style="display: none;">
@@ -34,8 +35,9 @@
                         <span asp-validation-for="Stock" class="text-danger"></span>
                     </div>
                     <div class="form-outline mb-4 form-check form-switch">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                        <label class="toggle-switch toggle-switch-success">
+                            <input asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                            <span class="toggle-slider round"></span>
                         </label>
                     </div>
                     <div class="form-outline mb-4 btn-groups">
@@ -57,8 +59,8 @@
                 </form>
             </div>
         </div>
-
     </div>
+
 }
 catch (Exception ex)
 {

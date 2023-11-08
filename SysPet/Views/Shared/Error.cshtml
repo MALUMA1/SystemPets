@@ -3,32 +3,39 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (Model != null && Model.ShowRequestId)
-{
-    <p>
-        <strong>Numero de petición:</strong> <code>@Model.RequestId</code>
-    </p>
-}
-
-<h3 class="text-info">Se ha producido un error inesperado en la aplicación.</h3>
-
-<p>
-    <strong>Error en la aplicación, para mas detalles contacta el Administrador o intentalo más tarde.</strong>
-    Si el problema persiste no dudes en contactar a un Equipo Técnico.
-</p>
-
-<div class="mb-4">
-    <a class="btn btn-outline-primary btn-custom-color-primary" href="@Url.Action("Index", "Home", new {})">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
-        </svg>
-        Regresar al Inicio
-    </a>
-</div>
-
-<div style="display: flex;justify-content: center;">
-    <image src="../images/Error.png" class="img-error" style="width:700px;height:400px;"/>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center text-center error-page bg-info">
+            <div class="row flex-grow">
+                <div class="col-lg-7 mx-auto text-white">
+                    <div class="row align-items-center d-flex flex-row">
+                        <div class="col-lg-6 text-lg-right pr-lg-4">
+                            <h1 class="display-1 mb-0">500</h1>
+                        </div>
+                        <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
+                            <h2>Disculpa la Molestia!</h2>
+                            <h3 class="font-weight-light">Ocurrio un Error interno!</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 text-center mt-xl-2">
+                            <a class="btn btn-outline-primary btn-custom-color-primary" href="@Url.Action("Index", "Home", new {})">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+                                </svg>
+                                Regresar al Inicio
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 mt-xl-2">
+                            <p class="text-white font-weight-medium text-center">Copyright &copy; 2023  Todos los derechos Reservados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
 </div>

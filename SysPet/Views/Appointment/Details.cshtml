@@ -43,9 +43,27 @@
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Estado)
             </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Estado)
-            </dd>
+            @if (Model.Estado.Equals("Activa"))
+            {
+                <dd class="col-sm-8 badge-custom-success">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+            }
+            @if (Model.Estado.Equals("Cancelada"))
+            {
+                <dd class="col-sm-8 badge-custom-danger">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+            }
+            else
+            {
+                @if (Model.Estado.Equals("Reagendada"))
+                {
+                    <dd class="col-sm-8 badge-custom-info">
+                        @Html.DisplayFor(model => model.Estado)
+                    </dd>
+                }
+            }
         </dl>
     </div>
     <div class="btn-groups-detail">
