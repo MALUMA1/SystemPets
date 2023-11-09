@@ -1,5 +1,6 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using SysPet.Exception;
 using SysPet.Extensions;
@@ -15,10 +16,32 @@ context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Agen
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
 builder.Services.AddScoped<ManageExceptionFilter>();
-//builder.Services.AddMvc(opt =>
-//{
-//    opt.Filters.Add(typeof(ManageExceptionFilter));
-//});
+
+builder.Services.AddScoped(provider =>
+{
+    return new RoleAuthorizationFilter("Administrador");
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+    {
+        policy.RequireRole("Administrador");
+    });
+    
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+    options.LoginPath = new PathString("/User/Login");
+    //options.AccessDeniedPath = new PathString("/Home/Error");
+});
+
 
 builder.Services.AddSession(o =>
 {
@@ -46,6 +69,7 @@ app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

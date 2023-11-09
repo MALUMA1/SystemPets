@@ -424,3 +424,10 @@ body {
     border-color: white !important;
 }
 
+.container-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+

@@ -67,7 +67,7 @@ namespace SysPet.Data
         {
             try
             {
-                var sql = @$"SELECT Email,Contrasenia,Nombre,Id
+                var sql = @$"SELECT Email,Contrasenia,Nombre,Id,IdRol
                         FROM Usuarios
                         WHERE Email = @email AND Contrasenia = @password";
                 var user = await Get(sql, new { email, password });

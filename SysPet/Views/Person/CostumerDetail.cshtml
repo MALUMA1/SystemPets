@@ -1,0 +1,165 @@
+﻿@model SysPet.Models.CostumerDetailViewModel
+
+@{
+    ViewData["Title"] = "CostumerDetail";
+}
+
+<div class="container-detail">
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="width: 400px;height: 300px;">
+            <div class="card-body">
+                <h4 class="card-title">Cliente @Model.FullName</h4>
+                <div>
+                    <dl class="row">
+                        
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Direccion)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Direccion)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Ciudad)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Ciudad)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.CodigoPostal)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.CodigoPostal)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Telefono)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Telefono)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </dt>
+                        @if (Model.Estado.Equals("Activo"))
+                        {
+                            <dd class="col-sm-8 badge-custom-success">
+                                @Html.DisplayFor(model => Model.Estado)
+                            </dd>
+                        }
+                        @if (Model.Estado.Equals("Inactivo"))
+                        {
+                            <dd class="col-sm-8 badge-custom-danger">
+                                @Html.DisplayFor(model => Model.Estado)
+                            </dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model != null && Model.IdPersona > 0 && Model.Pacientes.Any())
+    {
+        @foreach (var item in Model.Pacientes)
+        {
+            <div class="col-lg-4 grid-margin stretch-card">
+                <div class="card" style="width: 400px;height: 300px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Mascota @item.Nombre</h4>
+                        <div>
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Color)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.Color)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Raza)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.Raza)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Peso)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.Peso)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Sexo)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.Sexo)
+                                </dd>
+                                @if (item.Imagen != null)
+                                {
+                                    <dt class="col-sm-4" style="display: flex;align-items: center;">
+                                        @Html.DisplayNameFor(model => item.Imagen)
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <img src="data:@item.TipoContenido;base64,@(Convert.ToBase64String(item.Imagen))" class="rounded-3" style="width: 150px;"
+                                             alt="Imagen del Paciente" />
+                                    </dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model != null && Model.IdPersona > 0 && Model.Citas.Any())
+    {
+        @foreach (var item in Model.Citas)
+        {
+            <div class="col-lg-4 grid-margin stretch-card">
+                <div class="card" style="width: 400px;height: 300px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Cita No. @item.Id</h4>
+                        <div>
+                            <dl class="row">
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.FechaCita)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.FechaCita)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Motivo)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => item.Motivo)
+                                </dd>
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => item.Estado)
+                                </dt>
+                                @if (item.Estado.Equals("Activa"))
+                                {
+                                    <dd class="col-sm-8 badge-custom-success">
+                                        @Html.DisplayFor(model => item.Estado)
+                                    </dd>
+                                }
+                                @if (item.Estado.Equals("Cancelada"))
+                                {
+                                    <dd class="col-sm-8 badge-custom-danger">
+                                        @Html.DisplayFor(model => item.Estado)
+                                    </dd>
+                                }
+                                else
+                                {
+                                    @if (item.Estado.Equals("Reagendada"))
+                                    {
+                                        <dd class="col-sm-8 badge-custom-info">
+                                            @Html.DisplayFor(model => item.Estado)
+                                        </dd>
+                                    }
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

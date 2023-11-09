@@ -17,6 +17,16 @@ namespace SysPet.Models
         public string Apellidos { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
+        [DisplayName("Appellido Paterno")]
+        public string ApellidoPaterno { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
+        [DisplayName("Appellido Materno")]
+        public string ApellidoMaterno { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
         [StringLength(25, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
         public string Ciudad { get; set; }
 

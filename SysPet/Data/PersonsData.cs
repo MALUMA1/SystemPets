@@ -6,7 +6,7 @@ namespace SysPet.Data
     {
         public override int Create(PersonasViewModel item)
         {
-            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Direccion}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1,{item.IdTipoPersona})";
+            var sql = $@"INSERT INTO Personas VALUES('{item.Nombre}','{item.Apellidos}','{item.Direccion}','{item.Ciudad}','{item.CodigoPostal}','{item.Telefono}',1,{item.IdTipoPersona},'{item.ApellidoPaterno}', '{item.ApellidoMaterno}')";
 
             return Execute(sql);
         }
@@ -25,6 +25,8 @@ namespace SysPet.Data
                 var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[ApellidoPaterno]
+                              ,[ApellidoMaterno]
                               ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
@@ -48,6 +50,8 @@ namespace SysPet.Data
                 var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[ApellidoPaterno]
+                              ,[ApellidoMaterno]
                               ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
@@ -69,6 +73,8 @@ namespace SysPet.Data
             var sql = @$"SELECT [IdPersona]
                               ,[Nombre]
                               ,[Apellidos]
+                              ,[ApellidoPaterno]
+                              ,[ApellidoMaterno]
                               ,[Direccion]
                               ,[Cuidad] Ciudad
                               ,[CodigoPostal]
@@ -83,7 +89,8 @@ namespace SysPet.Data
         public override int Update(PersonasViewModel item, int id)
         {
             var sql = $@"UPDATE Personas SET Nombre='{item.Nombre}',
-                                Apellidos='{item.Apellidos}',
+                                ApellidoPaterno='{item.ApellidoPaterno}',
+                                ApellidoPaterno='{item.ApellidoMaterno}',
                                 Direccion='{item.Direccion}',
                                 Cuidad='{item.Ciudad}',
                                 CodigoPostal='{item.CodigoPostal}',

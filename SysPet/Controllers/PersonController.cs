@@ -11,9 +11,11 @@ namespace SysPet.Controllers
     public class PersonController : Controller
     {
         private readonly PersonsData data;
+        private readonly CostumerDetailData costumerDetailData;
         public PersonController()
         {
             data = new PersonsData();
+            costumerDetailData = new CostumerDetailData();
         }
 
         // GET: PersonController
@@ -38,6 +40,18 @@ namespace SysPet.Controllers
             {
                 return View(await data.GetItem(id));
 
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public async Task<ActionResult> CostumerDetail(int id)
+        {
+            try
+            {
+                return View(await costumerDetailData.GetCostumerDetail(id));
             }
             catch (System.Exception)
             {

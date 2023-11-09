@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Exception;
 using SysPet.Models;
+using System.Security.Claims;
 
 namespace SysPet.Controllers
 {
@@ -69,8 +73,41 @@ namespace SysPet.Controllers
                     return View(model);
                 }
 
+                var userRol = "Usuario";
+                if (user.IdRol == 1)
+                {
+                    userRol = "Administrador";
+                }
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Nombre), // Nombre de usuario
+                    new Claim(ClaimTypes.Role, userRol), // Rol del usuario
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+                };
+                try
+                {
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties);
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
+                
+
                 HttpContext.Session.SetString("User", user.Nombre);
                 HttpContext.Session.SetInt32("UserId", user.Id);
+                
 
                 return RedirectToAction("Index", "Home");
             }
@@ -166,6 +203,9 @@ namespace SysPet.Controllers
         }
 
         // GET: UserController/Edit/5
+        //[Authorize]
+        [TypeFilter(typeof(RoleAuthorizationFilter), Arguments = new object[] { "Administrador" })]
+        
         public async Task<ActionResult> Edit(int id)
         {
             var user = await _usersData.GetItem(id);
