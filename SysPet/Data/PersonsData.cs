@@ -90,7 +90,7 @@ namespace SysPet.Data
         {
             var sql = $@"UPDATE Personas SET Nombre='{item.Nombre}',
                                 ApellidoPaterno='{item.ApellidoPaterno}',
-                                ApellidoPaterno='{item.ApellidoMaterno}',
+                                ApellidoMaterno='{item.ApellidoMaterno}',
                                 Direccion='{item.Direccion}',
                                 Cuidad='{item.Ciudad}',
                                 CodigoPostal='{item.CodigoPostal}',
