@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SysPet.Helpers;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,7 @@ namespace SysPet.Models
         [DataType(DataType.Password)]
         [DisplayName("Contraseña")]
         [Compare("ConfirmPassword", ErrorMessage = "Las contraseñas no coinciden")]
+        [Password]
         public string Contrasenia { get; set; }
         [Required(ErrorMessage = "El campo es requerido.")]
         [StringLength(20, MinimumLength = 8, ErrorMessage = "El campo debe tener entre 8 y 20 caracteres.")]
@@ -31,7 +33,17 @@ namespace SysPet.Models
         public int IdRol { get; set; }
         public string Rol { get; set; }
         public bool Estado { get; set; }
+        [DisplayName("Estado")]
+        public string State { get { return Estado ? "Activo" : "Inactivo"; } }
         public PersonasViewModel Persona { get; set; }
         public List<SelectListItem> Roles { get; set; }
+
+        public string ContraseniaEnmascarada
+        {
+            get
+            {
+                return new string('*', Contrasenia.Length);
+            }
+        }
     }
 }

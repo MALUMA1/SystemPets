@@ -14,54 +14,63 @@
             <div class="modal-body">
                 <dl class="row">
 
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Nombre)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Nombre)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.ApellidoPaterno)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.ApellidoPaterno)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.ApellidoMaterno)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.ApellidoMaterno)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Direccion)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Direccion)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Ciudad)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Ciudad)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.CodigoPostal)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.CodigoPostal)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Telefono)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Telefono)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Estado)
                     </dt>
-                    <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.Estado, new { @class = "form-check-input chek-disabled" })
-                    </dd>
+                    @if (Model.State.Equals("Activo"))
+                    {
+                        <dd class="col-sm-6 badge-custom-success">
+                            @Html.DisplayFor(model => Model.State)
+                        </dd>
+                    }
+                    @if (Model.State.Equals("Inactivo"))
+                    {
+                        <dd class="col-sm-6 badge-custom-danger">
+                            @Html.DisplayFor(model => Model.State)
+                        </dd>
+                    }
                 </dl>
             </div>
             <div class="modal-footer">

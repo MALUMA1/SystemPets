@@ -14,6 +14,9 @@ namespace SysPet.Models
         [StringLength(100, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
+
+        [DisplayName("Estado")]
+        public string State { get { return Estado ? "Activo" : "Inactivo"; } }
         [DisplayName("Fecha de Registro")]
         public DateTime Fecha { get; set; }
     }

@@ -7,14 +7,14 @@ namespace SysPet.Models
     {
         public int IdProducto { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\.,#-ñÑ]+$", ErrorMessage = "El nombre no es válido.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 50 caracteres.")]
         [DisplayName("Nombre del artículo")]
         public string Nombre { get; set; }
         [DisplayName("Fecha de Ingreso")]
         public DateTime FechaIngreso { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s\.,#-ñÑ]+$", ErrorMessage = "El nombre no es válido.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 50 caracteres.")]
         public string Proveedor { get; set; }
         public int Cantidad { get; set; }
@@ -29,6 +29,8 @@ namespace SysPet.Models
         [DisplayName("Fecha de Vencimiento")]
         public DateTime FechaVencimiento { get; set; }
         public bool Estado { get; set; }
+        [DisplayName("Estado")]
+        public string State { get { return Estado ? "Activo" : "Inactivo"; } }
         public decimal Total { get; set; }
     }
 }

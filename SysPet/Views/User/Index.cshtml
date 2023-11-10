@@ -55,14 +55,23 @@
                                         @Html.DisplayFor(modelItem => item.Email)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Contrasenia)
+                                        @Html.DisplayFor(modelItem => item.ContraseniaEnmascarada)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Rol)
                                     </td>
+                                    @if (item.State.Equals("Activo"))
+                                    {
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Estado)
+                                        <span class="badge text-bg-success">@Html.DisplayFor(model => item.State)</span>
                                     </td>
+                                    }
+                                    @if (item.State.Equals("Inactivo"))
+                                    {
+                                        <td>
+                                            <span class="badge-custom-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.State)</span>
+                                        </td>
+                                    }
                                     <td>
                                         <a class="btn btn-outline-primary custom-tooltip btn-custom-color-primary" href="@Url.Action("Edit", "User", new { id = item.Id })">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
