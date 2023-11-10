@@ -26,7 +26,7 @@ namespace SysPet.Data
         {
             try
             {
-                var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[Apellidos], e.[Nombre] Estado
+                var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[ApellidoPaterno],p.[ApellidoMaterno], e.[Nombre] Estado
                               FROM [dbo].[Citas] c
                               INNER JOIN [dbo].[Personas] p on p.IdPersona = c.IdPersona
                               INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado";
@@ -55,7 +55,7 @@ namespace SysPet.Data
 
         public async override Task<CitasViewModel> GetItem(int id)
         {
-            var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[Apellidos], e.[Nombre] Estado
+            var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[ApellidoPaterno],p.[ApellidoMaterno], e.[Nombre] Estado
                           FROM [dbo].[Citas] c
                           INNER JOIN [dbo].[Personas] p on p.IdPersona = c.IdPersona
                           INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado
