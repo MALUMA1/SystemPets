@@ -32,5 +32,7 @@ namespace SysPet.Models
         [DisplayName("Estado")]
         public string State { get { return Estado ? "Activo" : "Inactivo"; } }
         public decimal Total { get; set; }
+        public byte[] Imagen { get; set; }
+        public string TipoContenido { get; set; }
     }
 }

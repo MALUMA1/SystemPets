@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using SysPet.Exception;
 using SysPet.Extensions;
+using SysPet.Models;
+using SysPet.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddControllersWithViews();
 var context = new CustomAsemblyLoadContext();
 context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Agents/libwkhtmltox.dll"));
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
+builder.Services.AddScoped<IPdfService<InternamientosViewModel>, PdfService>();
 
 builder.Services.AddScoped<ManageExceptionFilter>();
 
@@ -39,7 +43,6 @@ builder.Services.AddAuthentication(options =>
 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 {
     options.LoginPath = new PathString("/User/Login");
-    //options.AccessDeniedPath = new PathString("/Home/Error");
 });
 
 
@@ -47,7 +50,6 @@ builder.Services.AddSession(o =>
 {
     o.IdleTimeout = TimeSpan.FromMinutes(20);
 });
-
 
 
 builder.Services.AddDistributedMemoryCache();

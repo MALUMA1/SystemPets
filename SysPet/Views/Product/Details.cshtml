@@ -13,72 +13,72 @@
             </div>
             <div class="modal-body">
                 <dl class="row">
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Nombre)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Nombre)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.FechaIngreso)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.FechaIngreso)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Proveedor)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Proveedor)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Cantidad)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Cantidad)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Stock)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Stock)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.PrecioUnitario)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.PrecioUnitario)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.PrecioSugerido)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.PrecioSugerido)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Descripcion)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Descripcion)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.FechaVencimiento)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.FechaVencimiento)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Estado)
                     </dt>
                     @if (Model.State.Equals("Activo"))
                     {
-                        <dd class="col-sm-8 badge-custom-success">
+                        <dd class="col-sm-6 badge-custom-success">
                             @Html.DisplayFor(model => Model.State)
                         </dd>
                     }
                     @if (Model.State.Equals("Inactivo"))
                     {
-                        <dd class="col-sm-8 badge-custom-danger">
+                        <dd class="col-sm-6 badge-custom-danger">
                             @Html.DisplayFor(model => Model.State)
                         </dd>
                     }

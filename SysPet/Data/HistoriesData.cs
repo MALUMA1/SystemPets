@@ -31,7 +31,9 @@ namespace SysPet.Data
                               ,h.[Motivo]
                               ,h.[Diagnostico]
                               ,p.[Nombre] Paciente
-	                          ,ps.Nombre + ' ' + ps.Apellidos AS FullName
+                              ,p.[Imagen]
+                              ,p.[TipoContenido]
+	                          ,ps.Nombre + ' ' + ps.ApellidoPaterno + ' ' + ApellidoMaterno AS FullName
                           FROM [dbo].[Historiales] h
                           INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
                           INNER JOIN Personas ps on ps.IdPersona = p.IdPersona";
@@ -51,7 +53,9 @@ namespace SysPet.Data
                               ,h.[Motivo]
                               ,h.[Diagnostico]
                               ,p.[Nombre] Paciente
-	                          ,ps.Nombre + ' ' + ps.Apellidos AS FullName
+	                          ,p.[Imagen]
+                              ,p.[TipoContenido]
+	                          ,ps.Nombre + ' ' + ps.ApellidoPaterno + ' ' + ApellidoMaterno AS FullName
                           FROM [dbo].[Historiales] h
                           INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
                           INNER JOIN Personas ps on ps.IdPersona = p.IdPersona

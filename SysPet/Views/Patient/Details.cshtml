@@ -13,75 +13,74 @@
             </div>
             <div class="modal-body">
                 <dl class="row">
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Nombre)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Nombre)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Raza)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Raza)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Especie)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Especie)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Sexo)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Sexo)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Edad)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Edad)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Color)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Color)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Peso)
                     </dt>
-                    <dd class="col-sm-8">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Peso)
                     </dd>
-                    <dt class="col-sm-4">
+                    <dt class="col-sm-6">
+                        @Html.DisplayNameFor(model => model.Fecha)
+                    </dt>
+                    <dd class="col-sm-6 mb-4">
+                        @Html.DisplayFor(model => model.Fecha)
+                    </dd>
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Estado)
                     </dt>
                     @if (Model.State.Equals("Activo"))
                     {
-                        <dd class="col-sm-8 badge-custom-success">
+                        <dd class="col-sm-6 badge-custom-success">
                             @Html.DisplayFor(model => Model.State)
                         </dd>
                     }
                     @if (Model.State.Equals("Inactivo"))
                     {
-                        <dd class="col-sm-8 badge-custom-danger">
+                        <dd class="col-sm-6 badge-custom-danger">
                             @Html.DisplayFor(model => Model.State)
                         </dd>
                     }
-                    <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.Fecha)
-                    </dt>
-                    <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.Fecha)
-                    </dd>
+                    
                     @if (Model.Imagen != null)
                     {
-                        <dt class="col-sm-4" style="display: flex;align-items: center;">
-                            @Html.DisplayNameFor(model => model.Imagen)
-                        </dt>
-                        <dd class="col-sm-8">
+
+                        <dd class="col-sm-12" style="display: flex;justify-content: center;">
                             <img src="data:@Model.TipoContenido;base64,@(Convert.ToBase64String(Model.Imagen))" class="rounded-3" style="width: 200px;" 
                             alt="Imagen del Paciente" />
                         </dd>

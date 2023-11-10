@@ -37,6 +37,8 @@ namespace SysPet.Data
                                 I.[Tratamiento],
                                 I.[Estado],
                                 a.Nombre AS Paciente,
+                                a.[Imagen],
+                                a.[TipoContenido],
 	                            I.IdPersona,
 	                            I.IdDoctor
                             FROM [dbo].[Internamientos] I
@@ -46,7 +48,7 @@ namespace SysPet.Data
                 var persons = new List<InternamientosViewModel>();
                 foreach (var item in internments)
                 {
-                    sql = @$"select IdPersona, Nombre + ' ' + Apellidos AS FullName from Personas where IdPersona in (@idPersona, @idDoctor)";
+                    sql = @$"select IdPersona, Nombre + ' ' + ApellidoPaterno + ' ' + ApellidoMaterno AS FullName from Personas where IdPersona in (@idPersona, @idDoctor)";
 
                     var result = await GetItems(sql, new { idPersona = item.IdPersona, idDoctor = item.IdDoctor });
                     foreach (var person in result)
@@ -82,6 +84,8 @@ namespace SysPet.Data
                                 I.[Tratamiento],
                                 I.[Estado],
                                 a.Nombre AS Paciente,
+                                a.[Imagen],
+                                a.[TipoContenido],
 	                            I.IdPersona,
 	                            I.IdDoctor
                             FROM [dbo].[Internamientos] I
@@ -92,7 +96,7 @@ namespace SysPet.Data
             var persons = new List<InternamientosViewModel>();
             foreach (var item in internments ?? new List<InternamientosViewModel>())
             {
-                sql = @$"select IdPersona, Nombre + ' ' + Apellidos AS FullName from Personas where IdPersona in (@idPersona, @idDoctor)";
+                sql = @$"select IdPersona, Nombre + ' ' + ApellidoPaterno + ' ' + ApellidoMaterno AS FullName from Personas where IdPersona in (@idPersona, @idDoctor)";
 
                 var result = await GetItems(sql, new { idPersona = item.IdPersona, idDoctor = item.IdDoctor });
                 foreach (var person in result)

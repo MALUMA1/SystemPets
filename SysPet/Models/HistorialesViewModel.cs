@@ -15,6 +15,8 @@ namespace SysPet.Models
         public string Paciente { get; set; }
         [DisplayName("Propietario")]
         public string FullName { get; set; }
+        public byte[] Imagen { get; set; }
+        public string TipoContenido { get; set; }
         public List<SelectListItem> Pacientes { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using SysPet.Models;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using SysPet.Exception;
+using Rotativa.AspNetCore;
+using SysPet.Services;
 
 namespace SysPet.Controllers
 {
@@ -17,13 +19,14 @@ namespace SysPet.Controllers
         private readonly PersonsData personsData;
         private readonly PetsData petsData;
         private readonly IConverter converter;
-        public InternmentController(IConverter converter)
+        private readonly IPdfService<InternamientosViewModel> _pdfService;
+        public InternmentController(IConverter converter, IPdfService<InternamientosViewModel> pdfService)
         {
             data = new InternmentsData();
             personsData = new PersonsData();
             petsData = new PetsData();
             this.converter = converter;
-
+            _pdfService = pdfService;
         }
 
         public IActionResult ShowPdf()
@@ -52,33 +55,17 @@ namespace SysPet.Controllers
             return File(pdf,"application/pdf");
         }
 
-        public IActionResult DownloadPdf()
+        public async Task<IActionResult> DownloadPdf(InternamientosViewModel model)
         {
             try
             {
-                string currentPage = HttpContext.Request.Path;
-                string pageUrl = HttpContext.Request.GetEncodedUrl();
+                var item = await data.GetItem(model.Id);
 
-                pageUrl = pageUrl.Replace(currentPage, "");
-                pageUrl = $"{pageUrl}/Internment/PDF";
+                var pdfBytes = _pdfService.GeneratePdf(new List<InternamientosViewModel> { item});
 
-                var pdfSettings = new HtmlToPdfDocument()
-                {
-                    GlobalSettings = new GlobalSettings
-                    {
-                        PaperSize = PaperKind.A4Plus,
-                        Orientation = Orientation.Portrait
-                    },
-                    Objects = { new ObjectSettings
-                    {
-                        Page = pageUrl
-                    } }
-                };
+                string pdfName = $"Detalle_Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
 
-                var pdf = converter.Convert(pdfSettings);
-                string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
-
-                return File(pdf, "application/pdf", pdfName);
+                return File(pdfBytes, "application/pdf", pdfName);
 
             }
             catch (System.Exception)
@@ -87,33 +74,17 @@ namespace SysPet.Controllers
             }
         }
 
-        public IActionResult DownloadIndexPdf()
+        public async Task<IActionResult> DownloadIndexPdf()
         {
             try
             {
-                string currentPage = HttpContext.Request.Path;
-                string pageUrl = HttpContext.Request.GetEncodedUrl();
+                var items = await data.GetAll();
 
-                pageUrl = pageUrl.Replace(currentPage, "");
-                pageUrl = $"{pageUrl}/Internment/Index";
+                var pdfBytes = _pdfService.GeneratePdf(items);
 
-                var pdfSettings = new HtmlToPdfDocument()
-                {
-                    GlobalSettings = new GlobalSettings
-                    {
-                        PaperSize = PaperKind.A4Plus,
-                        Orientation = Orientation.Portrait
-                    },
-                    Objects = { new ObjectSettings
-                    {
-                        Page = pageUrl
-                    } }
-                };
+                string pdfName = $"Internamientos_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
 
-                var pdf = converter.Convert(pdfSettings);
-                string pdfName = $"Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
-
-                return File(pdf, "application/pdf", pdfName);
+                return File(pdfBytes, "application/pdf", pdfName);
 
             }
             catch (System.Exception)
@@ -179,13 +150,13 @@ namespace SysPet.Controllers
                 var personList = persons.Select(x => new SelectListItem
                 {
                     Value = x.IdPersona.ToString(),
-                    Text = $"{x.Nombre} {x.Apellidos}"
+                    Text = $"{x.Nombre} {x.ApellidoPaterno} {x.ApellidoMaterno}"
                 }).ToList();
 
                 var doctorList = doctors.Select(x => new SelectListItem
                 {
                     Value = x.IdPersona.ToString(),
-                    Text = $"{x.Nombre} {x.Apellidos}"
+                    Text = $"{x.Nombre} {x.ApellidoPaterno} {x.ApellidoMaterno}"
                 }).ToList();
 
                 var patientList = patients.Select(x => new SelectListItem

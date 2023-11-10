@@ -1,0 +1,32 @@
+﻿
+table.customTable {
+    width: 100%;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 3px;
+    border-color: #759BE6;
+    border-style: double;
+    color: #000000;
+    text-align: center;
+}
+
+    table.customTable td, table.customTable th {
+        border-width: 3px;
+        border-color: #759BE6;
+        border-style: double;
+        padding: 10px;
+        text-align: center;
+    }
+
+    table.customTable thead {
+        background-color: #B3CCF8;
+    }
+
+table.customTable tr:nth-child(even) {
+    background: #B4C5D4;
+}
+
+table.customTable thead th:first-child {
+    border-left: none;
+}
