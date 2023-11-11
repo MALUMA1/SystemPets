@@ -12,7 +12,7 @@ namespace SysPet.Data
             foreach (var detalle in item.DetalleVenta)
             {
                 detalle.IdVenta = result;
-                var query = $@"INSERT INTO DetalleVenta VALUES({detalle.IdVenta},'{detalle.Descripcion}', {detalle.Cantidad}, {detalle.Precio}, {detalle.Total}, {detalle.IdProducto})";
+                var query = $@"INSERT INTO DetalleVenta VALUES({detalle.IdVenta},'{detalle.Descripcion}', {detalle.Precio}, {detalle.Cantidad}, {detalle.Total}, {detalle.IdProducto})";
                 Execute(query);
             }
 
@@ -42,6 +42,7 @@ namespace SysPet.Data
                               ,d.[Cantidad]
                               ,d.[Total] TotalItem
 	                          ,p.Nombre Articulo
+                              ,p.[Imagen], p.[TipoContenido]
                           FROM [dbo].[Ventas] v
                           INNER JOIN [dbo].[DetalleVenta] d on d.IdVenta = v.Id
                           INNER JOIN [dbo].[Productos] p on p.IdProducto = d.IdProducto";
@@ -65,6 +66,7 @@ namespace SysPet.Data
                               ,d.[Cantidad]
                               ,d.[Total]
 	                          ,p.Nombre Articulo
+                              ,p.[Imagen], p.[TipoContenido]
                           FROM [dbo].[Ventas] v
                           INNER JOIN [dbo].[DetalleVenta] d on d.IdVenta = v.Id
                           INNER JOIN [dbo].[Productos] p on p.IdProducto = d.IdProducto

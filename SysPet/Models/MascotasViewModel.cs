@@ -32,7 +32,7 @@ namespace SysPet.Models
         public string Edad { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Este campo debe contener solo letras.")]
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 10 caracteres.")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 10 caracteres.")]
         public string Color { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression(@"^[a-zA-Z0-9 ]*$", ErrorMessage = "Este campo debe contener solo letras y números.")]
@@ -42,6 +42,10 @@ namespace SysPet.Models
         [DisplayName("Estado")]
         public string State { get { return Estado ? "Activo" : "Inactivo"; } }
         public string Propietario { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        [DisplayName("Propietario")]
+        public string FullName { get { return $"{Propietario} {ApellidoPaterno} {ApellidoMaterno}"; } }
         [DisplayName("Foto")]
         public byte[] Imagen { get; set; }
 

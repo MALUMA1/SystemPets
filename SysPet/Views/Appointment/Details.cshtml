@@ -16,53 +16,50 @@
 
     <div>
         <dl class="row">
-            <dt class="col-sm-4 mb-4">
+            <dt class="col-sm-6 mb-4">
                 @Html.DisplayNameFor(model => model.FechaCita)
             </dt>
-            <dd class="col-sm-8">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.FechaCita)
             </dd>
-            <dt class="col-sm-4">
+            <dt class="col-sm-6">
                 @Html.DisplayNameFor(model => model.Motivo)
             </dt>
-            <dd class="col-sm-8">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Motivo)
             </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.Nombre)
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.NombreCompleto)
             </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Nombre)
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.NombreCompleto)
             </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.Apellidos)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.Apellidos)
-            </dd>
-            <dt class="col-sm-4">
+            <dt class="col-sm-6">
                 @Html.DisplayNameFor(model => model.Estado)
             </dt>
             @if (Model.Estado.Equals("Activa"))
             {
-                <dd class="col-sm-8 badge-custom-success">
+                <dd class="col-sm-6 badge-custom-success">
                     @Html.DisplayFor(model => model.Estado)
                 </dd>
             }
             @if (Model.Estado.Equals("Cancelada"))
             {
-                <dd class="col-sm-8 badge-custom-danger">
+                <dd class="col-sm-6 badge-custom-danger">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+            }
+            @if (Model.Estado.Equals("Reagendada"))
+            {
+                <dd class="col-sm-6 badge-custom-info">
                     @Html.DisplayFor(model => model.Estado)
                 </dd>
             }
             else
             {
-                @if (Model.Estado.Equals("Reagendada"))
-                {
-                    <dd class="col-sm-8 badge-custom-info">
-                        @Html.DisplayFor(model => model.Estado)
-                    </dd>
-                }
+                <dd class="col-sm-6 badge-custom-danger">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
             }
         </dl>
     </div>

@@ -45,10 +45,7 @@
                                     @Html.DisplayNameFor(model => model.Peso)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Propietario)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Estado)
+                                    @Html.DisplayNameFor(model => model.FullName)
                                 </th>
                                 <th>Acciones</th>
                             </tr>
@@ -76,10 +73,7 @@
                                         @Html.DisplayFor(modelItem => item.Peso)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Propietario)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estado)
+                                        @Html.DisplayFor(modelItem => item.FullName)
                                     </td>
                                     <td>
                                         <a class="btn btn-outline-primary custom-tooltip btn-custom-color-primary" href="@Url.Action("Edit", "Patient", new { id = item.IdPaciente })">

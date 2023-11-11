@@ -20,7 +20,7 @@ namespace SysPet.Data
 
         public override int Delete(int id)
         {
-            var sql = $"DELETE FROM Pacientes WHERE IdPaciente = @id;";
+            var sql = $"UPDATE Pacientes SET Estado = 0 WHERE IdPaciente = @id;";
 
             return Execute(sql, new { id });
         }
@@ -40,10 +40,12 @@ namespace SysPet.Data
                               ,p.[Estado]
                               ,p.[Fecha]
                               ,a.Nombre Propietario
-	                          ,a.Apellidos
+	                          ,a.ApellidoPaterno
+                              ,a.ApellidoMaterno
                               ,p.Imagen
                           FROM [dbo].[Pacientes] p
-                          INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona";
+                          INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona
+                          WHERE p.Estado = 1 AND a.Estado = 1";
 
                 return await GetItems(sql);
             }
@@ -66,12 +68,13 @@ namespace SysPet.Data
                               ,p.[Estado]
                               ,p.[Fecha]
                               ,a.Nombre Propietario
-	                          ,a.Apellidos
+	                          ,a.ApellidoPaterno
+                              ,a.ApellidoMaterno
                               ,p.Imagen
                               ,p.NombreArchivo,p.TipoContenido
                           FROM [dbo].[Pacientes] p
                           INNER JOIN [dbo].[Personas] a on a.IdPersona = p.IdPersona
-                          WHERE p.IdPaciente = @id";
+                          WHERE p.IdPaciente = @id AND p.Estado = 1 AND a.Estado = 1";
 
             return await Get(sql, new { id });
         }

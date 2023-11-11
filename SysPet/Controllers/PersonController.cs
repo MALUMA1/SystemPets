@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SysPet.Data;
 using SysPet.Exception;
+using SysPet.Extensions;
 using SysPet.Models;
 using System.Reflection;
 
@@ -51,7 +52,30 @@ namespace SysPet.Controllers
         {
             try
             {
-                return View(await costumerDetailData.GetCostumerDetail(id));
+                var result = await costumerDetailData.GetCostumerDetail(id);
+
+                var expiredDate = DateTime.Now.AddHours(-2);
+                var dateToExpired = DateTime.Now.AddDays(2);
+
+                var expiredDates = result.Citas.Where(x => x.FechaCita <= expiredDate && x.FechaCita >= DateTime.Now.AddDays(-1));
+                var dateToExpiredList = result.Citas.Where(x => x.FechaCita >= dateToExpired);
+                if (expiredDates.Any())
+                {
+                    foreach (var item in expiredDates)
+                    {
+                        TempData.AddToastrMessage($"La cita expiró!, Fecha: {item.FechaCita}", $"Cita No. {item.Id}", ToastrMessageType.Error);
+                    }
+                }
+
+                if (dateToExpiredList.Any())
+                {
+                    foreach (var item in expiredDates)
+                    {
+                        TempData.AddToastrMessage($"La cita expira pronto!, Fecha: {item.FechaCita}", $"Cita No. {item.Id}", ToastrMessageType.Info);
+                    }
+                }
+
+                return View(result);
             }
             catch (System.Exception)
             {

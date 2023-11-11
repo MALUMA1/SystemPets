@@ -32,7 +32,7 @@ namespace SysPet.Models
 
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression(@"^[a-zA-Z0-9\s\.,#-]+$", ErrorMessage = "La dirección no es válida.")]
-        [StringLength(25, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "El campo debe tener entre 3 y 25 caracteres.")]
         [DisplayName("Dirección")]
         public string Direccion { get; set; }
 

@@ -33,6 +33,35 @@ namespace SysPet.Controllers
 				ViewBag.Url = "Shared/EmptyData";
                 var result = await salesData.GetAll();
 
+                var headers = result.Select(x => new SalesViewModel
+                {
+                    Id = x.Id,
+                    FechaVenta = x.FechaVenta,
+                    TotalArticulos = x.TotalArticulos,
+                    TotalSale = x.TotalSale,
+                }).GroupBy(x => new { x.Id, x.FechaVenta, x.TotalArticulos, x.TotalSale}).ToList();
+
+                var details = result.Select(x => new SalesDetailViewModel
+                {
+                    IdVenta = x.Id,
+                    Articulo = x.Articulo,
+                    Descripcion = x.Descripcion,
+                    Precio = x.Precio,
+                    Cantidad = x.Cantidad,
+                    TotalItem = x.TotalItem,
+                    Imagen = x.Imagen,
+                    TipoContenido = x.TipoContenido,
+                }).Distinct().GroupBy(x => new { x.IdVenta }).ToList();
+
+                var finalList = headers.Join(details, h => h.Key.Id, d => d.Key.IdVenta, (h, d) => new SalesViewModel
+                {
+                    Id = h.Key.Id,
+                    FechaVenta = h.Key.FechaVenta,
+                    TotalArticulos = h.Key.TotalArticulos,
+                    TotalSale = h.Key.TotalSale,
+                    DetalleVenta = d.Select(x => x).ToList()
+                });
+
                 if (result.Any())
                 {
                     foreach (var item in result)
@@ -57,7 +86,52 @@ namespace SysPet.Controllers
                     salesList.Add(model);
                 }
                 
-                return View(salesList);
+                return View(finalList);
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public async Task<ActionResult> SalesDetail(int id)
+        {
+            try
+            {
+                var result = await salesData.GetAll();
+
+                var list = result.Where(x => x.Id == id).ToList();
+
+                var headers = list.Select(x => new SalesViewModel
+                {
+                    Id = x.Id,
+                    FechaVenta = x.FechaVenta,
+                    TotalArticulos = x.TotalArticulos,
+                    TotalSale = x.TotalSale,
+                }).GroupBy(x => new { x.Id, x.FechaVenta, x.TotalArticulos, x.TotalSale }).ToList();
+
+                var details = list.Select(x => new SalesDetailViewModel
+                {
+                    IdVenta = x.Id,
+                    Articulo = x.Articulo,
+                    Descripcion = x.Descripcion,
+                    Precio = x.Precio,
+                    Cantidad = x.Cantidad,
+                    TotalItem = x.TotalItem,
+                    Imagen = x.Imagen,
+                    TipoContenido = x.TipoContenido,
+                }).Distinct().GroupBy(x => new { x.IdVenta }).ToList();
+
+                var finalModel = headers.Join(details, h => h.Key.Id, d => d.Key.IdVenta, (h, d) => new SalesViewModel
+                {
+                    Id = h.Key.Id,
+                    FechaVenta = h.Key.FechaVenta,
+                    TotalArticulos = h.Key.TotalArticulos,
+                    TotalSale = h.Key.TotalSale,
+                    DetalleVenta = d.Select(x => x).ToList()
+                }).FirstOrDefault();
+
+                return View(finalModel);
             }
             catch (System.Exception)
             {
@@ -106,6 +180,7 @@ namespace SysPet.Controllers
         {
             try
             {
+                
                 var products = await productsData.GetAll();
 
                 var idProducts = model.DetalleVenta.Select(x => x.IdProducto).ToList();
@@ -113,7 +188,9 @@ namespace SysPet.Controllers
                 {
                     IdProducto = x.IdProducto,
                     Descripcion = x.Descripcion,
-                    Precio = x.PrecioSugerido
+                    Precio = x.PrecioSugerido,
+                    Stok = x.Stock,
+                    Producto = x.Nombre
                 }).ToList();
 
                 var detalles = model.DetalleVenta;
@@ -123,7 +200,35 @@ namespace SysPet.Controllers
                     Cantidad = d.Cantidad,
                     Descripcion = l.Descripcion,
                     Precio = l.Precio,
+                    Stok = l.Stok,
+                    Producto = l.Producto,
                 });
+
+                var validateStock = finalList.Where(x => x.Cantidad > x.Stok).ToList();
+                if (validateStock.Any())
+                {
+                    foreach (var item in validateStock)
+                    {
+                        ModelState.AddModelError(string.Empty, $"El artículo {item.Producto} no cuenta con sufuciente existencia, Existencia: {item.Stok}");
+                    }
+                    model.Productos = products.Select(x => new SelectListItem
+                    {
+                        Value = x.IdProducto.ToString(),
+                        Text = x.Nombre
+                    }).ToList();
+
+                    model.ListaProductos = products.ToList();
+
+                    return View(model);
+                }
+
+                var productsToUpdate = finalList.Where(x => idProducts.Contains(x.IdProducto)).Select(x => new ProductosViewModel
+                {
+                    IdProducto = x.IdProducto,
+                    Stock = x.StokToUpdate
+                }).ToList();
+
+                var updated = productsData.UpdateStock(productsToUpdate);
 
                 model.DetalleVenta = finalList.ToList();
 

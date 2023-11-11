@@ -45,7 +45,7 @@ namespace SysPet.Data
                               ,pa.TipoContenido
                           FROM [dbo].[Personas] p
                           INNER JOIN [dbo].[Pacientes] pa on pa.IdPersona = p.IdPersona
-                          WHERE p.IdTipoPersona = 2 AND p.IdPersona = @id";
+                          WHERE p.IdTipoPersona = 2 AND p.IdPersona = @id AND p.Estado = 1 AND pa.Estado = 1";
 
                 var personsWithPatiens =  await GetItems(sql, new { id });
                 if (personsWithPatiens != null && personsWithPatiens.Any())
@@ -95,7 +95,7 @@ namespace SysPet.Data
                           FROM [dbo].[Personas] p
                           INNER JOIN [dbo].[Citas] c on c.IdPersona = p.IdPersona
                           INNER JOIN [dbo].[EstadoCitas] ec on ec.Id = c.IdEstado
-                          WHERE p.IdTipoPersona = 2 AND p.IdPersona = @id";
+                          WHERE p.IdTipoPersona = 2 AND p.IdPersona = @id AND p.Estado = 1";
 
                 var personsWithAppointments = await GetItems(query, new { id });
                 if (personsWithAppointments != null && personsWithAppointments.Any())

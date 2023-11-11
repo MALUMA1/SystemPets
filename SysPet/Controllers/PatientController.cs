@@ -58,7 +58,7 @@ namespace SysPet.Controllers
             var lista = persons.Select(x => new SelectListItem
             {
                 Value = x.IdPersona.ToString(),
-                Text = $"{x.Nombre} {x.Apellidos}"
+                Text = $"{x.Nombre} {x.ApellidoPaterno} {x.ApellidoMaterno}"
             });
 
             model.Personas = persons.ToList();

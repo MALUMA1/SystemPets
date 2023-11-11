@@ -29,7 +29,7 @@ namespace SysPet.Data
                 var sql = @$"SELECT c.[Id],c.[FechaCita],c.[Motivo],p.[Nombre],p.[ApellidoPaterno],p.[ApellidoMaterno], e.[Nombre] Estado
                               FROM [dbo].[Citas] c
                               INNER JOIN [dbo].[Personas] p on p.IdPersona = c.IdPersona
-                              INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado";
+                              INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado AND p.Estado = 1";
 
                 return await GetItems(sql);
             }
@@ -59,7 +59,7 @@ namespace SysPet.Data
                           FROM [dbo].[Citas] c
                           INNER JOIN [dbo].[Personas] p on p.IdPersona = c.IdPersona
                           INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado
-                          WHERE c.Id = @id";
+                          WHERE c.Id = @id AND p.Estado = 1";
 
             return await Get(sql, new { id });
         }

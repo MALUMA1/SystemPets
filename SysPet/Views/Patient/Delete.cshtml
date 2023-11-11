@@ -22,6 +22,12 @@
                         <dd class="col-sm-8">
                             @Html.DisplayFor(model => model.Nombre)
                         </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.FullName)
+                        </dd>
                         <dt class="col-sm-4">
                             @Html.DisplayNameFor(model => model.Raza)
                         </dt>
@@ -59,17 +65,34 @@
                             @Html.DisplayFor(model => model.Peso)
                         </dd>
                         <dt class="col-sm-4">
-                            @Html.DisplayNameFor(model => model.Estado)
-                        </dt>
-                        <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Estado)
-                        </dd>
-                        <dt class="col-sm-4">
                             @Html.DisplayNameFor(model => model.Fecha)
                         </dt>
                         <dd class="col-sm-8">
                             @Html.DisplayFor(model => model.Fecha)
                         </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </dt>
+                        @if (Model.State.Equals("Activo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-success">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.State.Equals("Inactivo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-danger">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.Imagen != null)
+                        {
+
+                            <dd class="col-sm-12" style="display: flex;justify-content: center;">
+                                <img src="data:@Model.TipoContenido;base64,@(Convert.ToBase64String(Model.Imagen))" class="rounded-3" style="max-width: 200px;"
+                                     alt="Imagen del Paciente" />
+                            </dd>
+                        }
                     </dl>
                 </div>
                 <div class="modal-footer">

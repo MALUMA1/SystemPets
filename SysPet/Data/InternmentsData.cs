@@ -42,7 +42,7 @@ namespace SysPet.Data
 	                            I.IdPersona,
 	                            I.IdDoctor
                             FROM [dbo].[Internamientos] I
-                            INNER JOIN Pacientes a ON a.IdPaciente = I.IdPaciente";
+                            INNER JOIN Pacientes a ON a.IdPaciente = I.IdPaciente WHERE a.Estado = 1";
 
                 var internments =  await GetItems(sql);
                 var persons = new List<InternamientosViewModel>();
@@ -90,7 +90,7 @@ namespace SysPet.Data
 	                            I.IdDoctor
                             FROM [dbo].[Internamientos] I
                             INNER JOIN Pacientes a ON a.IdPaciente = I.IdPaciente
-                            WHERE I.Id = @id";
+                            WHERE I.Id = @id AND a.Estado = 1";
 
             var internments = await GetItems(sql, new { id });
             var persons = new List<InternamientosViewModel>();

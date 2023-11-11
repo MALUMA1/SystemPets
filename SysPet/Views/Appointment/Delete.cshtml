@@ -36,11 +36,44 @@
                             @Html.DisplayFor(model => model.Nombre)
                         </dd>
                         <dt class="col-sm-4">
-                            @Html.DisplayNameFor(model => model.Apellidos)
+                            @Html.DisplayNameFor(model => model.ApellidoPaterno)
                         </dt>
                         <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Apellidos)
+                            @Html.DisplayFor(model => model.ApellidoPaterno)
                         </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.ApellidoMaterno)
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </dt>
+                        @if (Model.Estado.Equals("Activa"))
+                        {
+                            <dd class="col-sm-6 badge-custom-success">
+                                @Html.DisplayFor(model => model.Estado)
+                            </dd>
+                        }
+                        @if (Model.Estado.Equals("Cancelada"))
+                        {
+                            <dd class="col-sm-6 badge-custom-danger">
+                                @Html.DisplayFor(model => model.Estado)
+                            </dd>
+                        }
+                        @if (Model.Estado.Equals("Reagendada"))
+                        {
+                            <dd class="col-sm-6 badge-custom-info">
+                                @Html.DisplayFor(model => model.Estado)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-6 badge-custom-danger">
+                                @Html.DisplayFor(model => model.Estado)
+                            </dd>
+                        }
                     </dl>
                 </div>
                 <div class="modal-footer">

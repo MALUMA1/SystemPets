@@ -14,8 +14,9 @@ namespace SysPet.Data
         {
             try
             {
-                var sql = @$"SELECT [IdProducto],[Nombre],[FechaIngreso],[Proveedor],[Cantidad],[Stock],[PrecioUnitario],[PrecioSugerido],[Descripcion],[FechaVencimiento],[Estado]
-                        FROM [dbo].[Productos]";
+                var sql = @$"SELECT [IdProducto],[Nombre],[FechaIngreso],[Proveedor],[Cantidad],[Stock],[PrecioUnitario],
+                                    [PrecioSugerido],[Descripcion],[FechaVencimiento],[Estado],[Imagen], [TipoContenido]
+                            FROM [dbo].[Productos] WHERE Estado = 1 AND Stock > 0";
 
                 return await GetItems(sql);
             }
@@ -29,47 +30,93 @@ namespace SysPet.Data
         public override async Task<ProductosViewModel> GetItem(int idProducto)
         {
             var sql = @$"SELECT [IdProducto],[Nombre],[FechaIngreso],[Proveedor],[Cantidad],[Stock],[PrecioUnitario],[PrecioSugerido],[Descripcion],[FechaVencimiento],
-                                [Estado]  FROM [Pets].[dbo].[Productos] WHERE idProducto = @idProducto";
+                                [Estado],[Imagen], [TipoContenido]  FROM [dbo].[Productos] WHERE idProducto = @idProducto AND Estado = 1 AND Stock > 0";
 
             return await Get(sql, new { idProducto });
         }
 
         public override int Create(ProductosViewModel producto)
         {
-            var sql = @$"INSERT INTO Productos 
-                        (Nombre, FechaIngreso, Proveedor, Cantidad, Stock, PrecioUnitario, PrecioSugerido, Descripcion, FechaVencimiento, Estado)
-            VALUES ('{producto.Nombre}', 
-                    '{FormatDate(producto.FechaIngreso)}', 
-                    '{producto.Proveedor}', 
-                    {producto.Cantidad}, 
-                    {producto.Stock}, 
-                    {producto.PrecioUnitario}, 
-                    {producto.PrecioSugerido}, 
-                   '{producto.Descripcion}', 
-                   '{FormatDate(producto.FechaVencimiento)}', 
-                    1);";
+            var sql = @$"INSERT INTO Productos (Nombre, FechaIngreso, Proveedor, Cantidad, Stock, PrecioUnitario, PrecioSugerido, Descripcion, FechaVencimiento, Estado,Imagen,NombreArchivo,TipoContenido)
+            VALUES (@Nombre, @FechaIngreso, @Proveedor, @Cantidad, @Stock, @PrecioUnitario, @PrecioSugerido, @Descripcion, @FechaVencimiento, @Estado,@Imagen,@NombreArchivo,@TipoContenido);";
 
-            return Execute(sql);
+            var estado = 1;
+            var fecha = FormatDate(producto.FechaIngreso);
+            var fechaVencimiento = FormatDate(producto.FechaVencimiento);
+            var parameters = new { producto.Nombre, FechaIngreso = fecha, producto.Proveedor, producto.Cantidad, producto.Stock, 
+                producto.PrecioUnitario, producto.PrecioSugerido, producto.Descripcion, FechaVencimiento = fechaVencimiento, Estado = estado,
+                producto.Imagen,
+                producto.NombreArchivo,
+                producto.TipoContenido
+            };
+                    
+            return Execute(sql, parameters);
         }
 
         public override int Update(ProductosViewModel producto, int idProducto)
         {
-            var sql = @$"UPDATE Productos SET Nombre='{producto.Nombre}',
-                                Cantidad={producto.Cantidad}, 
-                                Stock={producto.Stock},
-                                PrecioUnitario={producto.PrecioUnitario},
-                                PrecioSugerido={producto.PrecioSugerido},
-                                Descripcion='{producto.Descripcion}',
-                                FechaVencimiento='{FormatDate(producto.FechaVencimiento)}',
-                                Estado={GetEstado(producto.Estado)}
+            var estado = GetEstado(producto.Estado);
+            var fechaVencimiento = FormatDate(producto.FechaVencimiento);
+
+            var sql = @$"UPDATE Productos SET Nombre=@Nombre,
+                                Cantidad=@Cantidad, 
+                                Stock=@Stock,
+                                PrecioUnitario=@PrecioUnitario,
+                                PrecioSugerido=@PrecioSugerido,
+                                Descripcion=@Descripcion,
+                                FechaVencimiento=@FechaVencimiento,
+                                Estado=@Estado,
+                                Imagen=@Imagen,
+                                NombreArchivo=@NombreArchivo,
+                                TipoContenido=@TipoContenido
+                        WHERE idProducto = @idProducto";
+
+            var parameters = new
+            {
+                producto.Nombre,
+                producto.Cantidad,
+                producto.Stock,
+                producto.PrecioUnitario,
+                producto.PrecioSugerido,
+                producto.Descripcion,
+                FechaVencimiento = fechaVencimiento,
+                Estado = estado,
+                producto.Imagen,
+                producto.NombreArchivo,
+                producto.TipoContenido,
+                idProducto
+            };
+
+            return Execute(sql, parameters);
+        }
+
+        public int UpdateStock(int stock, int idProducto)
+        {
+            var sql = @$"UPDATE Productos SET  
+                                Stock={stock}
                         WHERE idProducto = @idProducto";
 
             return Execute(sql, new { idProducto });
         }
 
+        public int UpdateStock(List<ProductosViewModel> products)
+        {
+            foreach (ProductosViewModel producto in products)
+            {
+                var sql = @$"UPDATE Productos SET  
+                                Stock={producto.Stock}
+                        WHERE idProducto = @idProducto";
+                var idProducto = producto.IdProducto;
+
+                Execute(sql, new { idProducto });
+            }
+
+            return 0;
+        }
+
         public override int Delete(int idProducto)
         {
-            var sql = $"DELETE FROM Productos WHERE IdProducto = @idProducto;";
+            var sql = $"UPDATE Productos SET Estado = 0 WHERE IdProducto = @idProducto;";
 
             return Execute(sql, new { idProducto});
         }

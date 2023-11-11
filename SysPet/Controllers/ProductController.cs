@@ -60,8 +60,17 @@ namespace SysPet.Controllers
         {
             try
             {
-                var result = productsData.Create(model);
-                return RedirectToAction(nameof(Index));
+                using (var ms = new MemoryStream())
+                {
+                    model.Image.CopyTo(ms);
+                    model.NombreArchivo = model.Image.FileName;
+                    model.TipoContenido = model.Image.ContentType;
+                    model.Imagen = ms.ToArray();
+
+                    var result = productsData.Create(model);
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             catch
             {
@@ -83,13 +92,20 @@ namespace SysPet.Controllers
         {
             try
             {
-                id = id > 0 ? id : model.IdProducto;
-                var product = await productsData.GetItem(id);
-                if (product == null) { RedirectToAction(nameof(Index)); }
+                using (var ms = new MemoryStream())
+                {
+                    model.Image.CopyTo(ms);
+                    model.NombreArchivo = model.Image.FileName;
+                    model.TipoContenido = model.Image.ContentType;
+                    model.Imagen = ms.ToArray();
 
-                var result = productsData.Update(model, id);
-                
-                return RedirectToAction(nameof(Index));
+                    id = id > 0 ? id : model.IdProducto;
+                    var product = await productsData.GetItem(id);
+                    if (product == null) { RedirectToAction(nameof(Index)); }
+
+                    var result = productsData.Update(model, id);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {

@@ -19,7 +19,12 @@ namespace SysPet.Models
         public int IdProducto { get; set; }
         [DisplayName("Artículo")]
         public string Articulo { get; set; }
+        public byte[] Imagen { get; set; }
+        public string TipoContenido { get; set; }
         public List<SelectListItem> Productos { get; set; }
 
+        public int Stok { get; set; }
+        public string Producto { get; set; }
+        public int StokToUpdate { get { return Stok > 0 ? (Stok - (int)Cantidad) : Stok; } }
     }
 }

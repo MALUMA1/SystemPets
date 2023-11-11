@@ -31,6 +31,9 @@ namespace SysPet.Models
 
         [DisplayName("Artículo")]
         public string Articulo { get; set; }
+        public byte[] Imagen { get; set; }
+        public string TipoContenido { get; set; }
+
         public SalesViewModel()
         {
             DetalleVenta = new List<SalesDetailViewModel>();

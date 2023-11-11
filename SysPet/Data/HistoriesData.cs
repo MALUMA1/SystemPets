@@ -36,7 +36,8 @@ namespace SysPet.Data
 	                          ,ps.Nombre + ' ' + ps.ApellidoPaterno + ' ' + ApellidoMaterno AS FullName
                           FROM [dbo].[Historiales] h
                           INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
-                          INNER JOIN Personas ps on ps.IdPersona = p.IdPersona";
+                          INNER JOIN Personas ps on ps.IdPersona = p.IdPersona
+                          WHERE p.Estado = 1 AND ps.Estado = 1";
 
                 return await GetItems(sql);
             }
@@ -59,7 +60,7 @@ namespace SysPet.Data
                           FROM [dbo].[Historiales] h
                           INNER JOIN Pacientes p on p.IdPaciente = h.IdPaciente
                           INNER JOIN Personas ps on ps.IdPersona = p.IdPersona
-                          WHERE h.[Id] = @id";
+                          WHERE h.[Id] = @id AND p.Estado = 1 AND ps.Estado = 1";
 
             return await Get(sql, new { id });
         }

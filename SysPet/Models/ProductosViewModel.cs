@@ -34,5 +34,7 @@ namespace SysPet.Models
         public decimal Total { get; set; }
         public byte[] Imagen { get; set; }
         public string TipoContenido { get; set; }
+        public string NombreArchivo { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

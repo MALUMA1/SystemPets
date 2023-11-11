@@ -73,9 +73,26 @@
                         <dt class="col-sm-4">
                             @Html.DisplayNameFor(model => model.Estado)
                         </dt>
-                        <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Estado)
-                        </dd>
+                        @if (Model.State.Equals("Activo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-success">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.State.Equals("Inactivo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-danger">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.Imagen != null)
+                        {
+
+                            <dd class="col-sm-12" style="display: flex;justify-content: center;">
+                                <img src="data:@Model.TipoContenido;base64,@(Convert.ToBase64String(Model.Imagen))" class="rounded-3" style="max-width: 200px; max-height: 170px;"
+                                     alt="Imagen del Paciente" />
+                            </dd>
+                        }
                     </dl>
                 </div>
                 <div class="modal-footer">

@@ -1,9 +1,46 @@
-﻿@model IEnumerable<SysPet.Models.CitasViewModel>
+﻿@using Newtonsoft.Json;
+@using SysPet.Extensions;
+@model IEnumerable<SysPet.Models.CitasViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "2000",
+        "hideDuration": "3000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1200",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+@{
+    var toastrMessages = TempData.ContainsKey("ToastrMessages")
+    ? JsonConvert.DeserializeObject<ToastrMessages>(TempData["ToastrMessages"].ToString())
+    : new ToastrMessages();
+    @foreach (var item in toastrMessages.ToastrList)
+    {
+        <script> toastr.success('@item.Message')</script>
+        <script>
+            toastr['@item.Type']('@item.Message', '@item.Title')
+            
+        </script>
+    }
+}
 
 <div class="btn-head btn-lg btn-block btn-custom-color-primary" style="padding: 0.5rem 0;">
     <a class="btn btn-outline-primary btn-image" href="@Url.Action("Create", "Appointment", new {})">
@@ -65,9 +102,30 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ApellidoMaterno)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estado)
-                                    </td>
+                                    @if (item.Estado.Equals("Activa"))
+                                    {
+                                        <td>
+                                            <span class="badge text-bg-success">@Html.DisplayFor(model => item.Estado)</span>
+                                        </td>
+                                    }
+                                    @if (item.Estado.Equals("Cancelada"))
+                                    {
+                                        <td>
+                                            <span class="badge-custom-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                        </td>
+                                    }
+                                    @if (item.Estado.Equals("Reagendada"))
+                                    {
+                                        <td>
+                                            <span class="badge-custom-info" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                        </td>
+                                    }
+                                    @if (item.Estado.Equals("Vencida"))
+                                    {
+                                        <td>
+                                            <span class="badge-custom-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                        </td>
+                                    }
                                     <td>
                                         <a class="btn btn-outline-primary custom-tooltip btn-custom-color-primary" href="@Url.Action("Edit", "Appointment", new { id = item.Id })">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -110,3 +168,4 @@ else
 {
     await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url });
 }
+

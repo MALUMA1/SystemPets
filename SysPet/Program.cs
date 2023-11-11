@@ -20,6 +20,7 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 builder.Services.AddScoped<IPdfService<InternamientosViewModel>, PdfService>();
 
 builder.Services.AddScoped<ManageExceptionFilter>();
+builder.Services.AddScoped<ToastrService>();
 
 builder.Services.AddScoped(provider =>
 {

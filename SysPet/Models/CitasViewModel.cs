@@ -23,6 +23,8 @@ namespace SysPet.Models
         public string Estado { get; set; }
         public List<SelectListItem> Personas { get; set; }
         public List<SelectListItem> EstadoCitas { get; set; }
-        
+        public List<CitasViewModel> ExpiredDates { get; set; }
+        public List<CitasViewModel> DatesToExpired { get; set; }
+
     }
 }

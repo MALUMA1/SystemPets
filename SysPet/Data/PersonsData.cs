@@ -13,7 +13,7 @@ namespace SysPet.Data
 
         public override int Delete(int id)
         {
-            var sql = $"DELETE FROM Personas WHERE IdPersona = @id;";
+            var sql = $"UPDATE Personas SET Estado = 0 WHERE IdPersona = @id;";
 
             return Execute(sql, new { id });
         }
@@ -33,7 +33,7 @@ namespace SysPet.Data
                               ,[Telefono]
                               ,[Estado]
                           FROM [dbo].[Personas]
-                          WHERE IdTipoPersona=2";
+                          WHERE IdTipoPersona = 2 AND Estado = 1";
 
                 return await GetItems(sql);
             }
@@ -58,7 +58,7 @@ namespace SysPet.Data
                               ,[Telefono]
                               ,[Estado]
                           FROM [dbo].[Personas]
-                          WHERE IdTipoPersona=@idTipoPersona";
+                          WHERE IdTipoPersona = @idTipoPersona AND Estado = 1";
 
                 return await GetItems(sql, new { idTipoPersona });
             }
@@ -81,7 +81,7 @@ namespace SysPet.Data
                               ,[Telefono]
                               ,[Estado]
                           FROM [dbo].[Personas]
-                          WHERE IdPersona = @id";
+                          WHERE IdPersona = @id AND Estado = 1";
 
             return await Get(sql, new { id });
         }

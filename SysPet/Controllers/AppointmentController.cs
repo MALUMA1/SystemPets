@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SysPet.Data;
 using SysPet.Exception;
+using SysPet.Extensions;
 using SysPet.Models;
+using SysPet.Services;
 using System.Reflection;
 
 namespace SysPet.Controllers
@@ -13,10 +15,12 @@ namespace SysPet.Controllers
     {
         private readonly DatingData data;
         private readonly PersonsData personsData;
-        public AppointmentController()
+        private readonly ToastrService _toastrService;
+        public AppointmentController(ToastrService toastrService)
         {
             data = new DatingData();
             personsData = new PersonsData();
+            _toastrService = toastrService;
         }
         // GET: AppointmentController
         public async Task<ActionResult> Index()
@@ -24,7 +28,32 @@ namespace SysPet.Controllers
             try
             {
                 ViewBag.Url = "Shared/EmptyData";
-                return View(await data.GetAll());
+
+                var result = await data.GetAll();
+
+                var expiredDate = DateTime.Now.AddHours(-2);
+                var dateToExpired = DateTime.Now.AddDays(2);
+
+                var expiredDates = result.Where(x => x.FechaCita <= expiredDate && x.FechaCita >= DateTime.Now.AddDays(-1));
+                var dateToExpiredList = result.Where(x => x.FechaCita >= dateToExpired);
+
+                if (expiredDates.Any())
+                {
+                    foreach (var item in expiredDates)
+                    {
+                        TempData.AddToastrMessage($"La cita del clíente {item.NombreCompleto} expiró!, Fecha: {item.FechaCita}", $"Cita No. {item.Id}", ToastrMessageType.Error);
+                    }
+                }
+
+                if (dateToExpiredList.Any())
+                {
+                    foreach (var item in expiredDates)
+                    {
+                        TempData.AddToastrMessage($"La cita del clíente {item.NombreCompleto} expira pronto!, Fecha: {item.FechaCita}", $"Cita No. {item.Id}", ToastrMessageType.Info);
+                    }
+                }
+
+                return View(result);
             }
             catch (System.Exception)
             {

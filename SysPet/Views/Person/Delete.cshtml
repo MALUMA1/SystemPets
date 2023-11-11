@@ -11,6 +11,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estas seguro de eliminar persona?</h1>
+                    
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -61,10 +62,21 @@
                         <dt class="col-sm-4">
                             @Html.DisplayNameFor(model => model.Estado)
                         </dt>
-                        <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Estado)
-                        </dd>
+                        @if (Model.State.Equals("Activo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-success">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.State.Equals("Inactivo"))
+                        {
+                            <dd class="col-sm-6 badge-custom-danger">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+
                     </dl>
+                    <h3 class="fs-6 text text-warning" id="exampleModalLabel">!Se eliminaran todos los datos realacionados al clíente! </h3>
                 </div>
                 <div class="modal-footer">
 

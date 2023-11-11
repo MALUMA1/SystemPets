@@ -43,9 +43,18 @@
                         <dt class="col-sm-4">
                             @Html.DisplayNameFor(model => model.Estado)
                         </dt>
-                        <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Estado)
-                        </dd>
+                        @if (Model.State.Equals("Activo"))
+                        {
+                            <dd class="col-sm-8 badge-custom-success">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
+                        @if (Model.State.Equals("Inactivo"))
+                        {
+                            <dd class="col-sm-8 badge-custom-danger">
+                                @Html.DisplayFor(model => Model.State)
+                            </dd>
+                        }
 
                     </dl>
                 </div>
