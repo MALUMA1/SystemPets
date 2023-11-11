@@ -38,5 +38,8 @@ namespace SysPet.Models
         public List<SelectListItem> Personas { get; set; }
         public List<SelectListItem> Pacientes { get; set; }
         public List<SelectListItem> Doctores { get; set; }
+
+        public DateTime Fecha { get; set; }
+        public int CantidadRegistros { get; set; }
     }
 }

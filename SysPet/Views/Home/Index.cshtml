@@ -14,11 +14,11 @@
     <div class="col-lg-4 grid-margin stretch-card">
         <div class="card" style="width:410px;height:450px;">
             <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Ventas de los últimos 5 días
                 </h4>
                 <div class="">
-                    <canvas id="myChart" width="350" height="350"></canvas>
+                    <canvas id="salesChart" width="350" height="350"></canvas>
                 </div>
             </div>
         </div>
@@ -27,61 +27,8 @@
     <div class="col-lg-4 grid-margin stretch-card">
         <div class="card" style="width:410px;height:450px;">
             <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
-                </h4>
-                <div class="">
-                    <canvas id="stackedBarChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card" style="width:410px;height:450px;">
-            <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
-                </h4>
-                <div class="">
-                    <canvas id="pieChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card" style="width:410px;height:450px;">
-            <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
-                </h4>
-                <div class="">
-                    <canvas id="multiLineChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card" style="width:410px;height:450px;">
-            <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
-                </h4>
-                <div class="">
-                    <canvas id="radarChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card" style="width:410px;height:450px;">
-            <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Productos más vendidos
                 </h4>
                 <div class="">
                     <canvas id="doughnutChart" width="400" height="400"></canvas>
@@ -93,137 +40,198 @@
     <div class="col-lg-4 grid-margin stretch-card">
         <div class="card" style="width:410px;height:450px;">
             <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;">
-                    Title
+                <h4 class="card-title" style="display: flex;justify-content: center; font-size: 1rem;">
+                    Internamientos en últimos 5 días
                 </h4>
                 <div class="">
-                    <canvas id="bubbleChart" width="400" height="400"></canvas>
+                    <canvas id="internmentChart" width="350" height="350"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="width:410px;height:450px;">
+            <div class="card-body">
+                <h4 class="card-title" style="display: flex;justify-content: center; font-size: 1rem;">
+                    Citas en últimos 5 días
+                </h4>
+                <div class="">
+                    <canvas id="appointmentChart" width="350" height="350"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="width:410px;height:450px;">
+            <div class="card-body">
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Productos que vencen los próximos 30 días
+                </h4>
+                <div class="">
+                    <canvas id="expiredChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="width:410px;height:450px;">
+            <div class="card-body">
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Productos con existencia de 5 o menos
+                </h4>
+                <div class="">
+                    <canvas id="stockChart" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
     
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="max-width: 800px;height:450px;">
+            <div class="card-body">
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Ventas por Mes de los últimos 7
+                </h4>
+                <div class="">
+                    <canvas id="multiLineChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
+@section Scripts{
+    <script>
 
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: @Html.Raw(Json.Serialize(Model.Labels)),
-            datasets: [{
-                label: 'Chart Example',
-                data: @Html.Raw(Json.Serialize(Model.Values)),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('stackedBarChart').getContext('2d');
-    var stackedBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: @Html.Raw(Json.Serialize(Model.StackedBarChart.Labels)),
-            datasets: @Html.Raw(Json.Serialize(Model.StackedBarChart.Datasets))
-                },
-        options: {
-            scales: {
-                xAxes: [{ stacked: true }],
-                yAxes: [{ stacked: true }]
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: @Html.Raw(Json.Serialize(Model.Labels)),
-            datasets: [{
-                data: @Html.Raw(Json.Serialize(Model.PieChart.Data)),
-                backgroundColor: @Html.Raw(Json.Serialize(Model.PieChart.BackgroundColors))
+        if (@Model.Labels.Any() && @Model.Values.Any()) {
+            var ctx = document.getElementById('salesChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.Labels)),
+                    datasets: [{
+                        label: 'Número de ventas',
+                        data: @Html.Raw(Json.Serialize(Model.Values)),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
                     }]
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('multiLineChart').getContext('2d');
-    var multiLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: @Html.Raw(Json.Serialize(Model.MultiLineChart.Labels)),
-            datasets: @Html.Raw(Json.Serialize(Model.MultiLineChart.Datasets))
                 },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
+                }
+            });
+        }
+
+        var ctx = document.getElementById('internmentChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.InternmentChart.Labels)),
+                datasets: [{
+                    label: 'Número de internamientos',
+                    data: @Html.Raw(Json.Serialize(Model.InternmentChart.Values)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
                 }]
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('radarChart').getContext('2d');
-    var radarChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: @Html.Raw(Json.Serialize(Model.RadarChart.Labels)),
-            datasets: @Html.Raw(Json.Serialize(Model.RadarChart.Datasets))
-                }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('bubbleChart').getContext('2d');
-    var bubbleChart = new Chart(ctx, {
-        type: 'bubble',
-        data: {
-            datasets: @Html.Raw(Json.Serialize(Model.BubbleChart.Datasets))
-                },
-        options: {
-            scales: {
-                x: {
-                    min: 0,
-                    max: 100
-                },
-                y: {
-                    min: 0,
-                    max: 100
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
             }
-        }
-    });
-</script>
+        });
 
-<script>
-    var ctx = document.getElementById('doughnutChart').getContext('2d');
-    var doughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            datasets: @Html.Raw(Json.Serialize(Model.DoughnutChart.Datasets))
+        var ctx = document.getElementById('appointmentChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.AppointmentChart.Labels)),
+                datasets: [{
+                    label: 'Número de internamientos',
+                    data: @Html.Raw(Json.Serialize(Model.AppointmentChart.Values)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
-    });
-</script>
+            }
+        });
+
+        var ctx = document.getElementById('doughnutChart').getContext('2d');
+        var doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+
+            data:
+            {
+                labels: @Html.Raw(Json.Serialize(Model.DoughnutChart.Labels)),
+                datasets: @Html.Raw(Json.Serialize(Model.DoughnutChart.Datasets))
+            }
+        });
+
+        var ctx = document.getElementById('expiredChart').getContext('2d');
+        var doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+
+            data:
+            {
+                labels: @Html.Raw(Json.Serialize(Model.ProductExpiredChart.Labels)),
+                datasets: @Html.Raw(Json.Serialize(Model.ProductExpiredChart.Datasets))
+                    }
+        });
+
+        var ctx = document.getElementById('stockChart').getContext('2d');
+        var doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+
+            data:
+            {
+                labels: @Html.Raw(Json.Serialize(Model.ProductInStockChart.Labels)),
+                datasets: @Html.Raw(Json.Serialize(Model.ProductInStockChart.Datasets))
+                    }
+        });
+
+        var ctx = document.getElementById('multiLineChart').getContext('2d');
+        var multiLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.MultiLineChart.Labels)),
+                datasets: @Html.Raw(Json.Serialize(Model.MultiLineChart.Datasets))
+                        },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+}

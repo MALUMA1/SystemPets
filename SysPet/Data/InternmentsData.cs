@@ -25,6 +25,28 @@ namespace SysPet.Data
             return Execute(sql, new { id });
         }
 
+        public async Task<IEnumerable<InternamientosViewModel>> GetOnlyInternments()
+        {
+            try
+            {
+                var sql = @$"SELECT 
+                                CONVERT(date, [FechaIngreso]) AS Fecha,
+                                COUNT(*) AS CantidadRegistros
+                            FROM 
+                                [dbo].[Internamientos]
+                            GROUP BY 
+                                CONVERT(date, [FechaIngreso])
+                            ORDER BY 
+                                Fecha;";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<InternamientosViewModel>();
+            }
+        }
+
         public async override Task<IEnumerable<InternamientosViewModel>> GetAll()
         {
             try

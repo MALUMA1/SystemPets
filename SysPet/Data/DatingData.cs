@@ -39,6 +39,26 @@ namespace SysPet.Data
             }
         }
 
+        public async Task<IEnumerable<CitasViewModel>> GetOnlyAppointments()
+        {
+            try
+            {
+                var sql = @$"SELECT CONVERT(date, c.[FechaCita]) AS Fecha
+                                  ,e.[Nombre]
+	                              ,COUNT(*) AS CantidadRegistros
+                              FROM [dbo].[Citas] c
+                              INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado
+                              GROUP BY  CONVERT(date, c.[FechaCita]), e.Nombre
+                            ORDER BY Fecha;";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<CitasViewModel>();
+            }
+        }
+
         public async Task<IEnumerable<CitasViewModel>> GetStates()
         {
             try

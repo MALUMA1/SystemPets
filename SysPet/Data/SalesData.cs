@@ -55,6 +55,71 @@ namespace SysPet.Data
             }
         }
 
+        public async Task<IEnumerable<SalesViewModel>> GetOnlySales()
+        {
+            try
+            {
+                var sql = @$"SELECT [FechaVenta]
+	                              ,Sum(CantidadArticulos) AS Cantidad
+                            FROM [dbo].[Ventas]
+                            GROUP BY FechaVenta
+                            ORDER BY FechaVenta";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<SalesViewModel>();
+            }
+        }
+
+        public async Task<IEnumerable<SalesViewModel>> GetOnlySalesDetail()
+        {
+            try
+            {
+                var sql = @$"SELECT TOP(4) d.[Cantidad]
+	                              ,p.Nombre AS Articulo
+	                              ,SUM(d.Cantidad) AS ToTal
+                              FROM [dbo].[DetalleVenta] d
+                              INNER JOIN [dbo].[Productos] p ON d.IdProducto = p.IdProducto
+                              GROUP BY d.Cantidad, p.Nombre
+                              ORDER BY Total DESC";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<SalesViewModel>();
+            }
+        }
+
+        public async Task<IEnumerable<SalesViewModel>> GetOnlyTotalSales()
+        {
+            try
+            {
+                var sql = @$"SELECT 
+                                YEAR([FechaVenta]) AS Anio,
+                                MONTH([FechaVenta]) AS MesNumero,
+                                DATENAME(MONTH, [FechaVenta]) AS Mes,
+                                SUM([Total]) AS TotalVentas
+                            FROM 
+                                [dbo].[Ventas]
+                            WHERE 
+                                [FechaVenta] >= DATEADD(MONTH, -7, GETDATE())
+                            GROUP BY 
+                                YEAR([FechaVenta]), MONTH([FechaVenta]), DATENAME(MONTH, [FechaVenta])
+                            ORDER BY 
+                                Anio DESC, MesNumero DESC;
+                            ";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<SalesViewModel>();
+            }
+        }
+
         public async override Task<SalesViewModel> GetItem(int id)
         {
             var sql = @$"SELECT v.[Id]

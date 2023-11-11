@@ -34,6 +34,11 @@ namespace SysPet.Models
         public byte[] Imagen { get; set; }
         public string TipoContenido { get; set; }
 
+        public string Mes { get; set; }
+        public int Anio { get; set; }
+        public int MesNumero { get; set; }
+        public int TotalVentas { get; set; }
+
         public SalesViewModel()
         {
             DetalleVenta = new List<SalesDetailViewModel>();

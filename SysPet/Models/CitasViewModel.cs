@@ -26,5 +26,8 @@ namespace SysPet.Models
         public List<CitasViewModel> ExpiredDates { get; set; }
         public List<CitasViewModel> DatesToExpired { get; set; }
 
+        public DateTime Fecha { get; set; }
+        public int CantidadRegistros { get; set; }
+
     }
 }
