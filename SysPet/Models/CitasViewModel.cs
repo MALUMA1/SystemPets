@@ -5,6 +5,7 @@ namespace SysPet.Models
 {
     public class CitasViewModel
     {
+        [DisplayName("Cita No.")]
         public int Id { get; set; }
         [DisplayName("Fecha de Cita")]
         public DateTime FechaCita { get; set; } = DateTime.Now.Date;

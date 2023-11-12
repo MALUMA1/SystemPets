@@ -59,9 +59,12 @@
             <div class="card-body">
                 <h4 class="card-title">Citas</h4>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="appointment">
                         <thead>
                             <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.FechaCita)
                                 </th>
@@ -88,6 +91,9 @@
                             {
                                 <tr>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.FechaCita)
                                     </td>
                                     <td>
@@ -105,25 +111,25 @@
                                     @if (item.Estado.Equals("Activa"))
                                     {
                                         <td>
-                                            <span class="badge text-bg-success">@Html.DisplayFor(model => item.Estado)</span>
+                                            <span class="badge text-bg-success" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
                                         </td>
                                     }
                                     @if (item.Estado.Equals("Cancelada"))
                                     {
                                         <td>
-                                            <span class="badge-custom-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                            <span class="badge text-bg-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
                                         </td>
                                     }
                                     @if (item.Estado.Equals("Reagendada"))
                                     {
                                         <td>
-                                            <span class="badge-custom-info" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                            <span class="badge text-bg-info" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
                                         </td>
                                     }
                                     @if (item.Estado.Equals("Vencida"))
                                     {
                                         <td>
-                                            <span class="badge-custom-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
+                                            <span class="badge text-bg-danger" style="font-size: 1em;">@Html.DisplayFor(model => item.Estado)</span>
                                         </td>
                                     }
                                     <td>
@@ -169,3 +175,20 @@ else
     await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url });
 }
 
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            new DataTable('#appointment', {
+                lengthMenu: [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, 'Todos']
+                ],
+                language: {
+                    decimal: '.',
+                    thousands: ',',
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+                }
+            });
+        })
+    </script>
+}

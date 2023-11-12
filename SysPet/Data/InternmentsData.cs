@@ -152,5 +152,15 @@ namespace SysPet.Data
 
             return Execute(sql, new { id });
         }
+    
+        public async Task<InternamientosViewModel> GetPersonId(int idPaciente)
+        {
+            var sql = @$"SELECT [IdPersona]
+                        FROM [dbo].[Pacientes]
+                        WHERE IdPaciente = @idPaciente";
+
+            var result = await Get(sql, new { idPaciente });
+            return result;
+        }
     }
 }

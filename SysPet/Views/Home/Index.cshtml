@@ -38,6 +38,19 @@
     </div>
 
     <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card" style="width: 410px;height:450px;">
+            <div class="card-body">
+                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
+                    Ventas por Mes de los últimos 7
+                </h4>
+                <div class="">
+                    <canvas id="multiLineChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 grid-margin stretch-card">
         <div class="card" style="width:410px;height:450px;">
             <div class="card-body">
                 <h4 class="card-title" style="display: flex;justify-content: center; font-size: 1rem;">
@@ -89,25 +102,11 @@
         </div>
     </div>
 
-    
-    <div class="col-lg-4 grid-margin stretch-card">
-        <div class="card" style="max-width: 800px;height:450px;">
-            <div class="card-body">
-                <h4 class="card-title" style="display: flex;justify-content: center;font-size: 1rem;">
-                    Ventas por Mes de los últimos 7
-                </h4>
-                <div class="">
-                    <canvas id="multiLineChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 @section Scripts{
     <script>
-
+        
             var ctx = document.getElementById('salesChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -161,7 +160,7 @@
             data: {
                 labels: @Html.Raw(Json.Serialize(Model.AppointmentChart.Labels)),
                 datasets: [{
-                    label: 'Número de internamientos',
+                    label: 'Número de citas',
                     data: @Html.Raw(Json.Serialize(Model.AppointmentChart.Values)),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',

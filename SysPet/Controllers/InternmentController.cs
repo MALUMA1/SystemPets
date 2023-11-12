@@ -213,10 +213,12 @@ namespace SysPet.Controllers
         // POST: InternmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(InternamientosViewModel model)
+        public async Task<ActionResult> Create(InternamientosViewModel model)
         {
             try
             {
+                var internment = await data.GetPersonId(model.IdPaciente);
+                model.IdPersona = internment.IdPersona;
                 var resut = data.Create(model);
                 return RedirectToAction(nameof(Index));
             }

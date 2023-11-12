@@ -190,8 +190,8 @@ namespace SysPet.Controllers
             var appointmentValues = appointmentList.Select(x => (int)x.CantidadRegistros).ToList();
             var appointmentChart = new AppointmentChartViewModel
             {
-                Labels = internmentLabels,
-                Values = internmentValues,
+                Labels = appointmentLabels,
+                Values = appointmentValues,
             };
 
             var productsToExpired = await _productsData.GetExpiredProducts();
@@ -199,7 +199,7 @@ namespace SysPet.Controllers
             var productValues = productsToExpired.Select(x => x.Stock).ToList();
             var productChart = new ProductExpiredChartModel
             {
-                Labels = internmentLabels,
+                Labels = productLabels,
                 Datasets = new List<DoughnutDataset>
                 {
                     new DoughnutDataset

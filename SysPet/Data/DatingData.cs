@@ -6,11 +6,13 @@ namespace SysPet.Data
     {
         public override int Create(CitasViewModel item)
         {
+            var getEstado = item.FechaCita.Day < DateTime.Now.Day ? 4 : 1;
+
             var sql = $@"INSERT INTO Citas values (
                         '{FormatDateTime(item.FechaCita)}', 
                         '{item.Motivo}', 
                           {item.IdPersona},
-                           1)";
+                           {getEstado})";
 
             return Execute(sql);
         }

@@ -5,12 +5,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Venta</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Create">
+<div class="col-md-8 offset-2 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Generar Venta</h4>
+            <form asp-action="Create">
             
             
             <div class="table-head-sales mb-5">
@@ -68,7 +68,7 @@
                     </tbody>
                 </table>
 
-                <div class="form-group" style="display:flex; justify-content:flex-end;gap:24px;">
+                <div class="form-group button-section-create">
                     <button type="submit" class="btn btn-outline-success btn-lg btn-block btn-custom-color-success btn-custom-f">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
                                 <path d="M11 2H9v3h2V2Z" />
@@ -104,6 +104,7 @@
             
 
         </form>
+        </div>
     </div>
 </div>
 
