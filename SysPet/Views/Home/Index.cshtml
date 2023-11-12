@@ -108,7 +108,6 @@
 @section Scripts{
     <script>
 
-        if (@Model.Labels.Any() && @Model.Values.Any()) {
             var ctx = document.getElementById('salesChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -132,8 +131,6 @@
                     }
                 }
             });
-        }
-
         var ctx = document.getElementById('internmentChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',

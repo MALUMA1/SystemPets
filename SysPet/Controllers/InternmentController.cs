@@ -9,6 +9,7 @@ using DinkToPdf.Contracts;
 using SysPet.Exception;
 using Rotativa.AspNetCore;
 using SysPet.Services;
+using System.Reflection;
 
 namespace SysPet.Controllers
 {
@@ -60,12 +61,29 @@ namespace SysPet.Controllers
             try
             {
                 var item = await data.GetItem(model.Id);
+                var internment = new InternmentViewModel
+                {
+                    Id = model.Id.ToString(),
+                    Antecedentes = item.Antecedentes,
+                    Atendio = item.Atendio,
+                    Fecha = item.FechaIngreso.ToString("f"),
+                    Medicamento = item.Medicamento,
+                    Paciente = item.Paciente,
+                    Propietario = item.Propietario,
+                    Tratamiento = item.Tratamiento,
+                    Imagen = item.Imagen,
+                    TipoContenido = item.TipoContenido,
 
-                var pdfBytes = _pdfService.GeneratePdf(new List<InternamientosViewModel> { item});
+                };
 
-                string pdfName = $"Detalle_Internamiento_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
+                string pdfName = $"Internamiento_{model.Id}_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
 
-                return File(pdfBytes, "application/pdf", pdfName);
+                return new ViewAsPdf("DownloadPdf", internment)
+                {
+                    FileName = $"Internamiento{model?.Id}.pdf",
+                    PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                    PageSize = Rotativa.AspNetCore.Options.Size.A4
+                };
 
             }
             catch (System.Exception)
@@ -80,12 +98,28 @@ namespace SysPet.Controllers
             {
                 var items = await data.GetAll();
 
-                var pdfBytes = _pdfService.GeneratePdf(items);
+                var result = items.Select(x => new InternmentViewModel
+                {
+                    Id = x.Id.ToString(),
+                    Antecedentes = x.Antecedentes,
+                    Atendio = x.Atendio,
+                    Fecha = x.FechaIngreso.ToString("dd/mm/yyyy"),
+                    Medicamento = x.Medicamento,
+                    Paciente = x.Paciente,
+                    Propietario = x.Propietario,
+                    Tratamiento = x.Tratamiento,
+
+                }).ToList();
 
                 string pdfName = $"Internamientos_{DateTime.Now.ToString("ddMMyyyyHHmmss")}.pdf";
 
-                return File(pdfBytes, "application/pdf", pdfName);
 
+                return new ViewAsPdf("DownloadIndexPdf", result)
+                {
+                    FileName = pdfName,
+                    PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                    PageSize = Rotativa.AspNetCore.Options.Size.A4
+                };
             }
             catch (System.Exception)
             {

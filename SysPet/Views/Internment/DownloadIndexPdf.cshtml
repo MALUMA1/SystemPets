@@ -1,0 +1,170 @@
+﻿@model List<InternmentViewModel>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Imprimir Internamiento</title>
+    <style>
+        .contenedor {
+            width: 900px !important;
+            height: 842px !important;
+            margin: auto;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        p.title {
+            font-weight: bold;
+        }
+
+        p.title2 {
+            font-weight: bold;
+            color: #03A99F;
+            font-size: 20px;
+        }
+
+        p.text {
+            font-size: 15px;
+            font-weight: 100;
+            color: #858585;
+        }
+
+        p {
+            margin: 0px
+        }
+
+        .tbth {
+            text-align: left;
+        }
+
+        table.tbinternamientos {
+            border-collapse: separate;
+            border-spacing: 4px;
+        }
+
+            table.tbinternamientos thead tr th {
+                background-color: #03A99F;
+                padding: 10px;
+                font-size: 15px;
+                color: white;
+            }
+
+            table.tbinternamientos tbody tr td {
+                padding: 10px;
+            }
+
+        .item {
+            font-size: 15px;
+            font-weight: 100;
+            color: #757575;
+        }
+
+        .item-2 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #757575;
+        }
+
+        .item-3 {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #03A99F;
+            color: white;
+        }
+
+        .td-item {
+            border-bottom: 2px solid #E8E8E8 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <img src="../images/pets.png" style="width: 250px;" />
+                </td>
+                <td style="text-align:right">
+                    <table style="margin-right:0;margin-left:auto">
+                        <tr><td><p class="title2">INTERNAMIENTOS</p></td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <p class="title">Sys Pet</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p class="text">Direccion: Calle Correo No 100.</p></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+
+        <table class="tbinternamientos" style="width:100%">
+            <thead>
+                <tr>
+
+                    <th class="tbth" style="width:70%">Paciente</th>
+                    <th class="tbth" style="width:15%">Propietario</th>
+                    <th class="tbth" style="width:15%">Atendió</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="td-item"><p class="item">@item.Paciente</p></td>
+                        <td class="td-item"><p class="item">@item.Propietario</p></td>
+                        <td class="td-item"><p class="item">@item.Atendio</p></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="tbth">Id</th>
+                                        <th class="tbth" style="width:25%">Ingreso</th>
+                                        <th class="tbth" style="width:25%">Antecedentes</th>
+                                        <th class="tbth" style="width:25%">Medicamento</th>
+                                        <th class="tbth" style="width:25%">Tratamiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="td-item-2"><p class="item">@item.Id</p></td>
+                                        <td class="td-item-2"><p class="item">@item.Fecha</p></td>
+                                        <td class="td-item-2"><p class="item">@item.Antecedentes</p></td>
+                                        <td class="td-item-2"><p class="item">@item.Medicamento</p></td>
+                                        <td class="td-item-2"><p class="item">@item.Tratamiento</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
