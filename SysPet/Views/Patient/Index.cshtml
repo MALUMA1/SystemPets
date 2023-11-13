@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="fw-normal mb-3 pb-3">Mascotas</h1>
-
 <div class="btn-head btn-lg btn-block btn-custom-color-primary" style="padding: 0.5rem 0;">
     <a class="btn btn-outline-primary btn-image" href="@Url.Action("Create", "Patient", new {})">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
@@ -23,7 +21,7 @@
             <div class="card-body">
                 <h4 class="card-title">Mascotas</h4>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="patient">
                         <thead>
                             <tr>
                                 <th>
@@ -117,4 +115,20 @@ else
     await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url });
 }
 
-
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            new DataTable('#patient', {
+                lengthMenu: [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, 'Todos']
+                ],
+                language: {
+                    decimal: '.',
+                    thousands: ',',
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+                }
+            });
+        })
+    </script>
+}

@@ -6,11 +6,13 @@ namespace SysPet.Data
     {
         public override int Create(CitasViewModel item)
         {
+            var getEstado = item.FechaCita.Day < DateTime.Now.Day ? 4 : 1;
+
             var sql = $@"INSERT INTO Citas values (
                         '{FormatDateTime(item.FechaCita)}', 
                         '{item.Motivo}', 
                           {item.IdPersona},
-                           1)";
+                           {getEstado})";
 
             return Execute(sql);
         }
@@ -30,6 +32,26 @@ namespace SysPet.Data
                               FROM [dbo].[Citas] c
                               INNER JOIN [dbo].[Personas] p on p.IdPersona = c.IdPersona
                               INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado AND p.Estado = 1";
+
+                return await GetItems(sql);
+            }
+            catch
+            {
+                return new List<CitasViewModel>();
+            }
+        }
+
+        public async Task<IEnumerable<CitasViewModel>> GetOnlyAppointments()
+        {
+            try
+            {
+                var sql = @$"SELECT CONVERT(date, c.[FechaCita]) AS Fecha
+                                  ,e.[Nombre]
+	                              ,COUNT(*) AS CantidadRegistros
+                              FROM [dbo].[Citas] c
+                              INNER JOIN [dbo].[EstadoCitas] e on e.Id = c.IdEstado
+                              GROUP BY  CONVERT(date, c.[FechaCita]), e.Nombre
+                            ORDER BY Fecha;";
 
                 return await GetItems(sql);
             }

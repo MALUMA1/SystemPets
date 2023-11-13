@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h4 class="card-title">Departamentos</h4>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="department">
                         <thead>
                             <tr>
                                 <th>
@@ -96,4 +96,22 @@
 else
 {
     await Html.RenderPartialAsync("EmptyData", new { Url = ViewBag.Url });
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            new DataTable('#department', {
+                lengthMenu: [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, 'Todos']
+                ],
+                language: {
+                    decimal: '.',
+                    thousands: ',',
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+                }
+            });
+        })
+    </script>
 }

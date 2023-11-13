@@ -5,6 +5,7 @@ namespace SysPet.Models
 {
     public class CitasViewModel
     {
+        [DisplayName("Cita No.")]
         public int Id { get; set; }
         [DisplayName("Fecha de Cita")]
         public DateTime FechaCita { get; set; } = DateTime.Now.Date;
@@ -25,6 +26,9 @@ namespace SysPet.Models
         public List<SelectListItem> EstadoCitas { get; set; }
         public List<CitasViewModel> ExpiredDates { get; set; }
         public List<CitasViewModel> DatesToExpired { get; set; }
+
+        public DateTime Fecha { get; set; }
+        public int CantidadRegistros { get; set; }
 
     }
 }

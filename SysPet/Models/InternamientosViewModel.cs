@@ -8,7 +8,7 @@ namespace SysPet.Models
     {
         public int Id { get; set; }
         [DisplayName("Fecha de Ingreso")]
-        public DateTime FechaIngreso { get; set; } = DateTime.Now.Date;
+        public DateTime FechaIngreso { get; set; } = DateTime.Now;
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [RegularExpression(@"^[a-zA-Z0-9\s\.,#-ñÑ]+$", ErrorMessage = "El nombre no es válido.")]
         [StringLength(200, MinimumLength = 3, ErrorMessage = "El campo debe tener entre 3 y 100 caracteres.")]
@@ -38,5 +38,8 @@ namespace SysPet.Models
         public List<SelectListItem> Personas { get; set; }
         public List<SelectListItem> Pacientes { get; set; }
         public List<SelectListItem> Doctores { get; set; }
+
+        public DateTime Fecha { get; set; }
+        public int CantidadRegistros { get; set; }
     }
 }

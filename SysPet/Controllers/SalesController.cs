@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Rotativa.AspNetCore;
 using SysPet.Data;
 using SysPet.Exception;
 using SysPet.Models;
@@ -94,6 +95,61 @@ namespace SysPet.Controllers
             }
         }
 
+        public async Task<IActionResult> PrintPdf(int id)
+        {
+            try
+            {
+                var result = await salesData.GetAll();
+
+                var list = result.Where(x => x.Id == id).ToList();
+
+                var headers = list.Select(x => new SalesViewModel
+                {
+                    Id = x.Id,
+                    FechaVenta = x.FechaVenta,
+                    TotalArticulos = x.TotalArticulos,
+                    TotalSale = x.TotalSale,
+                }).GroupBy(x => new { x.Id, x.FechaVenta, x.TotalArticulos, x.TotalSale }).ToList();
+
+                var details = list.Select(x => new SalesDetailViewModel
+                {
+                    IdVenta = x.Id,
+                    Articulo = x.Articulo,
+                    Descripcion = x.Descripcion,
+                    Precio = x.Precio,
+                    Cantidad = x.Cantidad,
+                    TotalItem = x.TotalItem,
+                    Imagen = x.Imagen,
+                    TipoContenido = x.TipoContenido,
+                }).Distinct().GroupBy(x => new { x.IdVenta }).ToList();
+
+                var finalModel = headers.Join(details, h => h.Key.Id, d => d.Key.IdVenta, (h, d) => new SaleViewModel
+                {
+                    Id = h.Key.Id.ToString(),
+                    Fecha = h.Key.FechaVenta.ToString("f"),
+                    Articulos = h.Key.TotalArticulos.ToString(),
+                    TotalVenta = h.Key.TotalSale.ToString("#.00"),
+                    DetalleVenta = d.Select(x => new DetailViewModel
+                    {
+                        Cantidad = x.Cantidad.ToString("#.00"),
+                        Precio = x.Precio.ToString("#.00"),
+                        Producto = x.Articulo,
+                        TotalItem = x.TotalItem.ToString("#.00"),
+                    }).ToList()
+                }).FirstOrDefault();
+
+                return new ViewAsPdf("PrintPdf", finalModel)
+                {
+                    FileName = $"Venta_{finalModel?.Id}.pdf",
+                    PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                    PageSize = Rotativa.AspNetCore.Options.Size.A4
+                };
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
         public async Task<ActionResult> SalesDetail(int id)
         {
             try
